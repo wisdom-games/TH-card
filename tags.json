@@ -258,6 +258,28 @@
   },
   "rule":"turnend",
   "siderule":"self"
+  },
+  /* trait */
+  "幽魂聚地":{
+    "type":"trait",
+    "效果":{
+      "effectchange":{
+        "add":{
+          "event.movetograve.delete":"true"
+      }
+      },
+      "valuechange":{
+      "fight.<selfside>.HP":{
+        "value":1
+      },
+      "fight.<selfside>.maxHP":{
+        "value":1
+      }
+        },
+    "rule":"movetograve",
+    "siderule":"all"
+    },
+    "描述":"所有卡将要被送入坟场时都改为被消耗;每有一张牌被消耗，获得1HP上限和1HP"
   }
   
 }

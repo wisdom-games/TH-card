@@ -3255,4 +3255,6 @@ window.effectruleAPI = effectruleAPI;
 window.addcardtohand = addcardtohand;
 window.movetograve = movetograve;
 window.movetofightcards = movetofightcards;
+window.drawPlayerCards = drawPlayerCards;
+window.drawEnemyCards = drawEnemyCards;
 })();

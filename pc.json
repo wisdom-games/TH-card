@@ -1,7 +1,7 @@
 {
   "ALLPC_template":{
     "levelup":[10,20,30,40,50,60,70,80,90],
-    "levelupaddmaxMP":[1,0,0,0,1,0,0,0,1],
+    "levelupaddmaxMP":[1,0,0,1,0,0,0,1,0],
     "levelupaddmaxHP":[5,5,5,5,5,5,5,5,5],
     "levelupaddmaxME":[0,0,0,0,0,0,0,0,0],
     "levelupaddmaxMB":[0,0,0,0,0,0,0,0,0],

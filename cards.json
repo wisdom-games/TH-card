@@ -348,7 +348,7 @@
           }
         }
       },
-    "数值修改":{
+    "valuechange":{
       "fight.<selfside>.HP":{ /* 为自己增加 */
         "value":5
       }
@@ -374,7 +374,7 @@
       }
     },
     "效果_2":{
-      "数值修改":{
+      "valuechange":{
       "fight.<selfside>.MP":{
 		  "value_new":0
 		  }
@@ -405,7 +405,7 @@
   "【飞翔于空中程度的能力】":{
   "类型":"基本卡",
   "效果":{
-    "数值修改":{
+    "valuechange":{
       "fight.<selfside>.cardmpchange":{ /* 减少MP消耗 */
       "value":-1
       }
@@ -679,7 +679,7 @@
   "快速治疗":{
   "类型":"基本卡",
   "效果":{
-    "数值修改":{
+    "valuechange":{
       "fight.<selfside>.HP":{
         "value":5
       }
@@ -765,7 +765,7 @@
     "effectchange":{
 	  "delete":"event"
     },
-    "数值修改":{
+    "valuechange":{
       "fight.<otherside>.giveothercardondraw":{
       "value":1
 	    }
@@ -894,7 +894,7 @@
   "智慧":{
   "类型":"基本卡",
   "效果":{
-    "数值修改":{
+    "valuechange":{
       "fight.<selfside>.MAXMP":{ /* 为自己增加 */
       "value":1
       }
@@ -931,7 +931,7 @@
         }
     }
     },
-    "数值修改":{
+    "valuechange":{
       "fight.<selfside>.MP":{ /* 为自己增加 */
       "value":2
       }
