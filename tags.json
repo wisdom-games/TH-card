@@ -187,7 +187,7 @@
   },
     "getHPturnstart":{
     "效果":{
-      "数值修改":{
+      "valuechange":{
         "fight.<selfside>.HP":{
           "value_read":"<self.tags.getHPturnstart>"
         }
@@ -241,7 +241,7 @@
   },
   "mpneedless":{
   "效果":{
-    "数值修改":{
+    "valuechange":{
       "fight.<selfside>.cardmpchange":{
         "value_read":"<self.tags.mpneedless>"
       }
@@ -272,7 +272,7 @@
       "fight.<selfside>.HP":{
         "value":1
       },
-      "fight.<selfside>.maxHP":{
+      "fight.<selfside>.MAXHP":{
         "value":1
       }
         },

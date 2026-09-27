@@ -1166,7 +1166,7 @@ function parseValueRead(expression, fight, side) {
   return true;
 }
 async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIndex,sourceData,ownerSide,sourceCount,cardName,valuechange,sourceCardName) {
-  const newEffectTypes = ["获取卡","抽卡","伤害","标记","卡牌选择","数值修改"];
+  const newEffectTypes = ["获取卡","抽卡","伤害","标记","卡牌选择","valuechange"];
   const source = isObject(sourceData) ? sourceData : {};
   let nextEffect = effect;
   let effectIndex = 1;
@@ -2161,12 +2161,12 @@ async function effectAPI(side,type,effect,tag,sidetype,fight,register,stepIndex,
     delete nextEffect["effectchange"];
   }
   const effectSide = Number(ownerSide) === 1 ? 1 : 0;
-    if (isObject(nextEffect) && isObject(nextEffect["数值修改"])) {
+    if (isObject(nextEffect) && isObject(nextEffect["valuechange"])) {
     nextEffect = {...nextEffect};
 
     const valueModify = {};
 
-    for (const [path,config] of Object.entries(nextEffect["数值修改"])) {
+    for (const [path,config] of Object.entries(nextEffect["valuechange"])) {
       let newPath = String(path ?? "");
 
       newPath = newPath.replace("<selfside>",side === 1 ? "player" : "enemy");
@@ -2188,7 +2188,7 @@ async function effectAPI(side,type,effect,tag,sidetype,fight,register,stepIndex,
       }
       valueModify[newPath] = newConfig;
     }
-    nextEffect["数值修改"] = valueModify;
+    nextEffect["valuechange"] = valueModify;
   }
   if (isObject(nextEffect) && isObject(nextEffect["伤害"])) {
     const damage = nextEffect["伤害"];
@@ -2337,7 +2337,7 @@ async function effectAPI(side,type,effect,tag,sidetype,fight,register,stepIndex,
 async function cardeffect(side,type,effect,fight,cardName = "",sidetype = []) {
 //  console.log(side,type,effect,fight);
   /* 数值修改 */
-  const valueModify = isObject(effect) ? effect["数值修改"] : null;
+  const valueModify = isObject(effect) ? effect["valuechange"] : null;
 
   if (isObject(valueModify)) {
     for (const [path,config] of Object.entries(valueModify)) {
