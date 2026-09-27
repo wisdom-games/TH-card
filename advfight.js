@@ -145,21 +145,11 @@
 
     // value_read
     text = text.replace(/<(self|other)\.tags\.([^>]+)>/g, function (match, owner, tagName) {
-      
       const targetSide = owner === "self" ? Number(side) : 1 - Number(side);
 
-      const tagList = targetSide === 1 ? (fight && Array.isArray(fight.playerfighttags) ? fight.playerfighttags : []) : (fight && Array.isArray(fight.enemyfighttags) ? fight.enemyfighttags : []);
+      const count = fight && typeof window.getTagCount === "function"
+        ? Number(window.getTagCount(fight,targetSide,String(tagName).trim())) : 0;
 
-      let count = 0;
-
-      for (let index = 0; index < tagList.length; index += 1) {
-        const entry = tagList[index];
-
-        if (Array.isArray(entry) && String(entry[0] ?? "") === String(tagName).trim()) {
-          count = Number(entry[1] ?? 0);
-          break;
-        }
-      }
       return Number.isFinite(count) ? String(count) : "0";
     });
     text = text.replace(/<(self|other)\.(HP|maxHP|MP|maxMP|handcard)>/g,function (match,owner,key) {
