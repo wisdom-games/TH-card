@@ -905,7 +905,27 @@
     "tag":"handcard;handcardaddtagother;handcardaddtagself",
     "sidetype":"typeIce"
   },
-  "冻结":{
+  "寒冰箭":{
+  "类型":"基本卡",
+  "效果":{
+    "伤害":{
+      "value":4,
+      "type":"冰霜"
+    },
+    "标记":{
+      "冻结":{
+        "other":{
+        "value":2
+        }
+      }
+    }
+  },
+    "MP":1,
+    "描述":"造成4冰霜伤害，对方获得2冻结",
+    "tag":"handcard;handcarddamage;handcardaddtagother",
+    "sidetype":"typeIce"
+  },
+  "冰冻":{
   "类型":"基本卡",
   "效果":{
     "标记":{
@@ -1035,6 +1055,19 @@
     "描述":"造成4普通伤害",
     "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
+  },
+  "沉思":{
+  "类型":"基本卡",
+  "效果":{
+    "valuechange":{
+      "fight.<selfside>.MP":{ /* 为自己增加 */
+      "value":2
+      }
+    }
+  },
+    "描述":"获得2MP",
+    "tag":"handcard;handcardvaluechangeself",
+    "sidetype":"typeIce"
   },
   "毒雾":{
   "类型":"基本卡",

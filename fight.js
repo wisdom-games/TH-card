@@ -559,9 +559,7 @@ function renderFightEquip(fight,owner) {
 
   function setupManualCardSelection(fight, side, callback) {
     const isPlayer = side === 1;
-    const selector = isPlayer 
-      ? ".game-area .player.bottom .slots .card-slot"
-      : ".game-area .player.top .slots .card-slot";
+    const selector = isPlayer  ? ".game-area .player.bottom .slots .card-slot" : ".game-area .player.top .slots .card-slot";
     
     const slots = Array.from(document.querySelectorAll(selector));
     
@@ -2514,8 +2512,6 @@ if (isObject(getCards)) {
           }
         }
       }
-    }
-  }
 
   /* 卡牌选择处理 */
   const cardSelection = isObject(effect) ? effect["卡牌选择"] : null;
