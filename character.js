@@ -45,7 +45,25 @@
     const character = characters[characterName];
     const image = getElement("#character-image");
     const nameButton = getElement("#character-name");
-    
+
+    /* 只在“没有有效存档”时写入默认角色状态：
+       1) 首次进入时留下带角色名的存档，刷新后主菜单的“继续游戏”才可用；
+       2) 浏览角色不会覆盖已有存档，删档只发生在点“开始”时。 */
+    const existing = (function () {
+      try {
+        const s = localStorage.getItem(CHARACTER_STORAGE_KEY);
+        if (!s) return null;
+        const d = JSON.parse(s);
+        return d && typeof d.name === "string" && d.name.trim() !== "" ? d : null;
+      } catch (e) {
+        return null;
+      }
+    })();
+
+    if (!existing) {
+      saveCharacterState(characterName, character);
+    }
+
     if (image) {
       delete image.dataset.fallbackUsed;
       image.src = characterImagePath(characterName);

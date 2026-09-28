@@ -1343,10 +1343,16 @@ async function runAction(cardState, action) {
   document.addEventListener("th-card:character-selected", function (event) {
     const isNewGame = (event && event.detail && event.detail.newGame) || window._thCardPendingNewGame;
     if (!isNewGame && !pendingNewGame) return;
+    pendingNewGame = false;
+    window._thCardPendingNewGame = false;
     try { localStorage.removeItem(STATE_KEY); clearShopData(); } catch (e) {}
     deck = [];
     hand = [];
     activeIndex = -1;
+    /* 清空之后必须重建牌组、补满手牌并重绘（否则 DOM 上还是开局渲染的旧卡，
+       而 hand 已空：点卡会执行 shopaddcard(getCardData(hand[index].name)) 抛 TypeError） */
+    currentLevel = DEFAULT_LEVEL;
+    resetAdventure();
   });
   function resetAdventure() {
     deck = buildDeckFromLevel(currentLevel);
