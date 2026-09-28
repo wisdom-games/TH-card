@@ -323,14 +323,18 @@
     const card = getCardData(name);
     return card && card.ID ? `images/adventure/${card.ID}.png` : "null.png";
   }
-  function clearShopCards() {
-    for (let i = 1; i <= 3; i += 1) {
-      const box = $(`#adventurenewcard${i}`);
-      if (!box) continue;
-      box.innerHTML = "";
-      box.hidden = true;
-    }
+  function clearShopCards(){
+  for(let i=1;i<=3;i++){
+    const box=$(`#adventurenewcard${i}`);
+    if(!box) continue;
+    const newBox=box.cloneNode(false);
+    newBox.innerHTML=""; newBox.hidden=true;
+    newBox.removeAttribute("data-card");
+    newBox.removeAttribute("data-pricetype");
+    newBox.removeAttribute("data-shop-index");
+    if(box.parentNode) box.parentNode.replaceChild(newBox, box);
   }
+}
 
   function getShopPrice(cardName) {
     const card = window.cardDatabase && window.cardDatabase[cardName];
@@ -727,6 +731,7 @@
     }
 
     activeIndex = -1;
+    clearShopCards();
   }
     window.clearInfo = clearInfo;
 
