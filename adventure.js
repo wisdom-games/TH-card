@@ -1038,56 +1038,6 @@
   }
 }
 
-  function extractOutcomeKeys(result) {
-    const keys = new Set();
-
-    if (result === true) {
-      keys.add("win");
-      return Array.from(keys);
-    }
-
-    if (result === false) {
-      keys.add("lost");
-      return Array.from(keys);
-    }
-
-    if (result === null || result === undefined) {
-      return [];
-    }
-
-    if (
-      typeof result === "string" ||
-      typeof result === "number" ||
-      typeof result === "boolean"
-    ) {
-      keys.add(String(result));
-      return Array.from(keys);
-    }
-
-    if (Array.isArray(result)) {
-      for (const value of result) {
-        if (value !== null && value !== undefined) {
-          keys.add(String(value));
-        }
-      }
-      return Array.from(keys);
-    }
-
-    if (isObject(result)) {
-      for (const [key, value] of Object.entries(result)) {
-        if (value === true) keys.add(key);
-        if (
-          typeof value === "string" ||
-          typeof value === "number" ||
-          typeof value === "boolean"
-        ) {
-          keys.add(String(value));
-        }
-      }
-    }
-
-    return Array.from(keys);
-  }
 function getLevelUpAdd(pc,key,fromLevel) { // pcname.levelupadd*
   const list = pc && Array.isArray(pc[key]) ? pc[key] : [];
   return toInt(list[fromLevel - 1],0);
@@ -1139,6 +1089,7 @@ async function PCLevelUP() {
   stats.MP = stats.maxMP;
   syncStatsToDom(true);
   await showLevelUpChoice(character.name);
+  syncStatsToDom(true);
   return true;
   
 }
@@ -1255,6 +1206,7 @@ async function handleReaction(cardState, cardData, result) {
   if (hasXPReward) {
     while (await PCLevelUP()) {
     }
+    syncStatsToDom(true);
   }
 
   if (ops.delete !== undefined) {
@@ -1388,22 +1340,13 @@ async function runAction(cardState, action) {
     }
   }
 
-  document.addEventListener("th-card:start-new-game", function () {
-    pendingNewGame = true;
+  document.addEventListener("th-card:character-selected", function (event) {
+    const isNewGame = (event && event.detail && event.detail.newGame) || window._thCardPendingNewGame;
+    if (!isNewGame && !pendingNewGame) return;
+    try { localStorage.removeItem(STATE_KEY); clearShopData(); } catch (e) {}
     deck = [];
     hand = [];
     activeIndex = -1;
-    handSlots = [];
-    currentLevel = DEFAULT_LEVEL;
-    localStorage.removeItem(STATE_KEY);
-    clearShopData();
-  });
-
-  document.addEventListener("th-card:character-selected", function () {
-    if (!pendingNewGame) return;
-
-    pendingNewGame = false;
-    resetAdventure();
   });
   function resetAdventure() {
     deck = buildDeckFromLevel(currentLevel);

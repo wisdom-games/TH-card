@@ -46,18 +46,6 @@
     const image = getElement("#character-image");
     const nameButton = getElement("#character-name");
     
-    if (window.startingNewGame) {
-      localStorage.removeItem("TH_CARD_CHARACTER");
-      localStorage.removeItem("TH_CARD_ADVENTURE_STATE");
-      localStorage.removeItem("TH_CARD_DECK");
-      localStorage.removeItem("TH_CARD_PLAYER_BAG");
-      window.startingNewGame = false;
-    }
-
-    const existing = (function () { try { const s = localStorage.getItem(CHARACTER_STORAGE_KEY); if (!s) return null; const d = JSON.parse(s); return d && d.name === characterName ? d : null; } catch (e) { return null; } })();
-
-    const state = existing && !window.startingNewGame ? existing : saveCharacterState(characterName, character);
-    
     if (image) {
       delete image.dataset.fallbackUsed;
       image.src = characterImagePath(characterName);
@@ -142,7 +130,19 @@ function showAdventure() {
     if (characterNames.length === 0) {
       return;
     }
-
+      localStorage.removeItem("TH_CARD_CHARACTER");
+      localStorage.removeItem("TH_CARD_ADVENTURE_STATE");
+      localStorage.removeItem("TH_CARD_DECK");
+      localStorage.removeItem("TH_CARD_PLAYER_BAG");
+      const shopKeys = [];
+      for (let i = 0; i < localStorage.length; i += 1) {
+        const k = localStorage.key(i);
+        if (k && k.indexOf("SHOP_DATA_") === 0) shopKeys.push(k);
+      }
+      shopKeys.forEach(function (k) { localStorage.removeItem(k); });
+      window.startingNewGame = false;
+      window._thCardPendingNewGame = true;
+    
     const characterName = characterNames[currentIndex];
     const character = characters[characterName];
     const state = saveCharacterState(characterName, character);
@@ -159,7 +159,8 @@ function showAdventure() {
         detail: {
           name: characterName,
           character: character,
-          state: state
+          state: state,
+          newGame: true 
         }
       })
     );
@@ -378,7 +379,9 @@ document.addEventListener("th-card:start-new-game", function () {
     if (startButton) {
       startButton.addEventListener("click", selectCurrentCharacter);
     }
-
+    if (nameButton) {
+      nameButton.addEventListener("click", selectCurrentCharacter);
+    }
     if (image) {
       image.addEventListener("error", function () {
         if (!image.dataset.fallbackUsed) {
