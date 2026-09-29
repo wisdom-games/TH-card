@@ -400,16 +400,17 @@ document.addEventListener("th-card:start-new-game", function () {
       });
     }
 
-const restored = restoreSavedCharacter();
+loadCharacters()
+  .then(function () {
+    restoreSavedCharacter();
+  })
+  .catch(function (error) {
+    console.error("角色选择界面初始化失败", error);
 
-loadCharacters().catch(function (error) {
-  console.error("角色选择界面初始化失败", error);
-
-  if (nameButton) {
-    nameButton.textContent = "角色数据读取失败";
-  }
-});
-if (restored) return;
+    if (nameButton) {
+      nameButton.textContent = "角色数据读取失败";
+    }
+  });
   });
 })();
 /* 接口 window.giveCardToPlayer("卡牌名", 数量); */

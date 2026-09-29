@@ -4,5 +4,275 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language: en\n"
 
-msgid "测试1"
-msgstr "test 1"
+msgid "札弹"
+msgstr "札弹"
+
+msgid "造成4普通伤害"
+msgstr "Deal 4 normal damage"
+
+msgid "札弹2"
+msgstr "札弹2"
+
+msgid "造成4普通伤害，重复2次"
+msgstr "Deal 4 normal damage,repeat 2 times"
+
+msgid "札弹3"
+msgstr "札弹3"
+
+msgid "造成4普通伤害，重复4次"
+msgstr "Deal 4 normal damage,repeat 4 times"
+
+msgid "升天脚"
+msgstr "升天脚"
+
+msgid "抽1张卡，获得1力量"
+msgstr "Draw 1 card,gain 1 strength"
+
+msgid "封魔针"
+msgstr "封魔针"
+
+msgid "造成8点伤害，对方2回合内无法使用技能"
+msgstr "Deal 8 damage,your opponent cannot use ability for 2 turns"
+
+msgid "阴阳玉1"
+msgstr "阴阳玉1"
+
+msgid "造成4点伤害，获得2点护甲"
+msgstr "Deal 4 damage,gain 2 armor"
+
+msgid "阴阳玉2"
+msgstr "阴阳玉2"
+
+msgid "造成6点伤害，获得4点护甲"
+msgstr "Deal 6 damage,gain 4 armor"
+
+msgid "宝具「阴阳飞鸟井」"
+msgstr "宝具「阴阳飞鸟井」"
+
+msgid "造成5点伤害，获得5点护甲，回复5HP，抽5张卡"
+msgstr "Deal 5 damage,gain 5 armor,restore 5HP,draw 5 cards"
+
+msgid "灵符「梦想封印」"
+msgstr "灵符「梦想封印」"
+
+msgid "消耗所有MP，每消耗1MP，造成2次1点普通伤害"
+msgstr "Use all MP,for each 1MP used,deal 1 normal damage 2 times"
+
+msgid "【飞翔于空中程度的能力】"
+msgstr "【飞翔于空中程度的能力】"
+
+msgid "本回合所有牌费用-1"
+msgstr "All cards cost -1 this turn"
+
+msgid "召神术"
+msgstr "召神术"
+
+msgid "获得2临时力量。你的临时力量本回合结束不清零"
+msgstr "Gain 2 temporary strength. Your temporary strength does not reset at the end of this turn"
+
+msgid "妖怪破坏者"
+msgstr "妖怪破坏者"
+
+msgid "造成3普通伤害，重复2次"
+msgstr "Deal 3 normal damage,repeat 2 times"
+
+msgid "诱导护符"
+msgstr "诱导护符"
+
+msgid "造成1普通伤害，抽1张卡"
+msgstr "Deal 1 normal damage,draw 1 card"
+
+msgid "亚空点穴"
+msgstr "亚空点穴"
+
+msgid "将出牌顶3张0费牌拿回手牌"
+msgstr "Return the top 3 0-cost cards of the deck to your hand"
+
+msgid "问神"
+msgstr "问神"
+
+msgid "将出牌顶的牌的一张临时复制置入手牌"
+msgstr "Put a temporary copy of the top card of the deck into your hand"
+
+msgid "神技「八方龙杀阵」"
+msgstr "神技「八方龙杀阵」"
+
+msgid "丢弃所有手牌，每丢弃一张就造成10点伤害；抽1"
+msgstr "Discard all cards in hand,deal 10 damage for each card discarded; draw 1"
+
+msgid "冲撞"
+msgstr "冲撞"
+
+msgid "造成4普通伤害，对方获得弱化1"
+msgstr "Deal 4 normal damage,your opponent gain 1 weakened"
+
+msgid "幽火"
+msgstr "幽火"
+
+msgid "造成6混沌伤害"
+msgstr "Deal 6 chaos damage"
+
+msgid "阴阳玉"
+msgstr "阴阳玉"
+
+msgid "香蕉皮陷阱"
+msgstr "香蕉皮陷阱"
+
+msgid "当对方打出0费卡时触发，对方随机丢弃一张卡牌"
+msgstr "Triggers when your opponent use a 0-cost card,your opponent discards a random card"
+
+msgid "土坑陷阱"
+msgstr "土坑陷阱"
+
+msgid "打出普通卡时触发，造成4伤害"
+msgstr "Triggers when you use a normal card,deal 4 damage"
+
+msgid "繁茂"
+msgstr "繁茂"
+
+msgid "下个自己的回合开始时，抽2，恢复3HP"
+msgstr "Your next turn start,draw 2,restore 3HP"
+
+msgid "快速治疗"
+msgstr "Healing"
+
+msgid "回复5HP"
+msgstr "Restore 5HP"
+
+msgid "缴械"
+msgstr "Disarm"
+
+msgid "将对方装备栏一张装备弃置，自己抽1"
+msgstr "Discard one equipment from your opponent's equipment slot,draw 1"
+
+msgid "取回"
+msgstr "取回"
+
+msgid "将场上最后一张牌移回手牌"
+msgstr "Return the last card on the site to your hand"
+
+msgid "窃取"
+msgstr "Steal"
+
+msgid "从对方牌组中窃取两张牌"
+msgstr "Steal 2 cards from your opponent's deck"
+
+msgid "瘴气场"
+msgstr "瘴气场"
+
+msgid "自身获得3瘴气"
+msgstr "Gain 3 瘴气"
+
+msgid "捕捉之网"
+msgstr "捕捉之网"
+
+msgid "在对方抽牌时，将那张牌加入自己的手牌"
+msgstr "When your opponent draws a card,add that card to your hand"
+
+msgid "黑暗"
+msgstr "Darkness"
+
+msgid "对方获得2黑暗标记"
+msgstr "Your opponent gain 2 darkness tagss"
+
+msgid "偷袭"
+msgstr "偷袭"
+
+msgid "造成2+自身黑暗层数的伤害"
+msgstr "Deal damage equal to 2 plus your darkness stacks"
+
+msgid "夜雀"
+msgstr "夜雀"
+
+msgid "双方获得2黑暗标记"
+msgstr "Both sides gain 2 darkness tagss"
+
+msgid "月亮光"
+msgstr "月亮光"
+
+msgid "驱散自身所有黑暗，然后造成8点伤害"
+msgstr "Dispel all darkness from yourself,deal 8 damage"
+
+msgid "死蝶之舞"
+msgstr "死蝶之舞"
+
+msgid "造成5伤害，将一张“死蝶之舞”洗入牌组"
+msgstr "Deal 5 damage,shuffle a “死蝶之舞” into the deck"
+
+msgid "樱吹雪地狱"
+msgstr "樱吹雪地狱"
+
+msgid "将5张“*樱弹”置入你的手牌"
+msgstr "Put 5 “*樱弹” into your hand"
+
+msgid "樱桃"
+msgstr "樱桃"
+
+msgid "造成2普通伤害"
+msgstr "Deal 2 normal damage"
+
+msgid "智慧"
+msgstr "Wisdom"
+
+msgid "获得1MP上限"
+msgstr "Gain 1 max MP"
+
+msgid "寒冰箭"
+msgstr "寒冰箭"
+
+msgid "造成4冰霜伤害，对方获得2冻结"
+msgstr "Deal 4 frost damage,your opponent gain 2 frozen"
+
+msgid "冰冻"
+msgstr "Freeze"
+
+msgid "双方获得4冻结"
+msgstr "Both sides gain 4 frozen"
+
+msgid "冰冷智慧"
+msgstr "冰冷智慧"
+
+msgid "对方获得2冻结，获得2MP，抽取1张卡"
+msgstr "Your opponent gain 2 frozen,gain 2MP,draw 1 card"
+
+msgid "冰袭方阵"
+msgstr "冰袭方阵"
+
+msgid "造成4*场上的冰属性卡次的冰霜伤害，每次造成伤害时给予对方1冻结"
+msgstr "Deal frost damage to 4 times the number of ice cards on the site,each times damage is dealt your opponent gain 1 frozen"
+
+msgid "完美冻结"
+msgstr "完美冻结"
+
+msgid "对方获得1点冰冻标记，那之后，如果对方冰冻标记不低于10，获得1个额外回合"
+msgstr "your opponent gain 1 frozen tag,after that,if your opponent's frozen tags is 10 or higher,gain 1 extra turn"
+
+msgid "顺走"
+msgstr "顺走"
+
+msgid "选择一张对方手中的卡牌加入手中，忽略双方反制卡，装备，特性，标记的效果"
+msgstr "Choose a card from your opponent's hand and add it to your hand,ignoring the effects of counter-cards/equips/traits/tags on both sides"
+
+msgid "打击"
+msgstr "Attack(lv.1)"
+
+msgid "猛击"
+msgstr "Attack(lv.2)"
+
+msgid "沉思"
+msgstr "Muse"
+
+msgid "获得2MP"
+msgstr "gain 2MP"
+
+msgid "毒雾"
+msgstr "Gas"
+
+msgid "对方获得3中毒"
+msgstr "your opponent gain 3 poisoned"
+
+msgid "猛毒雾"
+msgstr "Severe Gas"
+
+msgid "对方获得6中毒"
+msgstr "your opponent gain 6 poisoned"

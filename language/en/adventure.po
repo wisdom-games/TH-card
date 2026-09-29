@@ -4,5 +4,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language: en\n"
 
+msgid "水井"
+msgstr "Well"
+
+msgid "喝水可以获得10HP"
+msgstr "Drink water can restores 10HP"
+
 msgid "商人"
-msgstr "shop"
+msgstr "Shop"
+
+msgid "毛玉"
+msgstr "毛玉"
+
+msgid "游魂"
+msgstr "游魂"
+
+msgid "阴阳玉"
+msgstr "阴阳玉"
+
+msgid "妖精A"
+msgstr "妖精A"
+
+msgid "妖精B"
+msgstr "妖精B"
+
+msgid "妖怪兔"
+msgstr "妖怪兔"
+
+msgid "黑谷山女"
+msgstr "黑谷山女"
+
+msgid "露米娅"
+msgstr "露米娅"
+
+msgid "西行寺幽幽子"
+msgstr "西行寺幽幽子"
+
+msgid "琪露诺"
+msgstr "琪露诺"
