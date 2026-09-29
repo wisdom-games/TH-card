@@ -45,18 +45,19 @@
     const character = characters[characterName];
     const image = getElement("#character-image");
     const nameButton = getElement("#character-name");
-    
+    const displayName = window.i18n.t(character.display);
+
     if (image) {
       delete image.dataset.fallbackUsed;
       image.src = characterImagePath(characterName);
-      image.alt = htmlToPlainText(characterName);
+      image.alt = displayName;
     }
 
     if (nameButton) {
-      nameButton.innerHTML = characterName;
+      nameButton.innerHTML = displayName;
       nameButton.setAttribute(
         "aria-label",
-        `选择角色：${htmlToPlainText(characterName)}`
+        `${window.i18n.t("选择角色：")}${displayName}`
       );
     }
   }
@@ -189,7 +190,7 @@ function updateAdventureView(characterName, state) {
   const avatar = getElement("#adventure-character-image");
   if (avatar) {
     avatar.src = characterImagePath(characterName);
-    avatar.alt = htmlToPlainText(characterName);
+    avatar.alt = window.i18n.t(characters[characterName].display);
   }
 
   document.dispatchEvent(new Event("th-card:stats-changed"));

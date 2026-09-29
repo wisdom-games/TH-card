@@ -1,5 +1,6 @@
 {
   "测试卡牌1":{
+  "display":"测试1",
   "price":"5",
   "类型":"基本卡",
   "效果":{
@@ -8,7 +9,7 @@
 	    "type":"普通"
     }
   },
-    "描述":"造成2普通伤害",
+    "info":"造成2普通伤害",
     "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
   },
@@ -20,7 +21,7 @@
 	    "type":"普通"
     }
   },
-    "描述":"造成65535普通伤害",
+    "info":"造成65535普通伤害",
     "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
   },
@@ -35,7 +36,7 @@
     }
     }
   },
-    "描述":"获得两张测试卡牌flood",
+    "info":"获得两张测试卡牌flood",
     "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
   },
@@ -47,7 +48,7 @@
       "value":1
     }
   },
-    "描述":"造成1点伤害，忽略双方反制卡",
+    "info":"造成1点伤害，忽略双方反制卡",
     "tag":"handcard;handcarddamage",
     "ignore":"startsidecounter;startsideequip;startsidetrait;startsidetag;nsidetag;nsidetrait;nsideequip;nsidecounter",
     "sidetype":"typeNormal"
@@ -69,7 +70,7 @@
     }
     }
   },
-    "描述":"获得测试卡牌flood和自身",
+    "info":"获得测试卡牌flood和自身",
     "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
   },
@@ -81,7 +82,7 @@
 	  "type":"普通"
     }
   },
-    "描述":"造成4普通伤害",
+    "info":"造成4普通伤害",
 	  "tag":"item;handcarddamage" /* 触发器检测 */
   },
   "测试卡牌3":{
@@ -95,7 +96,7 @@
     "type":"普通"
     }
   },
-    "描述":"从卡组抽取2张卡，造成1点普通伤害",
+    "info":"从卡组抽取2张卡，造成1点普通伤害",
     "MP":2,
     "tag":"handcard;handcarddamage;handcardaddcard",
     "sidetype":"typeNormal"
@@ -110,7 +111,7 @@
     }
     }
   },
-    "描述":"将2张基本卡牌1*加入手牌",
+    "info":"将2张基本卡牌1*加入手牌",
     "MP":2,
     "tag":"handcard;handcardaddcard",
     "sidetype":"typeNormal"
@@ -131,7 +132,7 @@
     }
     }
   },
-    "描述":"为自身增加1护甲和1力量",
+    "info":"为自身增加1护甲和1力量",
     "MP":2,
     "tag":"handcard;handcardaddtagself",
     "sidetype":"typeNormal"
@@ -147,7 +148,7 @@
 	    "value":3
 	    }
   },
-    "描述":"造成2普通伤害，重复3次",
+    "info":"造成2普通伤害，重复3次",
     "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
   },
@@ -161,7 +162,7 @@
 	  "rule":"handcarddamage;itemdamage;equipdamage", /* 触发规则 */
     "siderule":"other" /* 触发回合规则 */
   },
-    "描述":"受到的伤害-1",
+    "info":"受到的伤害-1",
 	  "tag":"equip;equipdamagechange", /* 触发器检测 */
     "sidetype":"typeNormal"
   },
@@ -176,7 +177,7 @@
 	  "rule":"handcarddamage;itemdamage;equipdamage", /* 触发规则 */
     "siderule":"self" /* 触发回合规则 */
   },
-    "描述":"造成的伤害+1",
+    "info":"造成的伤害+1",
 	  "tag":"equip;equipdamagechange", /* 触发器检测 */
     "sidetype":"typeNormal"
   },
@@ -190,7 +191,7 @@
     "rule":"turnstart", /* 触发规则 */
     "siderule":"self" /* 触发回合规则 */
   },
-    "描述":"在回合开始时对敌方造成2普通伤害",
+    "info":"在回合开始时对敌方造成2普通伤害",
 	  "tag":"equip;equipdamage", /* 触发器检测 */
     "sidetype":"typeNormal"
   },
@@ -204,7 +205,7 @@
     "rule":"turnend", /* 触发规则 */
     "siderule":"self" /* 触发回合规则 */
   },
-    "描述":"在回合结束时对敌方造成4普通伤害",
+    "info":"在回合结束时对敌方造成4普通伤害",
 	  "tag":"equip;equipdamage", /* 触发器检测 */
     "sidetype":"typeNormal"
   },
@@ -212,6 +213,7 @@
   /* PC */
   /* 红白 */
   "札弹":{
+  "display":"札弹",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -219,12 +221,13 @@
 	  "type":"普通"	  
     }
   },
-    "描述":"造成4普通伤害",
+    "info":"造成4普通伤害",
     "MP":1,
 	  "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
   },
   "札弹2":{
+  "display":"札弹2",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -235,12 +238,13 @@
 	    "value":2
 	  }
   },
-    "描述":"造成4普通伤害，重复2次",
+    "info":"造成4普通伤害，重复2次",
     "MP":2,
 	  "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
   },
   "札弹3":{
+  "display":"札弹3",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -251,12 +255,13 @@
 	    "value":4
 	  }
   },
-    "描述":"造成4普通伤害，重复4次",
+    "info":"造成4普通伤害，重复4次",
     "MP":4,
 	  "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
   },
   "升天脚":{
+  "display":"升天脚",
   "类型":"基本卡",
   "效果":{
     "抽卡":{
@@ -270,11 +275,12 @@
     }
     }
   },
-    "描述":"抽1张卡，获得1力量",
+    "info":"抽1张卡，获得1力量",
 	  "tag":"handcard;handcardaddtagself;handcardaddcard",
     "sidetype":"typeNormal"
   },
   "封魔针":{
+  "display":"封魔针",
   "price":"25",
   "类型":"基本卡",
   "效果":{
@@ -290,12 +296,13 @@
         }
       }
   },
-    "描述":"造成8点伤害，对方2回合内无法使用技能",
+    "info":"造成8点伤害，对方2回合内无法使用技能",
     "MP":1,
 	  "tag":"handcard;handcardaddtagother;handcarddamage",
     "sidetype":"typeNormal;selfdeleteonsite" /* 打出后自我删除 */
   },
   "阴阳玉1":{
+  "display":"阴阳玉1",
   "price":"15",
   "类型":"基本卡",
   "效果":{
@@ -311,12 +318,13 @@
         }
       }
   },
-    "描述":"造成4点伤害，获得2点护甲",
+    "info":"造成4点伤害，获得2点护甲",
     "MP":1,
 	  "tag":"handcard;handcardaddtagself;handcarddamage",
     "sidetype":"typeNormal"
   },
   "阴阳玉2":{
+  "display":"阴阳玉2",
   "price":"25",
   "类型":"基本卡",
   "效果":{
@@ -332,12 +340,13 @@
         }
       }
   },
-    "描述":"造成6点伤害，获得4点护甲",
+    "info":"造成6点伤害，获得4点护甲",
     "MP":2,
 	  "tag":"handcard;handcardaddtagself;handcarddamage",
     "sidetype":"typeNormal"
   },
   "宝具「阴阳飞鸟井」":{
+  "display":"宝具「阴阳飞鸟井」",
   "price":"50",
   "类型":"基本卡",
   "效果":{
@@ -361,12 +370,13 @@
       "value":5
     }
   },
-    "描述":"造成5点伤害，获得5点护甲，回复5HP，抽5张卡",
+    "info":"造成5点伤害，获得5点护甲，回复5HP，抽5张卡",
     "MP":2,
 	  "tag":"handcard;handcardaddtagself;handcarddamage",
     "sidetype":"typeNormal"
   },
     "灵符「梦想封印」":{
+  "display":"灵符「梦想封印」",
   "price":"50",
     "类型":"基本卡",
     "效果":{
@@ -403,11 +413,12 @@
       }
       }
     },
-    "描述":"消耗所有MP，每消耗1MP，造成2次1点普通伤害",
+    "info":"消耗所有MP，每消耗1MP，造成2次1点普通伤害",
     "tag":"handcard;handcarddamage;handcarduseMP",
     "sidetype":"typeNormal"
   },
   "【飞翔于空中程度的能力】":{
+  "display":"【飞翔于空中程度的能力】",
   "price":"40",
   "类型":"基本卡",
   "效果":{
@@ -424,12 +435,13 @@
     }
     }
   },
-    "描述":"本回合所有牌费用-1",
+    "info":"本回合所有牌费用-1",
     "MP":2,
 	  "tag":"handcard;handcardaddtagself;handcardlessneedmpself",
     "sidetype":"typeNormal"
   },
   "召神术":{
+  "display":"召神术",
   "price":"20",
   "类型":"基本卡",
   "效果":{
@@ -446,12 +458,13 @@
     }
     }
   },
-    "描述":"获得2临时力量。你的临时力量本回合结束不清零",
+    "info":"获得2临时力量。你的临时力量本回合结束不清零",
     "MP":1,
 	  "tag":"handcard;handcardaddtagself",
     "sidetype":"typeNormal"
   },
   "妖怪破坏者":{
+  "display":"妖怪破坏者",
   "price":"25",
   "类型":"基本卡",
   "效果":{
@@ -463,12 +476,13 @@
 	    "value":2
 	  }
   },
-    "描述":"造成3普通伤害，重复2次",
+    "info":"造成3普通伤害，重复2次",
     "MP":1,
 	  "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
   },
   "诱导护符":{
+  "display":"诱导护符",
   "price":"20",
   "类型":"基本卡",
   "效果":{
@@ -480,11 +494,12 @@
 	    "value":1
 	  }
   },
-    "描述":"造成1普通伤害，抽1张卡",
+    "info":"造成1普通伤害，抽1张卡",
 	  "tag":"handcard;handcarddamage;handcardaddcard",
     "sidetype":"typeNormal"
   },
   "亚空点穴":{
+  "display":"亚空点穴",
   "price":"40",
   "类型":"基本卡",
   "效果":{
@@ -501,10 +516,11 @@
     }
   },
     "tag":"handcard;handcardaddcard",
-    "描述":"将出牌顶3张0费牌拿回手牌",
+    "info":"将出牌顶3张0费牌拿回手牌",
     "sidetype":"typeNormal"
   },
   "问神":{
+  "display":"问神",
   "price":"30",
   "类型":"基本卡",
   "效果":{
@@ -518,10 +534,11 @@
     }
   },
     "tag":"handcard;handcardaddcard",
-    "描述":"将出牌顶的牌的一张临时复制置入手牌",
+    "info":"将出牌顶的牌的一张临时复制置入手牌",
     "sidetype":"typeNormal"
   },
   "神技「八方龙杀阵」":{
+  "display":"神技「八方龙杀阵」",
   "price":"60",
     "类型":"基本卡",
     "效果":{
@@ -565,13 +582,14 @@
 		    "value":1
       }
     },
-    "描述":"丢弃所有手牌，每丢弃一张就造成10点伤害；抽1",
+    "info":"丢弃所有手牌，每丢弃一张就造成10点伤害；抽1",
     "tag":"handcard;handcarddamage;handcardusehandcard;handcardaddcard",
     "sidetype":"typeNormal"
   },
   /* NPC */
   /* 毛玉 */
   "冲撞":{
+  "display":"冲撞",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -591,13 +609,14 @@
         }
       }      
   },
-    "描述":"造成4普通伤害，对方获得弱化1",
+    "info":"造成4普通伤害，对方获得弱化1",
     "MP":1,
     "tag":"handcard;handcarddamage;handcardaddtagother"
   },
   /* 游魂 */
   
   "幽火":{
+  "display":"幽火",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -605,12 +624,13 @@
 	    "type":"混沌"
     }
   },
-    "描述":"造成6混沌伤害",
+    "info":"造成6混沌伤害",
     "MP":2,
     "tag":"handcard;handcarddamage"
   },
   /* 阴阳玉(enemy) */
   "阴阳玉":{
+  "display":"阴阳玉",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -625,13 +645,14 @@
         }
       }
   },
-    "描述":"造成4点伤害，获得2点护甲",
+    "info":"造成4点伤害，获得2点护甲",
     "MP":1,
 	  "tag":"handcard;handcardaddtagself;handcarddamage",
     "sidetype":"typeNormal"
   },
   /* 妖精A */
   "香蕉皮陷阱":{
+  "display":"香蕉皮陷阱",
   "类型":"反制卡",
   "效果":{
     "卡牌选择":{
@@ -646,11 +667,12 @@
     "siderule":"other"
   },
     "tag":"countercard;countercarddelothercard",
-    "描述":"当对方打出0费卡时触发，对方随机丢弃一张卡牌",
+    "info":"当对方打出0费卡时触发，对方随机丢弃一张卡牌",
     "sidetype":"typeNormal"
   },
   
   "土坑陷阱":{
+  "display":"土坑陷阱",
   "类型":"反制卡",
   "效果":{
     "伤害":{
@@ -663,11 +685,12 @@
     "siderule":"self"
   },
     "tag":"countercard;countercarddamage",
-    "描述":"打出普通卡时触发，造成4伤害",
+    "info":"打出普通卡时触发，造成4伤害",
     "sidetype":"typeNormal"
   },
   /* 妖精B */  
   "繁茂":{
+  "display":"繁茂",
   "类型":"基本卡",
   "效果":{
     "标记":{
@@ -685,10 +708,11 @@
   },
     "tag":"handcard;handcardaddtagself",
     "MP":2,
-    "描述":"下个自己的回合开始时，抽2，恢复3HP",
+    "info":"下个自己的回合开始时，抽2，恢复3HP",
     "sidetype":"typeNormal"
   },
   "快速治疗":{
+  "display":"快速治疗",
   "类型":"基本卡",
   "效果":{
     "valuechange":{
@@ -697,7 +721,7 @@
       }
     }
   },
-    "描述":"回复5HP",
+    "info":"回复5HP",
     "MP":1,
 	  "tag":"handcard",
     "sidetype":"typeNormal"
@@ -705,6 +729,7 @@
   /* 妖怪兔 */
   
   "缴械":{
+  "display":"缴械",
   "类型":"基本卡",
   "效果":{
     "卡牌选择":{
@@ -719,10 +744,11 @@
       }
   },
     "tag":"handcard;handcardremoveotherequip;handcardaddcard",
-    "描述":"将对方装备栏一张装备弃置，自己抽1",
+    "info":"将对方装备栏一张装备弃置，自己抽1",
     "sidetype":"typeNormal"
   },
   "取回":{
+  "display":"取回",
   "类型":"基本卡",
   "效果":{
     "卡牌选择":{
@@ -734,10 +760,11 @@
   },
     "tag":"handcard;handcardaddcard",
     "MP":1,
-    "描述":"将场上最后一张牌移回手牌",
+    "info":"将场上最后一张牌移回手牌",
     "sidetype":"typeNormal"
   },
   "窃取":{
+  "display":"窃取",
   "类型":"基本卡",
   "效果":{
     "卡牌选择":{
@@ -751,11 +778,12 @@
   },
     "tag":"handcard;handcardaddcard",
     "MP":1,
-    "描述":"从对方牌组中窃取两张牌",
+    "info":"从对方牌组中窃取两张牌",
     "sidetype":"typeNormal"
   },
   /* 黑谷山女 */
   "瘴气场":{
+  "display":"瘴气场",
   "类型":"基本卡",
   "效果":{
     "标记":{
@@ -766,12 +794,13 @@
     }
     }
   },
-    "描述":"自身获得3瘴气",
+    "info":"自身获得3瘴气",
     "MP":3,
 	  "tag":"handcard;handcardaddtagself",
     "sidetype":"typeNormal"
   },
   "捕捉之网":{
+  "display":"捕捉之网",
   "类型":"反制卡",
   "效果":{
     "effectchange":{
@@ -786,12 +815,13 @@
     "rule":"drawcard",
 	  "siderule":"other",
     "tag":"countercard;countercardgetothercard",
-    "描述":"在对方抽牌时，将那张牌加入自己的手牌",
+    "info":"在对方抽牌时，将那张牌加入自己的手牌",
     "sidetype":"typeNormal"
   },
   /* 露米娅 */
   
   "黑暗":{ /* 技能 */
+  "display":"黑暗",
   "类型":"基本卡",
   "效果":{
     "标记":{
@@ -803,11 +833,12 @@
     }
   },
     "MP":1,
-    "描述":"对方获得2黑暗标记",
+    "info":"对方获得2黑暗标记",
     "tag":"handcard;handcardaddtagother",
     "sidetype":"typeDark"
   },
   "偷袭":{
+  "display":"偷袭",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -815,11 +846,12 @@
       }
   },
     "MP":1,
-    "描述":"造成2+自身黑暗层数的伤害",
+    "info":"造成2+自身黑暗层数的伤害",
     "tag":"handcard;handcarddamage;handcarddeletetagself",
     "sidetype":"typeDark"
   },
   "夜雀":{
+  "display":"夜雀",
   "类型":"基本卡",
   "效果":{
     "标记":{
@@ -831,11 +863,12 @@
     }
   },
     "MP":2,
-    "描述":"双方获得2黑暗标记",
+    "info":"双方获得2黑暗标记",
     "tag":"handcard;handcardaddtagother;handcardaddtagself",
     "sidetype":"typeDark"
   },
   "月亮光":{
+  "display":"月亮光",
   "类型":"基本卡",
   "效果":{
     "标记":{
@@ -850,12 +883,13 @@
       }
   },
     "MP":2,
-    "描述":"驱散自身所有黑暗，然后造成8点伤害",
+    "info":"驱散自身所有黑暗，然后造成8点伤害",
     "tag":"handcard;handcarddamage;handcarddeletetagself",
     "sidetype":"typeDark"
   },
   /* 西行寺幽幽子 */
   "死蝶之舞":{
+  "display":"死蝶之舞",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -870,12 +904,13 @@
     }
     }
   },
-    "描述":"造成5伤害，将一张“死蝶之舞”洗入牌组",
+    "info":"造成5伤害，将一张“死蝶之舞”洗入牌组",
     "MP":2,
     "tag":"handcard;handcarddamage;handcardaddcardself",
     "sidetype":"typeNormal"
   },
   "樱吹雪地狱":{
+  "display":"樱吹雪地狱",
   "类型":"基本卡",
   "效果":{
     "获取卡":{
@@ -885,12 +920,13 @@
     }
     }
   },
-    "描述":"将5张“*樱弹”置入你的手牌",
+    "info":"将5张“*樱弹”置入你的手牌",
     "MP":3,
     "tag":"handcard;handcardaddcardself",
     "sidetype":"typeNormal"
   },
   "樱桃":{
+  "display":"樱桃",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -898,12 +934,13 @@
       "type":"普通"
       }
   },
-    "描述":"造成2普通伤害",
+    "info":"造成2普通伤害",
     "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
   },
   /* 琪露诺 */
   "智慧":{
+  "display":"智慧",
   "类型":"基本卡",
   "效果":{
     "valuechange":{
@@ -913,11 +950,12 @@
     }
   },
     "MP":1,
-    "描述":"获得1MP上限",
+    "info":"获得1MP上限",
     "tag":"handcard;handcardaddtagother;handcardaddtagself",
     "sidetype":"typeIce"
   },
   "寒冰箭":{
+  "display":"寒冰箭",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -933,11 +971,12 @@
     }
   },
     "MP":1,
-    "描述":"造成4冰霜伤害，对方获得2冻结",
+    "info":"造成4冰霜伤害，对方获得2冻结",
     "tag":"handcard;handcarddamage;handcardaddtagother",
     "sidetype":"typeIce"
   },
   "冰冻":{
+  "display":"冰冻",
   "类型":"基本卡",
   "效果":{
     "标记":{
@@ -949,11 +988,12 @@
     }
   },
     "MP":2,
-    "描述":"双方获得4冻结",
+    "info":"双方获得4冻结",
     "tag":"handcard;handcardaddtagother;handcardaddtagself",
     "sidetype":"typeIce"
   },
   "冰冷智慧":{
+  "display":"冰冷智慧",
   "类型":"基本卡",
   "效果":{
     "标记":{
@@ -973,11 +1013,12 @@
     }
   },
     "MP":1,
-    "描述":"对方获得2冻结，获得2MP，抽取1张卡",
+    "info":"对方获得2冻结，获得2MP，抽取1张卡",
     "tag":"handcard;handcardaddtagother;handcardaddMPself;handcardaddcard",
     "sidetype":"typeIce"
   },
   "冰袭方阵":{
+  "display":"冰袭方阵",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -997,11 +1038,12 @@
       }
     },
     "MP":3,
-    "描述":"造成4*场上的冰属性卡次的冰霜伤害，每次造成伤害时给予对方1冻结",
+    "info":"造成4*场上的冰属性卡次的冰霜伤害，每次造成伤害时给予对方1冻结",
     "tag":"handcard;handcardaddtagother;handcardaddtagself",
     "sidetype":"typeIce"
   },
   "完美冻结":{
+  "display":"完美冻结",
   "类型":"基本卡",
   "效果":{
     "标记":{
@@ -1019,13 +1061,14 @@
     }
   },
     "MP":3,
-    "描述":"对方获得1点冰冻标记，那之后，如果对方冰冻标记不低于10，获得1个额外回合",
+    "info":"对方获得1点冰冻标记，那之后，如果对方冰冻标记不低于10，获得1个额外回合",
     "tag":"handcard;handcardaddtagother",
     "sidetype":"typeIce"
   },
   
   /* General */
   "顺走":{
+  "display":"顺走",
   "类型":"基本卡",
   "效果":{
     "卡牌选择":{
@@ -1039,12 +1082,13 @@
   },
     "MP":1,
     "tag":"handcard;handcarddelothercard;handcardgetorhercard",
-    "描述":"选择一张对方手中的卡牌加入手中，忽略双方反制卡，装备，特性，标记的效果",
+    "info":"选择一张对方手中的卡牌加入手中，忽略双方反制卡，装备，特性，标记的效果",
     "ignore":"startsidecounter;startsideequip;startsidetrait;startsidetag;nsidetag;nsidetrait;nsideequip;nsidecounter",
     "sidetype":"typeNormal"
   },
   
   "打击":{
+  "display":"打击",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -1052,11 +1096,12 @@
 	    "type":"普通"
     }
   },
-    "描述":"造成2普通伤害",
+    "info":"造成2普通伤害",
     "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
   },
   "猛击":{
+  "display":"猛击",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -1064,11 +1109,12 @@
 	    "type":"普通"
     }
   },
-    "描述":"造成4普通伤害",
+    "info":"造成4普通伤害",
     "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
   },
   "沉思":{
+  "display":"沉思",
   "类型":"基本卡",
   "效果":{
     "valuechange":{
@@ -1077,11 +1123,12 @@
       }
     }
   },
-    "描述":"获得2MP",
+    "info":"获得2MP",
     "tag":"handcard;handcardvaluechangeself",
     "sidetype":"typeIce"
   },
   "毒雾":{
+  "display":"毒雾",
   "类型":"基本卡",
   "效果":{
     "标记":{
@@ -1092,12 +1139,13 @@
     }
     }
   },
-    "描述":"对方获得3中毒",
+    "info":"对方获得3中毒",
     "MP":1,
 	  "tag":"handcard;handcardaddtagother",
     "sidetype":"typeNormal"
   },
   "猛毒雾":{
+  "display":"猛毒雾",
   "类型":"基本卡",
   "效果":{
     "标记":{
@@ -1108,7 +1156,7 @@
     }
     }
   },
-    "描述":"对方获得6中毒",
+    "info":"对方获得6中毒",
     "MP":2,
 	  "tag":"handcard;handcardaddtagother",
     "sidetype":"typeNormal"

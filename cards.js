@@ -26,8 +26,8 @@
       }
 
       return {
-        name: targetName,
-        description: String(card["描述"] ?? ""),
+        name: card.display,
+        description: card.info,
         data:card.MP === null || card.MP === undefined || (typeof card.MP === "string" && card.MP.trim() === "") ? {...card,MP:0} : card
       };
     }
@@ -40,8 +40,8 @@
       }
 
       return {
-        name: targetName,
-        description: String(tag["描述"] ?? ""),
+        name: tag.display,
+        description: tag.info,
         data: tag
       };
     }

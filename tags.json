@@ -1,5 +1,6 @@
 {
   "护甲":{
+	"display":"护甲",
     "效果":{
     "伤害修改":{
       "value_read":"0-<self.tags.护甲>",
@@ -18,9 +19,10 @@
     },
     "rule":"handcarddamage;itemdamage;equipdamage",
     "siderule":"other",
-    "描述":"减少受到的伤害，不能抵御混沌伤害"
+    "info":"减少受到的伤害，不能抵御混沌伤害"
   },
   "力量":{
+	"display":"力量",
     "效果":{
     "伤害修改":{
       "value_read":"<self.tags.力量>",
@@ -43,6 +45,7 @@
     "siderule":"self"
   },
   "临时力量":{
+	"display":"临时力量",
     "效果":{
     "伤害修改":{
       "value_read":"<self.tags.临时力量>",
@@ -66,6 +69,7 @@
     "siderule":"self"
   },
   "临时力量保护":{
+	"display":"临时力量保护",
     "效果":{
       "标记":{
         "临时力量保护":{
@@ -77,9 +81,10 @@
     },
     "rule":"turnend",
     "siderule":"self",
-    "描述":"本回合结束时临时力量不消失"
+    "info":"本回合结束时临时力量不消失"
   },
   "冻结":{
+	"display":"冻结",
     "效果":{
     "伤害修改":{
       "value_read":"0-<self.tags.冻结>",
@@ -99,21 +104,23 @@
     "rule":"handcarddamage;itemdamage;equipdamage",
     "siderule":"self"
   },
-  "瘴气场":{
+  "瘴气":{
+	"display":"瘴气",
     "效果":{
       "标记":{
         "中毒":{
           "other":{
-        "value_read":"<self.tags.瘴气场>"
+        "value_read":"<self.tags.瘴气>"
           }
           }
         }
     },
     "rule":"turnend",
     "siderule":"self",
-    "描述":"回合结束时给予对方等同于标记数量的毒素标记"
+    "info":"回合结束时给予对方等同于标记数量的毒素标记"
   },
   "中毒":{
+	"display":"中毒",
     "效果":{
     "伤害":{
       "value_read":"<self.tags.中毒>",
@@ -132,9 +139,10 @@
     },
     "rule":"turnend",
     "siderule":"self",
-    "描述":"回合结束时受到等同于标记的毒素伤害，然后失去1标记"
+    "info":"回合结束时受到等同于标记的毒素伤害，然后失去1标记"
   },
   "弱化":{
+	"display":"弱化",
     "效果":{
     "伤害修改":{
       "value_read":"0-<self.tags.弱化>",
@@ -145,6 +153,7 @@
     "siderule":"self"
   },
   "弱化控制":{
+	"display":"弱化控制",
     "效果":{
       "标记":{
         "弱化":{
@@ -163,6 +172,7 @@
     "siderule":"self"
   },
   "黑暗":{
+	"display":"黑暗",
     "效果":{
       "伤害修改":{
         "type":"unconstrained", /* 通用匹配 */
@@ -182,9 +192,10 @@
     },
     "rule":"handcarddamage;itemdamage;equipdamage",
     "siderule":"self",
-    "描述":"有50%概率无法造成伤害"
+    "info":"有50%概率无法造成伤害"
   },
     "getHPturnstart":{
+	"display":"getHPturnstart",
     "效果":{
       "valuechange":{
         "fight.<selfside>.HP":{
@@ -201,9 +212,10 @@
     },
     "rule":"turnstart",
     "siderule":"self",
-    "描述":"下回合开始时恢复标记层数HP"
+    "info":"下回合开始时恢复标记层数HP"
   },
   "getcardturnstart":{
+	"display":"getcardturnstart",
     "效果":{
       "抽卡":{
         "value_read":"<self.tags.getcardturnstart>"
@@ -218,13 +230,25 @@
     },
     "rule":"turnstart",
     "siderule":"self",
-    "描述":"下回合开始时抽取标记层数的牌"
+    "info":"下回合开始时抽取标记层数的牌"
   },
   "额外回合":{
+	"display":"额外回合",
     "ID":"moreturn",
-    "描述":"额外回合"
+    "info":"在回合结束后，额外执行1个回合"
+  },
+  "allMP":{
+	"display":"allMP",
+    "hide":"true",
+    "info":"allMP"
+  },
+  "allhandcard":{
+	"display":"allhandcard",
+    "hide":"true",
+    "info":"allhandcard"
   },
   "noability":{
+	"display":"noability",
     "效果":{
       "标记":{
         "noability":{
@@ -236,9 +260,10 @@
     "rule":"turnend",
     "siderule":"self"
     },
-    "描述":"无法使用技能"
+    "info":"无法使用技能"
   },
   "mpneedless":{
+	"display":"mpneedless",
   "效果":{
     "valuechange":{
       "fight.<selfside>.cardmpchange":{
@@ -260,6 +285,7 @@
   },
   /* trait */
   "幽魂聚地":{
+	"display":"幽魂聚地",
     "type":"trait",
     "效果":{
       "effectchange":{
@@ -278,7 +304,7 @@
     "rule":"movetograve",
     "siderule":"all"
     },
-    "描述":"所有卡将要被送入坟场时都改为被消耗;每有一张牌被消耗，获得1HP上限和1HP"
+    "info":"所有卡将要被送入坟场时都改为被消耗;每有一张牌被消耗，获得1HP上限和1HP"
   }
   
 }

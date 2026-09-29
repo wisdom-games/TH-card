@@ -867,14 +867,10 @@
       return;
     }
 
-    let html = `<h3>${escapeHtml(cardState.name)}</h3>`;
+    let html = `<h3>${escapeHtml(window.i18n.t(cardData.display))}</h3>`;
 
     if (cardData.info) {
-      html += `<p>${escapeHtml(cardData.info)}</p>`;
-    }
-
-    if (cardData["描述"]) {
-      html += `<p>${escapeHtml(cardData["描述"])}</p>`;
+      html += `<p>${escapeHtml(window.i18n.t(cardData.info))}</p>`;
     }
 
     if (cardData["类型"]) {
@@ -968,12 +964,12 @@
         button.classList.add("is-empty");
         button.disabled = true;
         button.removeAttribute("data-card");
-        button.setAttribute("aria-label", `空卡位${index + 1}`);
+        button.removeAttribute("aria-label");
         if (cardName) cardName.textContent = "";
 
         if (img) {
           img.src = "null.png";
-          img.alt = "empty card";
+          img.alt = "";
         }
 
         if (activeIndex === index) {

@@ -263,11 +263,10 @@ function parseFightCard(cardEntry) {
           button.disabled = true;
 
           button.removeAttribute("data-card");
-
-          button.setAttribute("aria-label",`${labelPrefix}空卡位${index + 1}`);
+          button.removeAttribute("aria-label");
 
             img.src = "null.png";
-            img.alt = "empty card";
+            img.alt = "";
         }
       }
     );
@@ -1073,10 +1072,14 @@ function renderAbilityButton(fight, owner) {
     }
 
 //    title.textContent = info.name;
+    // 翻译在显示点发生：传入 display / info 原值，取回译文
+    const displayName = window.i18n.t(info.name);
+    const displayInfo = window.i18n.t(info.description);
+
     if(Number(window.debugmode) === 1){
-      content.innerHTML = `${info.name}\n ${JSON.stringify(info.data, null, 2)} ${info.description}`;
+      content.innerHTML = `${displayName}\n ${JSON.stringify(info.data, null, 2)} ${displayInfo}`;
       }else{
-    content.innerHTML = `${info.name}\n${info.description}`;
+    content.innerHTML = `${displayName}\n${displayInfo}`;
   }
   }
 
@@ -1163,38 +1166,6 @@ function parseValueRead(expression, fight, side) {
       return stepResult;
     }
 
-  function equipRuleMatch(rule,tag) {
-    const rules = String(rule ?? "").split(";").map(function (value) { return value.trim(); }).filter(Boolean);
-    const tags = String(tag ?? "").split(";").map(function (value) { return value.trim(); }).filter(Boolean);
-    return rules.some(function (value) { return tags.includes(value); });
-  }
-  function valueruleMatches(rules,inputeffect) {
-  if (!isObject(rules)) return false;
-  for (const [reference,expression] of Object.entries(rules)) {
-    const match = reference.trim().match(/^<inputeffect\.([^<>]+)>$/);
-    if (!match || typeof expression !== "string" || expression.trim() === "") return false;
-    let data = inputeffect;
-    for (const key of match[1].split(".")) {
-      if (!key || data === null || data === undefined || !Object.prototype.hasOwnProperty.call(data,key)) {
-        return false;
-      }
-      data = data[key];
-    }
-    if (data === null || data === undefined) return false;
-    try {
-      const literal = typeof data === "number" ? String(data) : typeof data === "bigint" ? `${data}n` : JSON.stringify(data);
-      if (literal === undefined) return false;
-      const condition = expression.replace(/\$\{data\}/g,function () { return `(${literal})`; });
-      // if
-      if (!Function('"use strict"; if (' + condition + ') { return true; } return false;')()) {
-        return false;
-      }
-    } catch (error) {
-      return false;
-    }
-  }
-  return true;
-}
 async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIndex,sourceData,ownerSide,sourceCount,cardName,valuechange,sourceCardName) {
   const newEffectTypes = ["获取卡","抽卡","伤害","标记","卡牌选择","valuechange"];
   const source = isObject(sourceData) ? sourceData : {};
@@ -1391,20 +1362,8 @@ async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIn
   }
   return {side:side,type:type,effect:nextEffect,tag:tag,sidetype:sidetype,register:-1,newEffectChain:false,rulePassed:anyRulePassed};
 }
-  function sideruleMatches(siderule,incomingSide,equipOwnerSide) {
-    const rule = String(siderule ?? "").trim();
-    if (!rule || rule === "" || rule === "all") return true;
-    if (rule === "self") {
-      return Number(incomingSide) === Number(equipOwnerSide);
-    }
-    if (rule === "other") {
-      return Number(incomingSide) !== Number(equipOwnerSide);
-    }
-    // default: no restriction
-    return true;
-  }
 
-  // ---------- 新增：标签数组操作 & 渲染工具 ----------
+  // 标签数组操作 & 渲染工具
   function getTagListForSide(fight, side, name) {
     if (isTrait(name)) {
       return side === 1 ? fight.playerfighttraits : fight.enemyfighttraits;
@@ -1465,13 +1424,14 @@ async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIn
       const hidden = tagDef && (tagDef.hide === true || String(tagDef.hide ?? "").trim().toLowerCase() === "true");
       if (hidden) return;
       // 每种标记只渲染一个图标，并在右下角显示数值徽章
+      const tagDisplay = tagDef ? window.i18n.t(tagDef.display) : name;
       const wrapper = document.createElement("span");
       wrapper.className = "tag-wrapper";
       wrapper.setAttribute("role", "img");
-      wrapper.setAttribute("aria-label", isTrait(name) ? name : `${name} ×${count}`);
+      wrapper.setAttribute("aria-label", isTrait(name) ? tagDisplay : `${tagDisplay} ×${count}`);
       const img = document.createElement("img");
       img.src = `images/tags/${name}.png`;
-      img.alt = name;
+      img.alt = tagDisplay;
       wrapper.appendChild(img);
       const badge = document.createElement("span");
       badge.className = "tag-badge";
