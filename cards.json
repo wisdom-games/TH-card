@@ -534,7 +534,7 @@
     }
   },
     "tag":"handcard;handcardaddcard",
-    "info":"将出牌顶的牌的一张临时复制置入手牌",
+    "info":"将场上最后一张牌复制*置入手牌",
     "sidetype":"typeNormal"
   },
   "神技「八方龙杀阵」":{
@@ -925,8 +925,8 @@
     "tag":"handcard;handcardaddcardself",
     "sidetype":"typeNormal"
   },
-  "樱桃":{
-  "display":"樱桃",
+  "樱弹":{
+  "display":"樱弹",
   "类型":"基本卡",
   "效果":{
     "伤害":{

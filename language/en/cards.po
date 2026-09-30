@@ -56,7 +56,7 @@ msgid "灵符「梦想封印」"
 msgstr "灵符「梦想封印」"
 
 msgid "消耗所有MP，每消耗1MP，造成2次1点普通伤害"
-msgstr "Use all MP,for each 1MP used,deal 1 normal damage 2 times"
+msgstr "Use all MP,deal 1 normal damage 2 times for each 1MP used"
 
 msgid "【飞翔于空中程度的能力】"
 msgstr "【飞翔于空中程度的能力】"
@@ -68,7 +68,7 @@ msgid "召神术"
 msgstr "召神术"
 
 msgid "获得2临时力量。你的临时力量本回合结束不清零"
-msgstr "Gain 2 temporary strength. Your temporary strength does not reset at the end of this turn"
+msgstr "Gain 2 temp strength. Your temp strength don't zero in this turn end"
 
 msgid "妖怪破坏者"
 msgstr "妖怪破坏者"
@@ -86,25 +86,25 @@ msgid "亚空点穴"
 msgstr "亚空点穴"
 
 msgid "将出牌顶3张0费牌拿回手牌"
-msgstr "Return the top 3 0-cost cards of the deck to your hand"
+msgstr "Return the top 3 0-MPcost cards of the deck to your hand"
 
 msgid "问神"
 msgstr "问神"
 
-msgid "将出牌顶的牌的一张临时复制置入手牌"
-msgstr "Put a temporary copy of the top card of the deck into your hand"
+msgid "将场上最后一张牌复制*置入手牌"
+msgstr "Copy site last card temp* into your hand"
 
 msgid "神技「八方龙杀阵」"
 msgstr "神技「八方龙杀阵」"
 
 msgid "丢弃所有手牌，每丢弃一张就造成10点伤害；抽1"
-msgstr "Discard all cards in hand,deal 10 damage for each card discarded; draw 1"
+msgstr "Discard all cards in your hand,deal 10 damage for each card discarded,draw 1 card"
 
 msgid "冲撞"
 msgstr "冲撞"
 
 msgid "造成4普通伤害，对方获得弱化1"
-msgstr "Deal 4 normal damage,your opponent gain 1 weakened"
+msgstr "Deal 4 normal damage,your opponent gain 1 weaken"
 
 msgid "幽火"
 msgstr "幽火"
@@ -119,7 +119,7 @@ msgid "香蕉皮陷阱"
 msgstr "香蕉皮陷阱"
 
 msgid "当对方打出0费卡时触发，对方随机丢弃一张卡牌"
-msgstr "Triggers when your opponent use a 0-cost card,your opponent discards a random card"
+msgstr "Triggers when your opponent use a 0-MPcost card,your opponent discard a random card"
 
 msgid "土坑陷阱"
 msgstr "土坑陷阱"
@@ -131,10 +131,10 @@ msgid "繁茂"
 msgstr "繁茂"
 
 msgid "下个自己的回合开始时，抽2，恢复3HP"
-msgstr "Your next turn start,draw 2,restore 3HP"
+msgstr "Your next turn start,draw 2 cards,restore 3HP"
 
 msgid "快速治疗"
-msgstr "Healing"
+msgstr "Fase healing"
 
 msgid "回复5HP"
 msgstr "Restore 5HP"
@@ -143,7 +143,7 @@ msgid "缴械"
 msgstr "Disarm"
 
 msgid "将对方装备栏一张装备弃置，自己抽1"
-msgstr "Discard one equipment from your opponent's equipment slot,draw 1"
+msgstr "Discard one equipment from your opponent's equipment slot,you draw 1 cards"
 
 msgid "取回"
 msgstr "取回"
@@ -158,10 +158,10 @@ msgid "从对方牌组中窃取两张牌"
 msgstr "Steal 2 cards from your opponent's deck"
 
 msgid "瘴气场"
-msgstr "瘴气场"
+msgstr "Field miasmal"
 
 msgid "自身获得3瘴气"
-msgstr "Gain 3 瘴气"
+msgstr "Gain 3 miasma"
 
 msgid "捕捉之网"
 msgstr "捕捉之网"
@@ -173,19 +173,19 @@ msgid "黑暗"
 msgstr "Darkness"
 
 msgid "对方获得2黑暗标记"
-msgstr "Your opponent gain 2 darkness tagss"
+msgstr "Your opponent gain 2 darkness tags"
 
 msgid "偷袭"
-msgstr "偷袭"
+msgstr "Sneak attack"
 
 msgid "造成2+自身黑暗层数的伤害"
-msgstr "Deal damage equal to 2 plus your darkness stacks"
+msgstr "Deal damage equal to 2 plus your darkness number"
 
 msgid "夜雀"
 msgstr "夜雀"
 
 msgid "双方获得2黑暗标记"
-msgstr "Both sides gain 2 darkness tagss"
+msgstr "Both sides gain 2 darkness tags"
 
 msgid "月亮光"
 msgstr "月亮光"
@@ -203,10 +203,10 @@ msgid "樱吹雪地狱"
 msgstr "樱吹雪地狱"
 
 msgid "将5张“*樱弹”置入你的手牌"
-msgstr "Put 5 “*樱弹” into your hand"
+msgstr "Put 5 temp 樱弹* into your hand"
 
-msgid "樱桃"
-msgstr "樱桃"
+msgid "樱弹"
+msgstr "樱弹"
 
 msgid "造成2普通伤害"
 msgstr "Deal 2 normal damage"
