@@ -19,31 +19,29 @@
   <button id="main-menu-start" type="button" aria-label="开始游戏"></button>
   <button id="main-menu-winlist" type="button" aria-label="通关成就"></button>
 </div>
-    <section id="character-select" aria-label="角色选择" aria-hidden="false">
-  <button
-    id="character-prev"
-    class="character-arrow"
-    type="button"
-    aria-label="上一个角色"
-  >
-    &#9664;
+<section id="character-select" aria-label="角色选择" aria-hidden="false">
+  <img id="character-background" src="images/UI/character-background.png" alt="" />
+  <img id="character-foreground" src="images/UI/character-foreground.png" alt="" />
+
+  <button id="character-prev" class="character-arrow" type="button" aria-label="上一个角色">
+    <img src="images/UI/character-changeL-BUTTOM.png" alt="上一个角色" />
   </button>
+
   <div id="pcui1"><div id="pcui1-1">选择角色</div></div>
+
   <div id="character-display">
     <img id="character-image" src="null.png" alt="角色"/>
-
     <button id="character-name" type="button" aria-label="选择当前角色">
       正在读取角色……
     </button>
   </div>
-  <div id="pcui2"><div id="pcui2-1">开始</div></div>
-  <button
-    id="character-next"
-    class="character-arrow"
-    type="button"
-    aria-label="下一个角色"
-  >
-    &#9654;
+
+  <button id="pcui2-1" type="button" aria-label="开始游戏">
+    <img src="images/UI/character-start.png" alt="开始游戏" />
+  </button>
+
+  <button id="character-next" class="character-arrow" type="button" aria-label="下一个角色">
+    <img src="images/UI/character-changeR-BUTTOM.png" alt="下一个角色" />
   </button>
 </section>
     <!--
@@ -153,7 +151,7 @@
 
   <!-- 结束回合按钮 -->
   <button class="end-turn" type="button">
-  <img src="images/UI/结束回合.png" alt="结束回合" />
+  <img src="images/UI/endturn.png" alt="结束回合" />
   </button>
   <div id="fightcardinfo">
     <div id="fightcardinfo-title">信息栏</div>

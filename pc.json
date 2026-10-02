@@ -32,8 +32,10 @@
         }
       }    
     },
-  "红白":{
-    "display":"红白",
+  "博丽灵梦":{
+    "display":"博丽灵梦",
+    "image":"images/pc/reimu.png",
+    "imageY":30,
     "levelup":[3,5,10,17,26,37,50],
     "初始卡":{
       "打击":6,

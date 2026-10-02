@@ -1,5 +1,3 @@
-/*从 pc.json 建立角色选择界面。*/
-
 (function () {
   "use strict";
 
@@ -14,10 +12,13 @@
     return document.querySelector(selector);
   }
 
-  function characterImagePath(characterName) {
-    const fileName = htmlToPlainText(characterName).trim();
-    return `/images/character/${encodeURIComponent(fileName)}.png`;
+function characterImagePath(characterName) {
+  const character = characters[characterName];
+  if (character && character.image) {
+    return character.image;
   }
+  return `/null.png`;
+}
 
   function htmlToPlainText(html) {
     const temporary = document.createElement("div");
@@ -51,6 +52,7 @@
       delete image.dataset.fallbackUsed;
       image.src = characterImagePath(characterName);
       image.alt = displayName;
+      image.style.transform = `translate(${Number(character.imageX) || 0}px, ${Number(character.imageY) || 0}px)`;
     }
 
     if (nameButton) {

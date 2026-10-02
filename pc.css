@@ -36,97 +36,127 @@ body {
    角色选择界面
    ========================================================= */
 #character-select {
+  width:100%;
+  height:100vh;
+
+  position:relative;
+  overflow:hidden;
+
+  background:#fff;
+}
+
+#character-background {
+  position: absolute;
+  inset: 0;
+
   width: 100%;
-  min-height: 100vh;
-  padding: 24px;
+  height: 100%;
 
-  display: grid;
-  grid-template-columns:
-    minmax(70px, 1fr)
-    minmax(300px, 520px)
-    minmax(70px, 1fr);
-  align-items: center;
-  justify-items: center;
-  gap: clamp(12px, 4vw, 64px);
+  object-fit: cover;
 
-  background: var(--bg);
+  z-index: 1;
 }
 
 #character-select.is-hidden {
   display: none;
 }
 
-/* 黑框：唯一实际显示的外框 */
 #character-display {
-  width: 100%;
-  height: min(76vh, 640px);
-  min-height: 420px;
-  padding: clamp(18px, 4vw, 42px);
+  width:520px;
+  height:640px;
 
-  border: 8px solid var(--black);
-  background: #fff;
+  position:absolute;
 
-  display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
-  align-items: center;
-  justify-items: center;
-  gap: 20px;
+  left:50%;
+  top:50%;
 
-  overflow: hidden;
-  position: relative;
+  transform:translate(-50%,-50%);
+
+  z-index:2;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  overflow:visible;
+}
+
+#character-image {
+  max-width: none;
+  max-height: none;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+}
+
+#character-foreground {
+  position: absolute;
+
+  left:0;
+  top:0;
+
+  width:100%;
+  height:100%;
+
+  object-fit:fill;
+
+  z-index:3;
+
+  pointer-events:none;
+}
+#character-prev {
+  position:absolute;
+
+  left:calc(50% - 260px - clamp(64px,9vw,120px) - 120px);
+
+  top:calc(50% - 80px);
+
+  transform:translateY(-50%);
+
+  z-index:5;
+}
+
+
+#character-next {
+  position:absolute;
+
+  right:calc(50% - 260px - clamp(64px,9vw,120px) - 80px);
+
+  top:calc(50% - 80px);
+
+  transform:translateY(-50%);
+
+  z-index:5;
 }
 #character-select {
   position: relative;
 }
 
-#pcui1,
-#pcui2 {
-  position: absolute;
-  height: 40px;
-  background: transparent;
-  border: 0;
-  pointer-events: none;
-}
-
-#pcui1 {
-  top: calc(50% - min(38vh, 320px) - 40px);
-  left: 0;
-  right: calc(50% + 260px);
-}
-
-#pcui1-1 {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  color: #111;
-  font-size: 24px;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-#pcui2 {
-  top: calc(50% + min(38vh, 320px));
-  left: calc(50% + 260px);
-  right: 0;
-}
-
 #pcui2-1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  color: #111;
-  font-size: 24px;
-  line-height: 1;
-  white-space: nowrap;
-  cursor: pointer;
-  pointer-events: auto;
+  position:absolute;
+
+  right:0;
+  bottom:8%;
+
+  padding:0;
+
+  border:0;
+
+  background:none;
+
+  z-index:6;
+}
+
+#pcui2-1 img {
+  width:auto;
+  height:auto;
+
+  display:block;
 }
 
 /* 名字 */
@@ -151,22 +181,29 @@ body {
 }
 
 .character-arrow {
-  width: clamp(64px, 9vw, 120px);
-  height: clamp(64px, 9vw, 120px);
-  padding: 0;
+  width:auto;
+  height:auto;
 
-  border: 0;
-  background: transparent;
+  padding:0;
 
-  color: #000;
-  font-size: clamp(48px, 8vw, 96px);
-  line-height: 1;
+  border:0;
+  background:transparent;
 
-  cursor: pointer;
-  user-select: none;
+  cursor:pointer;
 
-  appearance: none;
-  -webkit-appearance: none;
+  z-index:5;
+
+  appearance:none;
+  -webkit-appearance:none;
+}
+
+.character-arrow img {
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  display:block;
 }
 
 #pcui2-1:hover,
