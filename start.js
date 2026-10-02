@@ -51,11 +51,11 @@ if (gameArea) {
 
 }
 
-function winlist() {
+function achievement() {
 return true;
 }
 
-window.winlist = winlist;
+window.achievement = achievement;
 
 function updateContinueButton() {
 const button = document.getElementById("main-menu-continue");
@@ -104,7 +104,7 @@ setScene("adventure");
 function bind() {
 const continueButton = document.getElementById("main-menu-continue");
 const startButton = document.getElementById("main-menu-start");
-const winlistButton = document.getElementById("main-menu-winlist");
+const achievementButton = document.getElementById("main-menu-achievement");
 
 
 if (continueButton) {
@@ -115,8 +115,8 @@ if (startButton) {
   startButton.addEventListener("click", startGame);
 }
 
-if (winlistButton) {
-  winlistButton.addEventListener("click", winlist);
+if (achievementButton) {
+  achievementButton.addEventListener("click", achievement);
 }
 
 updateContinueButton();

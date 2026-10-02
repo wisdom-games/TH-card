@@ -1,11 +1,9 @@
-/* =========================================================
-主菜单
-========================================================= */
-
 #main-menu {
 width: 100vw;
 height: 100vh;
 padding: 0 20px 20px 0;
+
+position: relative;
 
 display: flex;
 flex-direction: column;
@@ -17,27 +15,48 @@ overflow: hidden;
 background: var(--bg);
 }
 
+#main-background {
+position: absolute;
+
+left: 0;
+top: 0;
+
+width: 100%;
+height: 100%;
+
+object-fit: cover;
+
+z-index: 0;
+}
+
 #main-menu.is-hidden {
 display: none;
 }
 
 #main-menu button {
-width: 200px;
-height: 60px;
-padding: 0;
+width:auto;
+height:auto;
 
-flex: 0 0 60px;
+padding:0;
 
-border: 5px solid #000000;
-border-radius: 0;
+border:0;
 
-background-position: center;
-background-repeat: no-repeat;
-background-size: 100% 100%;
+background:none;
 
-cursor: pointer;
-appearance: none;
--webkit-appearance: none;
+position:relative;
+z-index:1;
+
+cursor:pointer;
+
+appearance:none;
+-webkit-appearance:none;
+}
+
+#main-menu button img {
+display:block;
+
+width:auto;
+height:auto;
 }
 
 #main-menu button:hover,
@@ -48,18 +67,6 @@ outline: none;
 #main-menu button:disabled {
 cursor: default;
 opacity: 0.5;
-}
-
-#main-menu-continue {
-background-image: url("image/UI/继续游戏.png");
-}
-
-#main-menu-start {
-background-image: url("image/UI/开始游戏.png");
-}
-
-#main-menu-winlist {
-background-image: url("image/UI/通关成就.png");
 }
 
 @media (max-width: 760px) {
