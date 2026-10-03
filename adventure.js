@@ -825,11 +825,21 @@
       const button = document.createElement("button");
       const image = document.createElement("img");
       const badge = document.createElement("span");
+      const actionName = window.i18n.t(action.name);
       button.type = "button";
       button.className = "cardinfo-action";
-      button.setAttribute("aria-label",action.useCount && action.useCount > 1 ? `${action.name} ×${action.useCount}` : action.name);
-      image.src = `images/adventure/${action.name}.png`;
-      image.alt = "";
+      button.setAttribute("aria-label",action.useCount && action.useCount > 1 ? `${actionName} ×${action.useCount}` : actionName);
+      image.alt = actionName;
+      image.addEventListener("error", function () {
+        // if no image
+        const label = document.createElement("span");
+        label.className = "cardinfo-action-text";
+        label.textContent = actionName;
+        button.classList.add("is-text");
+        image.remove();
+        button.insertBefore(label, button.firstChild);
+      }, { once: true });
+      image.src = `images/adventure/${actionName}.png`;
       badge.className = "cardinfo-action-badge";
       badge.textContent = toCircledNumber(action.useCount);
       button.appendChild(image);
