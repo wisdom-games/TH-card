@@ -1,0 +1,41 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+html,body{margin:0;height:100%;overflow:hidden;background:#000}
+#wrap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+iframe{display:block;width:1920px;height:1080px;border:0}
+// load 1920*1020
+</style>
+<title>TH cav</title>
+<script>
+const languagelist = [
+    {code:"zh",title:"东方卡牌冒险者"},
+    {code:"en",title:"TH card adventurer"}
+];
+let language = localStorage.getItem("LANGUAGE");
+
+if (!language) {
+    let browserLang = navigator.language || navigator.userLanguage;
+    language = browserLang.split("-")[0];
+	// no sub
+    if (!languagelist.some(item => item.code === language)) {
+        language = "en";
+		// english default
+    }
+    localStorage.setItem("LANGUAGE", language);
+}
+let current = languagelist.find(item => item.code === language);
+document.title = current.title;
+
+</script>
+</head>
+<body>
+
+
+<div id=wrap><iframe src=index.html></iframe></div>
+
+<script>
+let w=wrap;
+onresize=()=>w.style.transform=`translate(-50%,-50%) scale(${Math.min(innerWidth/1920,innerHeight/1080)})`;
+onresize();
+</script>
+</body></html>
