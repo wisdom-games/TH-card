@@ -375,25 +375,23 @@
     <script src="advfight.js"></script>
 	<script src="setting.js"></script>
     <div id="th-card-settings">
-  <button id="th-card-settings-btn" type="button" aria-haspopup="menu" aria-expanded="false">
-    设置
-  </button>
+      <button id="th-card-settings-btn" type="button" aria-haspopup="menu" aria-expanded="false">
+        设置
+      </button>
 
-<div id="th-card-settings">
-  <button id="th-card-settings-btn" type="button" aria-haspopup="menu" aria-expanded="false">设置</button>
+      <div id="th-card-settings-menu" role="menu" hidden>
+        <button id="th-card-debug-toggle" type="button" role="menuitem">调试模式：关闭</button>
 
-  <div id="th-card-settings-menu" role="menu" hidden>
-    <button id="th-card-debug-toggle" type="button" role="menuitem">调试模式：关闭</button>
-    <div id="th-card-language-item">
-      <button id="th-card-language-btn" type="button" role="menuitem" aria-haspopup="menu" aria-expanded="false">语言</button>
-      <div id="th-card-language-menu" role="menu" hidden></div>
+        <div id="th-card-language-item">
+          <button id="th-card-language-btn" type="button" role="menuitem" aria-haspopup="menu" aria-expanded="false">语言</button>
+          <div id="th-card-language-menu" role="menu" hidden></div>
+        </div>
+
+        <div class="th-card-settings-separator" role="separator"></div>
+
+        <button id="th-card-back-menu" type="button" role="menuitem">返回主菜单</button>
+      </div>
     </div>
-
-    <div class="th-card-settings-separator" role="separator"></div>
-
-    <button id="th-card-back-menu" type="button" role="menuitem">返回主菜单</button>
-  </div>
-</div>
 
 <script>
 (function () {

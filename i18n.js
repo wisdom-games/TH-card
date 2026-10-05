@@ -103,6 +103,21 @@
     document.dispatchEvent(new CustomEvent("th-card:i18n-ready", { detail: { lang } }));
     return lang;
   }
+  
+  window.addEventListener("load", async function () {
+    const lang = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
+
+    try {
+      locale = lang;
+      const loaded = await load(lang);
+      ready = true;
+      console.info(`i18n: ${lang} load ${loaded.length}  .po file`, loaded);
+    } catch (error) {
+      console.warn("i18n load fail", error);
+    }
+
+    document.dispatchEvent(new CustomEvent("th-card:i18n-ready", { detail: { lang } }));
+  });
 
   window.i18n = {
     t,
