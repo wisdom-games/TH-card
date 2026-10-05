@@ -373,15 +373,25 @@
     <script src="adventure.js"></script>
     <script src="fight.js"></script>
     <script src="advfight.js"></script>
+	<script src="setting.js"></script>
     <div id="th-card-settings">
   <button id="th-card-settings-btn" type="button" aria-haspopup="menu" aria-expanded="false">
     设置
   </button>
 
-  <div id="th-card-settings-menu" hidden>
-    <button id="th-card-debug-toggle" type="button">
-      调试模式：关闭
-    </button>
+<div id="th-card-settings">
+  <button id="th-card-settings-btn" type="button" aria-haspopup="menu" aria-expanded="false">设置</button>
+
+  <div id="th-card-settings-menu" role="menu" hidden>
+    <button id="th-card-debug-toggle" type="button" role="menuitem">调试模式：关闭</button>
+    <div id="th-card-language-item">
+      <button id="th-card-language-btn" type="button" role="menuitem" aria-haspopup="menu" aria-expanded="false">语言</button>
+      <div id="th-card-language-menu" role="menu" hidden></div>
+    </div>
+
+    <div class="th-card-settings-separator" role="separator"></div>
+
+    <button id="th-card-back-menu" type="button" role="menuitem">返回主菜单</button>
   </div>
 </div>
 
@@ -425,61 +435,7 @@
   }
 
   window.thCardSyncBattleBars = syncBattleBars;
-
-  function updateDebugLabel() {
-    const toggle = document.getElementById("th-card-debug-toggle");
-    if (toggle) {
-      toggle.textContent = `调试模式：${window.debugmode ? "开启" : "关闭"}`;
-    }
-  }
-
-  function setDebugMode(next) {
-    window.debugmode = next ? 1 : 0;
-    updateDebugLabel();
-
-    document.dispatchEvent(
-      new CustomEvent("th-card:debugmode-changed", {
-        detail: { debugmode: window.debugmode }
-      })
-    );
-  }
-
-  window.setDebugMode = setDebugMode;
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const wrap = document.getElementById("th-card-settings");
-    const btn = document.getElementById("th-card-settings-btn");
-    const menu = document.getElementById("th-card-settings-menu");
-    const toggle = document.getElementById("th-card-debug-toggle");
-
-    function openMenu(open) {
-      if (!menu || !btn) return;
-      menu.hidden = !open;
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
-    }
-
-    if (btn && menu) {
-      btn.addEventListener("click", function () {
-        openMenu(menu.hidden);
-      });
-    }
-
-    if (toggle) {
-      toggle.addEventListener("click", function () {
-        setDebugMode(!window.debugmode);
-      });
-    }
-
-    document.addEventListener("click", function (event) {
-      if (!wrap || !wrap.contains(event.target)) {
-        openMenu(false);
-      }
-    });
-
-    updateDebugLabel();
-    syncBattleBars();
-  });
-
+  document.addEventListener("DOMContentLoaded", syncBattleBars);
   document.addEventListener("th-card:stats-changed", syncBattleBars);
 })();
 </script>

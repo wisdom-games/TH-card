@@ -1,36 +1,41 @@
 #th-card-settings {
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  z-index: 9999;
-  font-size: 14px;
+  position: fixed; top: 12px; right: 12px;
+  z-index: 65536;
+  font-size: 14px; color: #000;
+  user-select: none; -webkit-user-select: none;
 }
-
 #th-card-settings-btn {
-  padding: 6px 10px;
-  border-radius: 999px;
-  cursor: pointer;
+  padding: 6px 12px; border: 1px solid #8f8f8f; border-radius: 0;
+  background: #fff; color: #000; font: inherit; cursor: pointer;
+}
+#th-card-settings-btn:hover, #th-card-settings-btn:focus-visible {
+  background: #cce8ff; border-color: #99d1ff; outline: none;
 }
 
-#th-card-settings-menu {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 150px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: rgba(20, 20, 20, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+#th-card-settings-menu, #th-card-language-menu {
+  position: absolute; min-width: 168px; padding: 2px 0;
+  border: 1px solid #b8b8b8; background: #fff; color: #000;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.35);
+  z-index: 1;
 }
-
+#th-card-settings-menu { top: calc(100% + 6px); right: 0; }
+#th-card-settings-menu[hidden], #th-card-language-menu[hidden] { display: none; }
 #th-card-settings-menu button {
-  display: block;
-  width: 100%;
-  padding: 8px 12px;
-  text-align: left;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
+  display: block; width: 100%; padding: 6px 12px;
+  border: 0; background: transparent; color: #000; font: inherit;
+  text-align: left; white-space: nowrap; cursor: default;
 }
+#th-card-settings-menu button:hover, #th-card-settings-menu button:focus-visible {
+  background: #cce8ff; box-shadow: inset 0 0 0 1px #99d1ff; outline: none;
+}
+#th-card-language-item { position: relative; }
+#th-card-language-menu {
+  top: -3px;
+  right: 100%; left: auto;
+}
+#th-card-language-menu .th-card-language-option { position: relative; padding-left: 26px; }
+#th-card-language-menu .th-card-language-option.is-checked::before {
+  content: "●"; position: absolute; left: 9px; top: 50%; transform: translateY(-50%);
+  font-size: 10px; line-height: 1;
+}
+.th-card-settings-separator { height: 0; margin: 3px 0; border-top: 1px solid #d8d8d8; }

@@ -56,6 +56,7 @@ return true;
 }
 
 window.achievement = achievement;
+window.setScene = setScene;
 
 function updateContinueButton() {
 const button = document.getElementById("main-menu-continue");
