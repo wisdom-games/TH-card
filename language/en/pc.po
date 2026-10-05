@@ -4,5 +4,5 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language: en\n"
 
-msgid "红白"
-msgstr "rw"
+msgid "博丽灵梦"
+msgstr "reimu"

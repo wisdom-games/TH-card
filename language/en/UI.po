@@ -1,0 +1,20 @@
+msgid ""
+msgstr ""
+
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+
+msgid "调试模式"
+msgstr "debugmode"
+
+msgid "调试模式:关闭"
+msgstr "debugmode:off"
+
+msgid "调试模式:开启"
+msgstr "debugmode:on"
+
+msgid "返回主菜单"
+msgstr "back to main"
+
+msgid "语言"
+msgstr "language"

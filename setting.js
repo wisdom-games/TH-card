@@ -83,7 +83,7 @@
   function updateDebugLabel() {
     const toggle = byId("th-card-debug-toggle");
     if (toggle) {
-      toggle.textContent = window.debugmode ? t("调试模式：开启") : t("调试模式：关闭");
+      toggle.textContent = window.debugmode ? t("调试模式:开启") : t("调试模式:关闭");
     }
   }
 
@@ -105,8 +105,7 @@
     const menu = byId("th-card-language-menu");
     const button = byId("th-card-language-btn");
     if (!menu || !button) return;
-
-    if (open) {
+    if (open && !menu.childElementCount) {
       renderLanguageMenu();
     }
 
