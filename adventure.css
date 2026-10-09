@@ -130,27 +130,21 @@
 
 /* 右上 nextcards */
 #adventure #nextcards {
-  grid-column: 2;
-  grid-row: 1;
-  justify-self: end;
+  position: absolute;
+  left: 1218px;
+  top: 104px;            /* 174(手牌顶) − 70(牌堆高) */
   box-sizing: border-box;
-  width: calc(100% - 100px);
-  height: 100%;
+  width: 681px;
+  height: 70px;
 
   min-width: 0;
   min-height: 0;
 
-  padding: clamp(12px, 3vw, 40px);
+  padding: 0;
 
   border: 0;
   background: transparent;
 
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  gap: var(--scene-gap);
-  position: relative;
   overflow: visible;
 }
 #adventure #adventure-ui1 {
@@ -158,8 +152,8 @@
   height: auto;
   max-width: none;
   position: absolute;
-  left: 0;
-  bottom: 0;
+  left: -10px;
+  top: -72px;
   display: block;
   z-index: 10;
   pointer-events: none;
@@ -191,15 +185,18 @@
 
 /* 牌堆计数牌 */
 #adventure #adventuredeck {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
   width: 150px;
   height: 70px;
-  margin: 0 auto;
+  margin: 0;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  align-self: center;
   gap: 4px;
 
   border: 0;
@@ -233,9 +230,14 @@
   flex: 0 0 50px;
   display: block;
 }
-/* 手牌区域 */
+/* 牌区域 */
 #adventure #adventure-hand {
-  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 70px;
+  box-sizing: border-box;
+  width: 681px;
+  height: 307px;
   padding: calc(60px + 1em) 6px 6px;
   border: 2px solid #000000;
   display: grid;
