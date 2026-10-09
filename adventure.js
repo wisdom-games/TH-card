@@ -707,7 +707,7 @@
     const counter = $("#adventurecardnum");
     const backCard = $("#adventurebackcard");
     if (counter) counter.textContent = String(deck.length);
-    if (backCard) backCard.src = `images/adventure/card_${deck.length >= 4 ? 4 : deck.length}.png`;
+    if (backCard) backCard.src = `images/adventure/card_${deck.length >= 3 ? 3 : deck.length}.png`;
     window.adventurecardnum = deck.length;
   }
 

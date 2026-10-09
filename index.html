@@ -51,13 +51,7 @@
     <img src="images/UI/character-changeR-BUTTOM.png" alt="下一个角色" />
   </button>
 </section>
-    <!--
-      战斗场景 UI。
-      默认由 CSS 设置为隐藏。
-
-      需要显示时，可以通过 JavaScript 添加 is-active 类：
-      document.querySelector(".game-area").classList.add("is-active");
-    -->
+    <!-- 战斗场景UI -->
 <div class="game-area">
   <!-- 敌人区域 -->
 <div class="player top">
@@ -252,24 +246,12 @@
   </div>
 </div>
 
-    <!--
-      冒险场景 UI。
-      与 game-area 处于相同层级。
-    -->
+    <!-- 冒险模式UI -->
     <div id="adventure" aria-hidden="true">
-      <div
-        id="cardinfo"
-        aria-label="card information"
-      >
-        <div
-          id="cardinfo-content"
-          aria-live="polite"
-        ></div>
-
-        <div
-          id="cardinfo-button"
-          aria-label="card information action"
-        ></div>
+	<img id="main-background" src="images/UI/adventure-background.png" alt="" />
+      <div id="cardinfo" aria-label="card information">
+        <div id="cardinfo-content" aria-live="polite"></div>
+        <div id="cardinfo-button" aria-label="card information action"></div>
       </div>
 
       <div id="nextcards" aria-label="next cards">
