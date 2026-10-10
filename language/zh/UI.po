@@ -1,0 +1,14 @@
+msgid ""
+msgstr ""
+
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: zh\n"
+
+msgid "drink"
+msgstr "drink_zh"
+
+msgid "leave"
+msgstr "leave_zh"
+
+msgid "fight"
+msgstr "fight_zh"

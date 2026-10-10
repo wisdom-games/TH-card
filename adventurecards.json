@@ -1,16 +1,16 @@
 {
   "水井":{
-    "image":"images/adventure/水井.png",
+    "logoimage":"images/adventure/logo_go.png",
     "px":60,
     "action":{
       "actionnum":2,
-      "喝":{
+      "drink":{
         "effect":{
           "HP":10
           },
         "actionnum":1
       },
-      "离开":{
+      "leave":{
         "actionnum":"void"
       }
     },
@@ -34,16 +34,17 @@
       },
     "action":{
       "actionnum":1,
-      "离开":{
+      "leave":{
         "actionnum":"void"
       }
     }
   },
   "1商人1":{
     "display":"商人",
+    "logoimage":"images/adventure/logo_shop.png",
     "ID":"1shop1",
     "shops":{
-      "红白":{
+      "博丽灵梦":{
         "封魔针":2,
         "阴阳玉1":4,
         "阴阳玉2":2,
@@ -58,16 +59,17 @@
       },
     "action":{
       "actionnum":1,
-      "离开":{
+      "leave":{
         "actionnum":"void"
       }
     }
   },
   "1商人2":{
     "display":"商人",
+    "logoimage":"images/adventure/logo_shop.png",
     "ID":"1shop2",
     "shops":{
-      "红白":{
+      "博丽灵梦":{
         "封魔针":2,
         "阴阳玉1":4,
         "阴阳玉2":2,
@@ -82,16 +84,17 @@
       },
     "action":{
       "actionnum":1,
-      "离开":{
+      "leave":{
         "actionnum":"void"
       }
     }
   },
   "1商人3":{
     "display":"商人",
+    "logoimage":"images/adventure/logo_shop.png",
     "ID":"1shop3",
     "shops":{
-      "红白":{
+      "博丽灵梦":{
         "封魔针":2,
         "阴阳玉1":4,
         "阴阳玉2":2,
@@ -106,16 +109,17 @@
       },
     "action":{
       "actionnum":1,
-      "离开":{
+      "leave":{
         "actionnum":"void"
       }
     }
   },
   "2商人1":{
     "display":"商人",
+    "logoimage":"images/adventure/logo_shop.png",
     "ID":"2shop1",
     "shops":{
-      "红白":{
+      "博丽灵梦":{
         " 宝具「阴阳飞鸟井」":1,
         "灵符「梦想封印」":1,
         "【飞翔于空中程度的能力】":2,
@@ -126,14 +130,14 @@
       },
     "action":{
       "actionnum":1,
-      "离开":{
+      "leave":{
         "actionnum":"void"
       }
     }
   },
   "测试敌人1":{
     "display":"测试用敌人1",
-    "action":"战斗",
+    "action":"fight",
     "ID":"test1",
     "HP":11,
     "MP":10,
@@ -153,7 +157,7 @@
     }
   },
   "测试敌人3":{
-    "action":"战斗",
+    "action":"fight",
     "ID":"test3",
     "reaction":{
       "win":{
@@ -161,55 +165,10 @@
         }
       }
   },
-  "测试敌人4":{
-    "action":"战斗",
-    "ID":"test4",
-    "reaction":{
-      "win":{
-        "delete":"测试敌人4"
-        }
-      }
-  },
-  "测试敌人5":{
-    "action":"战斗",
-    "ID":"test5",
-    "reaction":{
-      "win":{
-        "delete":"测试敌人5"
-        }
-      }
-  },
-  "测试敌人6":{
-    "action":"战斗",
-    "ID":"test6"
-  },
-  "测试敌人7":{
-    "action":"战斗",
-    "ID":"test7"
-  },
-  "测试敌人8":{
-    "action":"战斗",
-    "ID":"test8"
-  },
-  "测试敌人9":{
-    "action":"战斗",
-    "ID":"test9"
-  },
-  "测试敌人10":{
-    "action":"战斗",
-    "ID":"test10"
-  },
-  "测试敌人11":{
-    "action":"战斗",
-    "ID":"test11"
-  },
-  "测试敌人12":{
-    "action":"战斗",
-    "ID":"test12"
-  },
   /* 正式内容 */
   "毛玉":{
-    "action":"战斗",
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
     "ID":"rLV1enemy1",
     "HP":10,
     "MP":1,
@@ -226,7 +185,8 @@
     }
   },
   "游魂":{
-    "action":"战斗",
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
     "ID":"rLV1enemy2",
     "HP":7,
     "MP":2,
@@ -243,7 +203,8 @@
     }
   },
   "阴阳玉":{
-    "action":"战斗",
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
     "ID":"rLV1enemy2",
     "HP":7,
     "MP":2,
@@ -259,7 +220,8 @@
     }
   },
   "妖精A":{
-    "action":"战斗",
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
     "ID":"rLV2enemy1",
     "HP":10,
     "MP":3,
@@ -278,7 +240,8 @@
     }
   },
   "妖精B":{
-    "action":"战斗",
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
     "ID":"rLV2enemy2",
     "HP":10,
     "MP":3,
@@ -296,7 +259,8 @@
     }
   },
   "妖怪兔":{
-    "action":"战斗",
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
     "ID":"rLV2enemy3",
     "HP":14,
     "MP":3,
@@ -315,7 +279,8 @@
     }
   },
   "黑谷山女":{
-    "action":"战斗",
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
     "ID":"rLV3enemy1",
     "HP":20,
     "MP":4,
@@ -335,7 +300,8 @@
     }
   },
   "露米娅":{
-    "action":"战斗",
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
     "ID":"rLV3enemy2",
     "HP":20,
     "MP":4,
@@ -354,7 +320,8 @@
     }
   },
   "西行寺幽幽子":{
-    "action":"战斗",
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
     "ID":"rLV3enemy3",
     "HP":20,
     "MP":4,
@@ -371,7 +338,8 @@
     }
   },
   "琪露诺":{
-    "action":"战斗",
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
     "ID":"rLV4enemy1",
     "HP":30,
     "MP":4,

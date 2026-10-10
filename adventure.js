@@ -563,7 +563,7 @@
   function getDefaultRemaining(name) {
     const card = getCardData(name);
     if (!card) return null;
-    if (card.action === "战斗") return null;
+    if (card.action === "fight") return null;
 
     if (isObject(card.action)) {
       const n = Number(card.action.actionnum);
@@ -738,10 +738,10 @@
   function getAvailableActions(cardState, cardData) {
     if (!cardData) return [];
 
-    if (cardData.action === "战斗") {
+    if (cardData.action === "fight") {
       return [
         {
-          name: "战斗",
+          name: "fight",
           kind: "fight",
           cost: 0,
           detail: null,
@@ -788,9 +788,9 @@
     selectedImage.style.width = "";
     selectedImage.style.height = "";
 
-    if (!cardData || cardData.action === "战斗" || !cardData.image) return;
+    if (!cardData || !cardData.logoimage) return;
 
-    selectedImage.src = cardData.image;
+    selectedImage.src = cardData.logoimage;
     selectedImage.alt = "";
 
     const px = Number(cardData.px);

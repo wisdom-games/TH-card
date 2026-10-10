@@ -26,25 +26,35 @@
 
 /* 左上 cardinfo */
 #adventure #cardinfo {
-  grid-column: 1;
-  grid-row: 1;
+  position: fixed;
+  left: 31px;
+  top: 138px;
+  width: 970px;
+  height: 399px;
+  box-sizing: border-box;
 
   min-width: 0;
   min-height: 0;
 
-  position: relative;
-  overflow: visible;
+  border: 0;
+  background: transparent;
 
-  border: var(--border-thick) solid var(--black);
-  background: #fff;
-  width: calc(100% - 100px);
-  justify-self: start;
-  box-sizing: border-box;
+  overflow: visible;
 }
 
 #adventure #cardinfo-content {
-  min-height: 100%;
+  position: fixed;
+  left: 31px;
+  top: 138px;
+  width: 970px;
+  height: 399px;
+  box-sizing: border-box;
+  min-height: 0;
   padding: 16px 70px 16px 16px;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  font-size: 32px;
 }
 
 #adventure #cardinfo-content h3 {
@@ -55,7 +65,7 @@
   margin-top: 8px;
 }
 
-/* 右下角 action 区 */
+/* action */
 #adventure #cardinfo-button {
   width: auto;
   height: auto;
@@ -69,10 +79,10 @@
   background: transparent;
 
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: row-reverse;
   justify-content: flex-start;
   align-items: flex-end;
-  gap: 8px;
+  gap: 10px;
 
   overflow: visible;
   z-index: 20;
@@ -169,13 +179,14 @@
   display: none;
 }
 
+
 #adventure #adventure-selected-image {
   width: auto;
   height: auto;
   max-width: none;
   position: absolute;
-  left: 50%;
-  top: calc(50% - 40px);
+  left: 1110px;
+  top: 525px;
   transform: translate(-50%, -100%);
   display: block;
   z-index: 15;
@@ -183,12 +194,14 @@
 }
 
 
+
 /* 牌堆计数牌 */
 #adventure #adventuredeck {
   position: absolute;
   left: 50%;
-  top: 0;
+  top: -60px;
   transform: translateX(-50%);
+  z-index: 11;
   width: 150px;
   height: 70px;
   margin: 0;
@@ -198,7 +211,6 @@
   align-items: center;
   justify-content: flex-end;
   gap: 4px;
-
   border: 0;
   background: transparent;
 
@@ -238,8 +250,10 @@
   box-sizing: border-box;
   width: 681px;
   height: 307px;
+  z-index: 12;
   padding: calc(60px + 1em) 6px 6px;
-  border: 2px solid #000000;
+  border: 0;
+  background: url("images/UI/adventurecardsmain.png") no-repeat center / 100% 100%;
   display: grid;
   grid-template-columns: repeat(5, minmax(50px, 1fr));
   align-items: center;
@@ -282,38 +296,38 @@
 
 /* 左下 adventure-player */
 #adventure .adventure-player {
-  grid-column: 1;
-  grid-row: 2;
+  position: absolute;
+  left: 29px;
+  top: 632px;
+  width: 647px;
+  height: 434px;
+  z-index: 1;
 
-  width: 332px;
-  height: 100%;
-
+  grid-column: auto;
+  grid-row: auto;
   min-width: 0;
   min-height: 0;
 
-  display: flex;
-  align-items: flex-end;
-  justify-self: start;
-
-  gap: 12px;
-
-  overflow: hidden;
+  display: block;
+  overflow: visible;
 }
 
 /* 头像外层容器 */
 #adventure .avatar-container {
-  width: 160px;
-  padding: 12px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 324px;
+  height: 434px;
+  box-sizing: border-box;
+  padding: 0;
 
-  border: var(--border-thick) solid var(--black);
-  background: #fff;
+  border: 0;
+  background: transparent;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 12px;
-
-  flex-shrink: 0;
+  display: block;
+  flex: none;
+  max-height: none;
 }
 
 #adventure .adventure-player .avatar-container {
@@ -321,30 +335,34 @@
   max-height: 100%;
 }
 #adventure #adventuredata2 {
-  width: 160px;
+  position: absolute;
+  left: 332px;
+  top: 293px;
+  width: 315px;
+  height: 141px;
+  box-sizing: border-box;
   padding: 12px;
 
-  border: var(--border-thick) solid var(--black);
-  background: #fff;
+  border: 0;
+  background: transparent;
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: 12px;
 
-  flex: 0 0 160px;
-  align-self: flex-end;
-
   color: #111;
-  font-size: 16px;
+  font-size: 32px;
 }
 
 #adventure #adventurenewcard {
   grid-column: 1;
   grid-row: 2;
 
+  width: 512px;
   height: 50%;
-  margin-left: 344px;
+  margin-left: 701px;
   margin-top: auto;
 
   min-width: 0;
@@ -387,9 +405,12 @@
 }
 /* 头像区域 */
 #adventure .avatar-inner {
-  width: var(--avatar-size);
-  height: var(--avatar-size);
-  margin-bottom: 6px;
+  position: absolute;
+  left: 33px;
+  top: 2px;
+  width: 261px;
+  height: 291px;
+  margin: 0;
   padding: 0;
 
   display: flex;
@@ -397,7 +418,7 @@
   justify-content: center;
 
   overflow: hidden;
-  background: #fff;
+  background: transparent;
 }
 
 /* 头像图片 */
@@ -411,8 +432,20 @@
 
 /* HP、MP 数据 */
 #adventure .stats {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 10px;
+  height: 114px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
   color: #111;
-  font-size: 16px;
+  font-size: 32px;
 }
 
 #adventure .stats .hp,
