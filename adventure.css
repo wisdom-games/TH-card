@@ -357,35 +357,49 @@
 }
 
 #adventure #adventurenewcard {
-  grid-column: 1;
-  grid-row: 2;
-
-  width: 512px;
-  height: 50%;
-  margin-left: 701px;
-  margin-top: auto;
-
+  position: absolute;
+  grid-column: auto;
+  grid-row: auto;
+  right: 702px;
+  bottom: 14px;
+  width: 523px;
+  height: 338px;
+  box-sizing: border-box;
   min-width: 0;
   min-height: 0;
+  margin: 0;
+  padding: 0;
 
-  border: 3px solid #000000;
-  background: #fff;
-
-  box-sizing: border-box;
-  position: relative;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  z-index: 2;
 }
+
 #adventure #adventurenewcard {
-  padding: 5px;
+  padding: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 5px;
+  justify-content: space-evenly;
+  gap: 0;
+}
+
+#adventure #adventurenewcard::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 557px;
+  height: 475px;
+  background: url("images/UI/adventure-choice.png") no-repeat right bottom;
+  pointer-events: none;
+  z-index: -1;
 }
 
 #adventure #adventurenewcard > div {
-  width: 60px;
-  height: 60px;
-  flex: 0 0 60px;
+  width: 120px;
+  height: 120px;
+  flex: 0 0 120px;
   padding: 0;
   border: 0;
   background: #fff;
@@ -398,8 +412,8 @@
 }
 
 #adventure #adventurenewcard > div img {
-  width: 60px;
-  height: 60px;
+  width: 120px;
+  height: 120px;
   display: block;
   object-fit: cover;
 }
