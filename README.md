@@ -5,3 +5,9 @@
 源代码用GPLv3发布，详见许可证信息。
 
 json数据格式不受保护(如果您所在的地区认为这种数据堆砌受保护，您自动对json数据格式获得CC 0许可)，这不包含json内的创意文本。
+
+游戏社群:
+
+Discord:https://discord.gg/EtRuxDbys5
+
+QQ:807604626
