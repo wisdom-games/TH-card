@@ -69,74 +69,10 @@
 
   window.fightcardImage = fightcardImage;
   let pcDatabase = {};
-  function stripJsonComments(text) {
-    let result = "";
-    let inString = false;
-    let escaped = false;
-
-    for (let index = 0; index < text.length; index += 1) {
-      const current = text[index];
-      const next = text[index + 1];
-
-      if (inString) {
-        result += current;
-
-        if (escaped) {
-          escaped = false;
-        } else if (current === "\\") {
-          escaped = true;
-        } else if (current === "\"") {
-          inString = false;
-        }
-
-        continue;
-      }
-
-      if (current === "\"") {
-        inString = true;
-        result += current;
-        continue;
-      }
-
-      if (current === "/" && next === "/") {
-        while (index < text.length && text[index] !== "\n") index += 1;
-        result += "\n";
-        continue;
-      }
-
-      if (current === "/" && next === "*") {
-        index += 2;
-        while (
-          index < text.length &&
-          !(text[index] === "*" && text[index + 1] === "/")
-        ) {
-          if (text[index] === "\n") result += "\n";
-          index += 1;
-        }
-        index += 1;
-        continue;
-      }
-
-      result += current;
-    }
-
-    return result;
-  }
-
-  async function fetchJsonFile(path, allowComments) {
-    const response = await fetch(path, { cache: "no-store" });
-    if (!response.ok) {
-      throw new Error(`${path} 请求失败：HTTP ${response.status}`);
-    }
-
-    const text = await response.text();
-    return JSON.parse(allowComments ? stripJsonComments(text) : text);
-  }
-
   const databaseReady = Promise.all([
-    fetchJsonFile("cards.json", true),
-    fetchJsonFile("pc.json", false),
-    fetchJsonFile("tags.json", true)
+    window.myjsonread("cards.json"),
+    window.myjsonread("pc.json"),
+    window.myjsonread("tags.json")
   ])
     .then(function (result) {
       cardDatabase = result[0];

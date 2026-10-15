@@ -313,13 +313,7 @@ function PCAPI(pcName) {
 
 window.PCAPI = PCAPI;
   async function loadCharacters() {
-    const response = await fetch("pc.json", { cache: "no-store" });
-
-    if (!response.ok) {
-      throw new Error(`pc.json 请求失败：HTTP ${response.status}`);
-    }
-
-    characters = await response.json();
+    characters = await window.myjsonread("pc.json");
 
     if (characters.ALLPC_template) {
       pcTemplate = characters.ALLPC_template;

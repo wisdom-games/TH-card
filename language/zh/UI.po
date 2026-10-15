@@ -12,3 +12,6 @@ msgstr "leave_zh"
 
 msgid "fight"
 msgstr "fight_zh"
+
+msgid "endturn"
+msgstr "endturn_zh"

@@ -62,15 +62,14 @@
   }
 
   async function listPoFiles(lang) {
-    try {
-      const manifest = await fetchText(`${BASE_PATH}${lang}/index.json`);
-      const names = JSON.parse(manifest);
-      if (Array.isArray(names) && names.length) {
-        return names.filter((name) => /\.po$/i.test(name));
-      }
-    } catch (error) {
+  try {
+    const names = await window.myjsonread(`${BASE_PATH}${lang}/index.json`);
+    if (Array.isArray(names) && names.length) {
+      return names.filter((name) => /\.po$/i.test(name));
     }
-    return FALLBACK_FILES;
+  } catch (error) {
+  }
+  return FALLBACK_FILES;
   }
 
   // 顺序合并

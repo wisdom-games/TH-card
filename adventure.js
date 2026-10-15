@@ -1376,8 +1376,8 @@ async function runAction(cardState, action) {
   async function boot() {
     try {
       const [cardsJson, adventureJson] = await Promise.all([
-        fetchJson("adventurecards.json"),
-        fetchJson("adventure.json")
+        window.myjsonread("adventurecards.json"),
+        window.myjsonread("adventure.json")
       ]);
 
       cardDB = cardsJson;

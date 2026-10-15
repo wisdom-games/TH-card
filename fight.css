@@ -1,247 +1,623 @@
+/* Battle canvas */
 .game-area {
-  width: 1150px;
-  height: 880px;
-  margin: 24px auto;
-  padding: 20px;
+  --slot-size: 80px;
+  --bag-slot-size: 50px;
 
   position: relative;
-
-  /*
-    战斗 UI 默认隐藏。
-    JavaScript 可以添加 is-active 类来显示。
-  */
   display: none;
-
-  grid-template-rows: auto 1fr auto;
-  gap: 0;
+  width: 1920px;
+  height: 1080px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .game-area.is-active {
-  display: grid;
+  display: block;
 }
 
-/* 敌人区域 */
-.game-area .player.top {
-  grid-row: 1;
-  display: flex;
-  align-items: flex-start;
-  gap: 0;
-  position: relative;
-  transform: translateX(-50px);
-}
-
-/* 玩家区域 */
-.game-area .player.bottom {
-  position: static;
-  grid-row: 3;
-  display: flex;
-  align-items: flex-end;
-  gap: 0;
-  position: relative;
-}
-
-/* 玩家区域默认左对齐 */
-.game-area .player {
-  justify-self: start;
-}
-
-/* 头像外层容器 */
-.game-area .avatar-container {
-  width: 160px;
-  padding: 12px;
-
-  border: var(--border-thick) solid var(--black);
-  background: #fff;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 12px;
-
-  flex-shrink: 0;
-}
-
-/* 头像区域 */
-.game-area .avatar-inner {
-  width: var(--avatar-size);
-  height: var(--avatar-size);
-  margin-bottom: 6px;
-  padding: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  overflow: hidden;
-  background: #fff;
-}
-
-/* 头像图片 */
-.game-area .avatar-inner .avatar-img {
+.game-area > #main-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
+  object-fit: fill;
+}
 
+/* Player areas */
+.game-area .player.top,
+.game-area .player.bottom {
+  position: absolute;
   display: block;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  transform: none;
+}
+
+.game-area .player.top {
+  left: 24px;
+  top: 19px;
+  width: 1754px;
+  height: 304px;
+}
+
+.game-area .player.bottom {
+  left: 114px;
+  top: 761px;
+  width: 1748px;
+  height: 306px;
+}
+
+/* Character panels */
+.game-area .player .avatar-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.game-area .player.top .avatar-container {
+  width: 224px;
+  height: 304px;
+}
+
+.game-area .player.bottom .avatar-container {
+  width: 226px;
+  height: 306px;
+}
+
+.game-area .avatar-info {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.game-area .avatar-inner {
+  position: absolute;
+  left: 18px;
+  top: 9px;
+  width: 188px;
+  height: 182px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.game-area .player.bottom .avatar-inner {
+  width: 190px;
+  height: 183px;
+}
+
+.game-area .avatar-inner .avatar-img {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
-/* HP、MP 数据 */
 .game-area .stats {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 16px;
+  display: flex;
+  height: 80px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: #111;
-  font-size: 16px;
+  font-size: 32px;
+  line-height: 1.2;
+  text-align: center;
+  background: transparent;
+}
+
+.game-area .player.bottom .stats {
+  bottom: 13px;
+  height: 90px;
 }
 
 .game-area .stats .hp,
 .game-area .stats .mp {
-  margin-top: 6px;
+  margin-top: 0;
 }
 
-/* 卡牌栏整体 */
+/* Hands */
 .game-area .hand.large-hand {
-  padding: 10px;
-
-  border: var(--border-thick) solid var(--black);
-  background: #fff;
-
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  box-sizing: border-box;
+  z-index: 2;
 }
 
-/* 卡牌栏标题 */
+.game-area .player.top .hand.large-hand {
+  left: 481px;
+  top: 0;
+  width: 1136px;
+  height: 204px;
+}
+
+.game-area .player.bottom .hand.large-hand {
+  left: 482px;
+  top: 102px;
+  width: 1139px;
+  height: 204px;
+}
+
 .game-area .hand-label {
-  padding-left: 6px;
+  position: absolute;
+  left: 10px;
+  margin: 0;
+  padding: 0;
   color: #111;
   font-size: 18px;
+  line-height: 1.2;
+  text-align: left;
 }
 
-/* 卡槽排列区域 */
-.game-area .slots {
-  padding: 6px;
+.game-area .player.top .hand-label {
+  top: auto;
+  bottom: 8px;
+}
 
+.game-area .player.bottom .hand-label {
+  top: 8px;
+  bottom: auto;
+}
+
+.game-area .hand.large-hand .slots {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 50%;
   display: grid;
+  width: auto;
+  padding: 0;
   grid-template-columns: repeat(8, var(--slot-size));
-  gap: 8px;
+  justify-content: space-evenly;
+  justify-items: center;
+  gap: 0;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  box-sizing: border-box;
 }
 
-/* 可点击卡牌 */
 .game-area .card-slot {
+  display: inline-block;
   width: var(--slot-size);
   height: var(--slot-size);
   padding: 0;
-
-  border: 4px solid var(--black);
-  background: #fff;
-
-  display: inline-block;
   overflow: hidden;
-
+  border: 4px solid #000;
+  background: #fff;
   cursor: pointer;
   outline: none;
-
   appearance: none;
   -webkit-appearance: none;
 }
 
-/* 卡牌图片 */
 .game-area .card-slot img {
+  display: block;
   width: 100%;
   height: 100%;
-
-  display: block;
-  object-fit: cover;
-
   border: 0;
+  object-fit: cover;
 }
 
-/* 卡牌悬停及键盘焦点效果 */
 .game-area .card-slot:hover,
 .game-area .card-slot:focus-visible {
   box-shadow: 0 0 0 4px var(--focus-color);
 }
 
-/* 卡牌区域 */
-.game-area .player.top .hand.large-hand {
-  margin-left: 155px;
-}
-
-.game-area .player.bottom .hand.large-hand {
-  margin-left: 155px;
-}
-
-/* 结束回合按钮 */
-.game-area .end-turn {
+/* Decks and graveyards */
+.game-area .fight-piles {
   position: absolute;
-  top: 50%;
-/*  left: 68px; */
-/*  right: auto; */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  z-index: 3;
+}
 
-  padding: 12px 18px;
+.game-area .player.top .fight-piles {
+  left: 238px;
+  top: 0;
+  width: 95px;
+  height: 204px;
+}
 
-  border: 6px solid var(--black);
-  background: #fff;
+.game-area .player.bottom .fight-piles {
+  left: 241px;
+  top: 102px;
+  width: 94px;
+  height: 204px;
+}
 
+.game-area .fight-pile {
+  position: relative;
+  display: block;
+  flex: 0 0 97px;
+  width: 100%;
+  height: 97px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
   color: #111;
-  font-size: 16px;
-
-  cursor: pointer;
+  line-height: 1;
   user-select: none;
+}
 
-  transform: translateY(-50%) rotate(-5deg);
-  transform-origin: center center;
+.game-area .fight-pile-number,
+.game-area .fight-pile-label {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  color: #111;
+  text-align: center;
+}
 
+.game-area .fight-pile-number {
+  top: 5px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.game-area .fight-pile-label {
+  bottom: 4px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Equipment panels */
+.game-area #fightenemyequip,
+.game-area #fightplayerequip {
+  position: absolute;
+  display: flex;
+  width: 94px;
+  height: 204px;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 26px 5px 5px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.game-area .player.top #fightenemyequip {
+  left: 347px;
+  top: 0;
+}
+
+.game-area .player.bottom #fightplayerequip {
+  left: 349px;
+  top: 102px;
+}
+
+.game-area #fightenemyequip::before,
+.game-area #fightplayerequip::before {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  z-index: 10;
+  padding: 0;
+  border: 0;
+  color: #111;
+  background: transparent;
+  content: "装备";
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.game-area #fightenemyequip .bag-slot,
+.game-area #fightplayerequip .bag-slot {
+  flex: 0 0 var(--bag-slot-size);
+}
+
+/* Bags */
+.game-area #fightenemybag,
+.game-area #fightplayerbag {
+  position: absolute;
+  display: grid;
+  width: 94px;
+  height: 204px;
+  min-width: 0;
+  min-height: 0;
+  grid-template-columns: var(--bag-slot-size);
+  grid-auto-rows: var(--bag-slot-size);
+  justify-content: center;
+  align-content: start;
+  gap: 5px;
+  padding: 26px 5px 5px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.game-area .player.top #fightenemybag {
+  left: 1654px;
+  top: 0;
+  width: 100px;
+}
+
+.game-area .player.bottom #fightplayerbag {
+  left: 1654px;
+  top: 102px;
+}
+
+.game-area #fightenemybag::before,
+.game-area #fightplayerbag::before {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  z-index: 10;
+  padding: 0;
+  border: 0;
+  color: #111;
+  background: transparent;
+  content: "背包";
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.game-area #fightenemybag .bag-slot,
+.game-area #fightplayerbag .bag-slot,
+.game-area #fightenemyequip .bag-slot,
+.game-area #fightplayerequip .bag-slot {
+  position: relative;
+  display: grid;
+  width: var(--bag-slot-size);
+  height: var(--bag-slot-size);
+  padding: 0;
+  place-items: center;
+  overflow: hidden;
+  border: 2px solid #2e2e2e;
+  border-radius: 3px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(215,215,215,0.95));
+  color: #111;
+  cursor: pointer;
+  outline: none;
+  box-shadow: inset 2px 2px 0 rgba(255,255,255,0.8), inset -2px -2px 0 rgba(0,0,0,0.2);
+  box-sizing: border-box;
   appearance: none;
   -webkit-appearance: none;
 }
 
-.game-area .end-turn img {
+.game-area .bag-slot img {
+  display: block;
   width: 100%;
   height: 100%;
-
-  display: block;
-  object-fit: fill;
-
-  border: 0;
+  object-fit: contain;
+  pointer-events: none;
 }
 
-.game-area .end-turn:hover,
+.game-area .bag-slot:hover,
+.game-area .bag-slot:focus-visible {
+  box-shadow: 0 0 0 3px var(--focus-color), inset 2px 2px 0 rgba(255,255,255,0.8), inset -2px -2px 0 rgba(0,0,0,0.2);
+}
+
+/* Status marks */
+.game-area .player .player-tags-left {
+  position: absolute;
+  display: flex;
+  width: auto;
+  height: auto;
+  flex: 0 0 auto;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 2px;
+  margin-right: 0;
+  box-sizing: border-box;
+  white-space: nowrap;
+  z-index: 4;
+}
+
+.game-area .player.top .player-tags-left {
+  left: 238px;
+  top: 207px;
+}
+
+.game-area .player.bottom .player-tags-left {
+  left: 241px;
+  bottom: 207px;
+}
+
+.game-area .player .player-tags-left img,
+.game-area .player .player-tags-left .tag-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+
+.game-area .player .player-tags-left img {
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.game-area .player .player-tags-left .tag-badge {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  width: auto;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  color: #000;
+  font-size: 16px;
+  line-height: 1;
+  text-align: center;
+  transform: translate(50%, 20%);
+  pointer-events: none;
+}
+
+/* End-turn button */
+.game-area .end-turn {
+  position: absolute;
+  left: 156px;
+  top: 568px;
+  z-index: 4;
+  width: 100px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #111;
+  line-height: 0;
+  transform: none;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.game-area .end-turn.end-turn-localized-banner {
+  left: 0;
+  top: 505px;
+  width: 413px;
+  height: 155px;
+}
+
+.game-area .end-turn img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: fill;
+}
+
 .game-area .end-turn:focus-visible {
   outline: none;
   box-shadow: 0 0 0 4px var(--focus-color);
 }
 
-/* 战斗卡牌信息栏 */
+/* Field cards */
+.game-area #fightsite {
+  position: absolute;
+  left: 682px;
+  top: 451px;
+  z-index: 4;
+  width: 530px;
+  height: 133px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  box-sizing: border-box;
+  transform: rotate(-4.4deg);
+  transform-origin: center center;
+}
+
+.game-area #fightsite .fightsite-card {
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: var(--slot-size);
+  height: var(--slot-size);
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  cursor: default;
+  outline: none;
+  transform: translateY(-50%);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.game-area #fightsite .fightsite-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Card information panel */
 .game-area #fightcardinfo {
   position: absolute;
-  transform: rotate(-5deg);
-  right: 20px;
-  top: 250px;
-
-  width: 220px;
-  height: 250px;
-
-  border: 3px solid var(--black);
-  background: #fff;
-
-  box-sizing: border-box;
-  overflow: hidden;
-
+  left: 1500px;
+  top: 290px;
   z-index: 5;
+  width: 340px;
+  height: 360px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  box-sizing: border-box;
+  transform: skewY(-5deg);
+  transform-origin: top left;
 }
 
 .game-area #fightcardinfo-title {
+  display: flex;
   width: 100%;
   height: 30px;
-
-  border-bottom: 3px solid var(--black);
-
-  box-sizing: border-box;
-
-  display: flex;
   align-items: center;
-
-  padding: 0 8px;
-
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
   color: #111;
   font-size: 20px;
   line-height: 1;
@@ -249,434 +625,43 @@
 
 .game-area #fightcardinfo-content {
   width: 100%;
-  height: calc(100% - 33px);
-  white-space: pre-line;
-
+  height: calc(100% - 30px);
+  padding: 8px 12px;
+  overflow-y: auto;
+  border: 0;
+  background: transparent;
   box-sizing: border-box;
-
-  padding: 8px;
-
   color: #111;
   font-size: 16px;
   line-height: 1.4;
-
-  overflow-y: auto;
+  white-space: pre-line;
 }
 
-/* 战斗装备栏 */
-
-.game-area #fightenemyequip,
-.game-area #fightplayerequip {
-  width: 60px;
-  height: 155px;
-
-  min-width: 0;
-  min-height: 0;
-
-  padding: 24px 5px 5px 5px;
-
-  display: flex;
-  align-items: flex-start;
-  gap: 5px;
-
-  flex-wrap: nowrap;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  position: absolute;
-
-  background: #f3f3f3;
-
-  box-shadow:
-    inset 0 0 0 2px rgba(0, 0, 0, 0.75);
-
-  box-sizing: border-box;
-  z-index: 3;
-}
-
-.game-area .player.top #fightenemyequip {
-  left: 233px;
-  top: 0;
-}
-
-.game-area .player.bottom #fightplayerequip {
-  left: 233px;
-  bottom: 0;
-}
-
-/* 战斗装备标题 */
-
-.game-area #fightenemyequip::before,
-.game-area #fightplayerequip::before {
-  content: "装备";
-
-  position: absolute;
-  top: 5px;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  padding: 2px 4px;
-
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 1.2;
-
-  color: #222;
-  background: rgba(255, 255, 255, 0.85);
-
-  border-radius: 3px;
-
-  white-space: nowrap;
-
-  z-index: 10;
-  pointer-events: none;
-}
-
-/* 战斗装备卡固定为 50 * 50，不自动换行 */
-
-.game-area #fightenemyequip .bag-slot,
-.game-area #fightplayerequip .bag-slot {
-  flex: 0 0 var(--bag-slot-size);
-}
-
-/* 战斗区头像、卡组、坟场 */
-
-.game-area .player.top .avatar-container,
-.game-area .player.bottom .avatar-container {
-  width: 150px;
-  margin-left: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 10px;
-  z-index: 1;
-}
-.game-area .fight-piles {
-  position: absolute;
-  left: 155px;
-  width: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  z-index: 3;
-}
-.game-area .player.top .fight-piles {
-  top: 0;
-}
-
-.game-area .player.bottom .fight-piles {
-  bottom: 0;
-}
-
-.game-area .fight-pile {
-  position: relative;
-  width: 75px;
-  height: 75px;
-  padding: 2px;
-  border: 2px solid var(--black);
-  background: #808080;
-  color: #fff;
-  display: block;
-  overflow: hidden;
-  line-height: 1;
-  user-select: none;
-}
-.game-area .avatar-info {
-  width: 110px;
-  flex: 0 0 110px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.game-area .fight-pile-number {
-  position: absolute;
-
-  top: 5px;
-  left: 0;
-
-  width: 100%;
-
-  color: #fff;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 1;
-
-  text-align: center;
-}
-
-.game-area .fight-pile-label {
-  position: absolute;
-
-  bottom: 4px;
-  left: 0;
-
-  width: 100%;
-
-  color: #000;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 1;
-
-  text-align: center;
-}
-
-/* 中间场地 */
-.game-area #fightsite {
-  grid-column: 1;
-  grid-row: 2;
-
-  position: fixed;
-  left: 50%;
-  top: 50%;
-
-  width: 442px;
-  height: 90px;
-  min-width: 0;
-  min-height: 0;
-
-  padding: 3px;
-
-  display: block;
-
-  transform: translate(-50%, -50%) rotate(-10deg);
-  transform-origin: center center;
-
-  overflow: hidden;
-  border: 2px solid #000000;
-  background: transparent;
-  box-sizing: border-box;
-}
-
-.game-area #fightsite .fightsite-card {
-  width: var(--slot-size);
-  height: var(--slot-size);
-  padding: 0;
-
-  position: absolute;
-  top: 3px;
-
-  border: 0;
-  background: transparent;
-
-  display: block;
-  overflow: hidden;
-
-  cursor: default;
-  outline: none;
-
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.game-area #fightsite .fightsite-card:first-child {
-  margin-left: 0;
-}
-
-.game-area #fightsite .fightsite-card img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  border: 0;
-  pointer-events: none;
-}
-
-/* 标签区 */
-.game-area .player .player-tags-left {
-  position: absolute;
-  left: 155px;
-  width: auto;
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 2px;
-  box-sizing: border-box;
-  height: auto;
-  margin-right: 0;
-  white-space: nowrap;
-  z-index: 4;
-}
-
-.game-area .player.top .player-tags-left {
-  top: 156px;
-  transform: translateY(0);
-}
-
-.game-area .player.bottom .player-tags-left {
-  bottom: 156px;
-  transform: translateY(0);
-}
-
-.game-area .player .player-tags-left img {
-  width: 30px;
-  height: 30px;
-  display: block;
-  object-fit: contain;
-  pointer-events: none;
-}
-
-.game-area .player .player-tags-left .tag-wrapper,
-.game-area .player .player-tags-left .tag-wrapper img {
-  position: relative;
-  display: inline-block;
-}
-
-.game-area .player .player-tags-left .tag-wrapper {
-  width: 30px;
-  height: 30px;
-  box-sizing: border-box;
-}
-
-.game-area .player .player-tags-left .tag-badge {
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  width: auto;
-  height: auto;
-  line-height: 1;
-  font-size: 16px;
-  color: #000;
-  background: none;
-  text-align: center;
-  border-radius: 0;
-  padding: 0;
-  box-sizing: border-box;
-  transform: translate(50%, 20%);
-  z-index: 10;
-  pointer-events: none;
-}
-
-/* 战斗界面背包 */
-
-.game-area #fightenemybag,
-.game-area #fightplayerbag {
-  width: 60px;
-  height: 155px;
-
-  min-width: 60px;
-  min-height: 0;
-
-  padding: 24px 5px 5px 5px;
-
-  display: grid;
-  grid-template-columns: var(--bag-slot-size);
-  grid-auto-rows: var(--bag-slot-size);
-  align-content: start;
-  gap: 5px;
-
-  overflow-x: hidden;
-  overflow-y: auto;
-
-  position: absolute;
-
-  background: #f3f3f3;
-
-  box-shadow:
-    inset 0 0 0 2px rgba(0, 0, 0, 0.75);
-
-  box-sizing: border-box;
-  z-index: 3;
-}
-
-/* 敌人背包 */
-.game-area .player.top #fightenemybag {
-  left: 1050px;
-  top: 0;
-}
-
-/* 玩家背包 */
-.game-area .player.bottom #fightplayerbag {
-  left: 1050px;
-  bottom: 0;
-}
-
-/* 战斗背包标题 */
-
-.game-area #fightenemybag::before,
-.game-area #fightplayerbag::before {
-  content: "背包";
-
-  position: absolute;
-  top: 5px;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  padding: 2px 4px;
-
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 1.2;
-
-  color: #222;
-  background: rgba(255, 255, 255, 0.85);
-
-  border-radius: 3px;
-
-  white-space: nowrap;
-
-  z-index: 10;
-  pointer-events: none;
-}
-
-/* 战斗背包卡片 */
-.game-area #fightenemybag .bag-slot,
-.game-area #fightplayerbag .bag-slot {
-  width: var(--bag-slot-size);
-  height: var(--bag-slot-size);
-  padding: 0;
-
-  border: 2px solid #2e2e2e;
-  border-radius: 3px;
-
-  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(215,215,215,0.95));
-
-  display: grid;
-  place-items: center;
-
-  position: relative;
-
-  overflow: hidden;
-
-  color: #111;
-
-  cursor: pointer;
-  outline: none;
-
-  box-shadow: inset 2px 2px 0 rgba(255,255,255,0.8), inset -2px -2px 0 rgba(0,0,0,0.2);
-
-  box-sizing: border-box;
-}
-
-/* 战斗技能区域 */
-
+/* Abilities */
 .game-area .ability-area {
+  position: absolute;
+  display: flex;
   width: max-content;
   min-width: 25px;
   height: 25px;
   min-height: 25px;
-
-  display: flex;
+  flex: 0 0 auto;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
   gap: 5px;
-
-  position: absolute;
-
-  flex-shrink: 0;
-
   padding: 0;
-
   overflow: visible;
+}
+
+.game-area .player.top #fightenemyability {
+  left: 0;
+  top: 0;
+}
+
+.game-area .player.bottom #fightplayerability {
+  left: 0;
+  bottom: 0;
 }
 
 .game-area .ability-area[hidden] {
@@ -684,30 +669,23 @@
 }
 
 .game-area .fight-ability-button {
+  position: relative;
+  display: flex;
   width: 25px;
   min-width: 25px;
   height: 25px;
   min-height: 25px;
-  flex: 0 0 20px;
-  padding: 0;
-
-  position: relative;
-
-  border: 3px solid var(--black);
-  border-radius: 8px;
-
-  background: #fff;
-
-  display: flex;
+  flex: 0 0 25px;
   align-items: center;
   justify-content: center;
-
+  padding: 0;
   overflow: hidden;
-
-  cursor: pointer;
-
+  border: 3px solid #000;
+  border-radius: 8px;
+  background: #fff;
   appearance: none;
   -webkit-appearance: none;
+  cursor: pointer;
 }
 
 .game-area .fight-ability-button:hover:not(:disabled),
@@ -721,157 +699,26 @@
 }
 
 .game-area .fight-ability-image {
+  display: block;
   width: 100%;
   height: 100%;
-
-  display: block;
-
   object-fit: contain;
 }
 
 .game-area .ability-cooldown {
-  min-width: 28px;
-  height: 28px;
-  padding: 0 6px;
-
   position: absolute;
   right: 3px;
   bottom: 3px;
-
-  border: 2px solid var(--black);
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border: 2px solid #000;
   border-radius: 999px;
-
   background: #fff;
-
   color: #111;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
   text-align: center;
-
   pointer-events: none;
-}
-
-.game-area .fight-side-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 60px;
-  flex: 0 0 auto;
-  align-self: stretch;
-  margin-left: 5px;
-}
-
-.game-area .player .fight-side-stack.player-side-bottom {
-  flex-direction: column-reverse;
-}
-
-.game-area .player .hand.large-hand + .fight-side-stack {
-  margin-left: 5px;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 60px;
-  flex: 0 0 auto;
-  min-height: 0;
-}
-
-.game-area .fight-side-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  align-items: stretch;
-  min-height: 0;
-}
-
-.game-area .fight-side-stack > #fightenemybag,
-.game-area .fight-side-stack > #fightplayerbag {
-  padding: 24px 5px 5px 5px;
-  display: grid;
-  grid-template-columns: var(--bag-slot-size);
-  grid-auto-rows: var(--bag-slot-size);
-  align-content: start;
-  gap: 5px;
-  overflow: auto;
-  background: #f3f3f3;
-  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.75);
-  box-sizing: border-box;
-  position: relative;
-  width: 60px;
-  min-height: 0;
-
-  flex: 1 1 auto;
-}
-
-.game-area .fight-side-stack > .ability-area {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0;
-  width: max-content;
-  box-sizing: border-box;
-  overflow: visible;
-}
-
-.game-area .player .fight-side-stack.player-side-bottom {
-  flex-direction: column-reverse;
-}
-
-.game-area .fight-side-stack > #fightenemybag::before,
-.game-area .fight-side-stack > #fightplayerbag::before {
-  position: absolute;
-  top: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  pointer-events: none;
-}
-
-/* 响应式 */
-@media (max-width: 1200px) {
-  :root {
-    --slot-size: 60px;
-    --avatar-size: 90px;
-  }
-
-  .game-area {
-    width: 95%;
-  }
-
-  .game-area .slots {
-    grid-template-columns:
-      repeat(8, minmax(40px, 1fr));
-  }
-
-  .game-area .card-slot {
-    height: 60px;
-  }
-
-  .game-area #nextcards {
-    padding: 16px;
-    gap: 6px;
-  }
-
-  .game-area .adventure-player {
-    gap: 8px;
-  }
-
-  .game-area .adventure-player .avatar-container {
-    flex-basis: 140px;
-    width: 140px;
-  }
-}
-
-@media (max-width: 760px) {
-  .game-area {
-    min-width: 720px;
-  }
-
-  html,
-  body {
-    min-width: 720px;
-    overflow: auto;
-  }
 }

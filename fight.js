@@ -353,49 +353,49 @@ window.fightenemyability = fight.enemyability;
 
   /* 创建战斗场地上的卡牌 */
 function renderFightSite(fight) {
-    const site = document.getElementById("fightsite");
+  const site = document.getElementById("fightsite");
 
-    if (!site) {
-      return;
-    }
-
-    site.innerHTML = "";
-
-    const cardCount = fight.fightsitecards.length;
-    const cardWidth = 80;
-    const normalGap = 8;
-    const sitePadding = 3;
-    const availableWidth = 442 - 4 - sitePadding * 2;
-    const step = cardCount <= 5 ? cardWidth + normalGap : (availableWidth - cardWidth) / (cardCount - 1);
-
-    fight.fightsitecards.forEach(
-      function (cardEntry, index) {
-        const cardName = parseFightCard(cardEntry).name;
-
-        const button = document.createElement("button");
-
-        const img = document.createElement("img");
-
-        button.type = "button";
-        button.className = "fightsite-card";
-
-        button.tabIndex = -1;
-        button.style.left = `${sitePadding + index * step}px`;
-        button.style.zIndex = String(index + 1);
-
-        button.setAttribute("aria-label",cardName);
-        bindFightCardInfo(button,1,cardName);
-        img.src = window.fightcardImage(cardName);
-
-        img.alt = cardName;
-
-        button.appendChild(img);
-        site.appendChild(button);
-      }
-    );
-
-    updateFightPileCounts(fight);
+  if (!site) {
+    return;
   }
+
+  site.innerHTML = "";
+
+  const cardCount = fight.fightsitecards.length;
+  const cardWidth = Number.parseFloat(
+    getComputedStyle(site).getPropertyValue("--slot-size")
+  ) || 80;
+  const normalGap = 8;
+  const sitePadding = 8;
+  const availableWidth = Math.max(cardWidth, site.clientWidth - sitePadding * 2);
+  const maxStep = cardWidth + normalGap;
+  const step = cardCount > 1
+    ? Math.max(0, Math.min(maxStep, (availableWidth - cardWidth) / (cardCount - 1)))
+    : 0;
+  const rowWidth = cardCount > 0 ? cardWidth + (cardCount - 1) * step : 0;
+  const startLeft = sitePadding + Math.max(0, (availableWidth - rowWidth) / 2);
+
+  fight.fightsitecards.forEach(function (cardEntry, index) {
+    const cardName = parseFightCard(cardEntry).name;
+    const button = document.createElement("button");
+    const img = document.createElement("img");
+
+    button.type = "button";
+    button.className = "fightsite-card";
+    button.tabIndex = -1;
+    button.style.left = `${startLeft + index * step}px`;
+    button.style.zIndex = String(index + 1);
+
+    button.setAttribute("aria-label", cardName);
+    bindFightCardInfo(button, 1, cardName);
+    img.src = window.fightcardImage(cardName);
+    img.alt = cardName;
+    button.appendChild(img);
+    site.appendChild(button);
+  });
+
+  updateFightPileCounts(fight);
+}
 function renderFightEquip(fight,owner) {
     const box = document.getElementById(owner === 1 ? "fightplayerequip" : "fightenemyequip");
 
@@ -428,79 +428,18 @@ function renderFightEquip(fight,owner) {
     );
   }
 
-  // ---------- tags 数据缓存与读取 ----------
+  // tags 数据缓存与读取
   let tagsDatabase = null;
-  function stripJsonComments(text) {
-    let result = "";
-    let inString = false;
-    let escaped = false;
-
-    for (let index = 0; index < text.length; index += 1) {
-      const current = text[index];
-      const next = text[index + 1];
-
-      if (inString) {
-        result += current;
-
-        if (escaped) {
-          escaped = false;
-        } else if (current === "\\") {
-          escaped = true;
-        } else if (current === "\"") {
-          inString = false;
-        }
-
-        continue;
-      }
-
-      if (current === "\"") {
-        inString = true;
-        result += current;
-        continue;
-      }
-
-      if (current === "/" && next === "/") {
-        while (index < text.length && text[index] !== "\n") index += 1;
-        result += "\n";
-        continue;
-      }
-
-      if (current === "/" && next === "*") {
-        index += 2;
-        while (
-          index < text.length &&
-          !(text[index] === "*" && text[index + 1] === "/")
-        ) {
-          if (text[index] === "\n") result += "\n";
-          index += 1;
-        }
-        index += 1;
-        continue;
-      }
-
-      result += current;
-    }
-
-    return result;
-  }
-
   async function loadTagsDatabase() {
-    if (tagsDatabase !== null) return tagsDatabase;
-    try {
-      const resp = await fetch("tags.json", { cache: "no-store" });
-      if (!resp.ok) {
-        console.error("tags.json加载失败:", resp.status, resp.statusText, resp.url);
-        return {};
-      }
-      const text = await resp.text();
-      tagsDatabase = JSON.parse(stripJsonComments(text));
-    } catch (e) {
-      console.error("tags.json读取失败:", e);
-      return {};
-    }
-    return tagsDatabase;
+  if (tagsDatabase !== null) return tagsDatabase;
+  try {
+    tagsDatabase = await window.myjsonread("tags.json");
+  } catch (e) {
+    console.error("tags.json读取失败:", e);
+    return {};
   }
-  // ---------- end tags loader ----------
+  return tagsDatabase;
+  }
     // Global variable to track picked cards during effect execution
   let cardpick = null;
 
@@ -3190,7 +3129,41 @@ async function fightenemyactioncard(fight) {
       }
     );
   }
+function updateEndTurnAsset() {
+  const button = document.querySelector(".game-area .end-turn");
+  const image = button && button.querySelector("img");
+  if (!button || !image) return;
 
+  const baseAsset = image.dataset.baseAsset || "endturn";
+  const translation = window.i18n && typeof window.i18n.t === "function"
+    ? window.i18n.t(baseAsset)
+    : baseAsset;
+  const assetName = typeof translation === "string" && /^[\w-]+$/.test(translation)
+    ? translation
+    : baseAsset;
+  const isLocalized = assetName !== baseAsset;
+  const assetPath = `images/UI/${assetName}.png`;
+  const fallbackPath = `images/UI/${baseAsset}.png`;
+
+  button.classList.toggle("end-turn-localized-banner", isLocalized);
+  image.onerror = null;
+
+  if (image.getAttribute("src") !== assetPath) {
+    image.setAttribute("src", assetPath);
+  }
+
+  if (isLocalized) {
+    image.onerror = function () {
+      image.onerror = null;
+      button.classList.remove("end-turn-localized-banner");
+      image.setAttribute("src", fallbackPath);
+    };
+  }
+}
+
+document.addEventListener("DOMContentLoaded", updateEndTurnAsset);
+document.addEventListener("th-card:i18n-ready", updateEndTurnAsset);
+if (document.readyState !== "loading") updateEndTurnAsset();
   /* 对外暴露 */
 window.fightAPI = fightAPI;
 window.fightmain = fightmain;

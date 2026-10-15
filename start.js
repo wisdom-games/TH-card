@@ -3,6 +3,18 @@
 
 const CHARACTER_KEY = "TH_CARD_CHARACTER";
 
+async function myjsonread(path) { // json5 read
+  const response = await fetch(path, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error(`${path} 请求失败：HTTP ${response.status}`);
+  }
+
+  const text = await response.text();
+  return JSON5.parse(text);
+}
+
+window.myjsonread = myjsonread;
+
 function hasSave() {
 const saved = localStorage.getItem(CHARACTER_KEY);
 if (!saved) return false;
