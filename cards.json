@@ -214,6 +214,7 @@
   /* 红白 */
   "札弹":{
   "display":"札弹",
+  "image":"images/fightcards/Cluster hit.png",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -228,6 +229,7 @@
   },
   "札弹2":{
   "display":"札弹2",
+  "image":"images/fightcards/Cluster hit.png",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -245,6 +247,7 @@
   },
   "札弹3":{
   "display":"札弹3",
+  "image":"images/fightcards/Cluster hit.png",
   "类型":"基本卡",
   "效果":{
     "伤害":{
@@ -262,6 +265,7 @@
   },
   "升天脚":{
   "display":"升天脚",
+  "image":"images/fightcards/Sky-Conquering Kick.png",
   "类型":"基本卡",
   "效果":{
     "抽卡":{
@@ -281,6 +285,7 @@
   },
   "封魔针":{
   "display":"封魔针",
+  "image":"images/fightcards/Evil-Sealing Circle.png",
   "price":"25",
   "类型":"基本卡",
   "效果":{
@@ -303,6 +308,7 @@
   },
   "阴阳玉1":{
   "display":"阴阳玉1",
+  "image":"images/fightcards/Yin-Yang Sign.png",
   "price":"15",
   "类型":"基本卡",
   "效果":{
@@ -325,6 +331,7 @@
   },
   "阴阳玉2":{
   "display":"阴阳玉2",
+  "image":"images/fightcards/Yin-Yang Sign.png",
   "price":"25",
   "类型":"基本卡",
   "效果":{
@@ -347,6 +354,7 @@
   },
   "宝具「阴阳飞鸟井」":{
   "display":"宝具「阴阳飞鸟井」",
+  "image":"images/fightcards/Yin-Yang Asuka.png",
   "price":"50",
   "类型":"基本卡",
   "效果":{
@@ -377,6 +385,7 @@
   },
     "灵符「梦想封印」":{
   "display":"灵符「梦想封印」",
+  "image":"images/fightcards/Dream Seal.png",
   "price":"50",
     "类型":"基本卡",
     "效果":{
@@ -419,6 +428,7 @@
   },
   "【飞翔于空中程度的能力】":{
   "display":"【飞翔于空中程度的能力】",
+  "image":"images/fightcards/Flying Mysterious Shrine Maiden.png",
   "price":"40",
   "类型":"基本卡",
   "效果":{
@@ -442,6 +452,7 @@
   },
   "召神术":{
   "display":"召神术",
+  "image":"images/fightcards/Call gods.png",
   "price":"20",
   "类型":"基本卡",
   "效果":{
@@ -465,6 +476,7 @@
   },
   "妖怪破坏者":{
   "display":"妖怪破坏者",
+  "image":"images/fightcards/Destroyer faes.png",
   "price":"25",
   "类型":"基本卡",
   "效果":{
@@ -483,6 +495,7 @@
   },
   "诱导护符":{
   "display":"诱导护符",
+  "image":"images/fightcards/Decoy amulet.png",
   "price":"20",
   "类型":"基本卡",
   "效果":{
@@ -500,6 +513,7 @@
   },
   "亚空点穴":{
   "display":"亚空点穴",
+  "image":"images/fightcards/Dimensional Rift.png",
   "price":"40",
   "类型":"基本卡",
   "效果":{
@@ -521,6 +535,7 @@
   },
   "问神":{
   "display":"问神",
+  "image":"images/fightcards/Ask gods.png",
   "price":"30",
   "类型":"基本卡",
   "效果":{
@@ -539,6 +554,7 @@
   },
   "神技「八方龙杀阵」":{
   "display":"神技「八方龙杀阵」",
+  "image":"images/fightcards/Omnidirectional Dragon-Slaying Circle.png",
   "price":"60",
     "类型":"基本卡",
     "效果":{

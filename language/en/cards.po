@@ -5,97 +5,99 @@ msgstr ""
 "Language: en\n"
 
 msgid "札弹"
-msgstr "札弹"
+msgstr "Cluster hit lv.1"
 
 msgid "造成4普通伤害"
 msgstr "Deal 4 normal damage"
 
 msgid "札弹2"
-msgstr "札弹2"
+msgstr "Cluster hit lv.2"
 
 msgid "造成4普通伤害，重复2次"
 msgstr "Deal 4 normal damage,repeat 2 times"
 
 msgid "札弹3"
-msgstr "札弹3"
+msgstr "Cluster hit lv.3"
 
 msgid "造成4普通伤害，重复4次"
 msgstr "Deal 4 normal damage,repeat 4 times"
 
 msgid "升天脚"
-msgstr "升天脚"
+msgstr "Sky-Conquering Kick"
 
 msgid "抽1张卡，获得1力量"
 msgstr "Draw 1 card,gain 1 strength"
 
 msgid "封魔针"
-msgstr "封魔针"
+msgstr "Evil-Sealing Circle"
 
 msgid "造成8点伤害，对方2回合内无法使用技能"
 msgstr "Deal 8 damage,your opponent cannot use ability for 2 turns"
 
 msgid "阴阳玉1"
-msgstr "阴阳玉1"
+msgstr "Yin-Yang Sign lv.1"
 
 msgid "造成4点伤害，获得2点护甲"
 msgstr "Deal 4 damage,gain 2 armor"
 
 msgid "阴阳玉2"
-msgstr "阴阳玉2"
+msgstr "Yin-Yang Sign lv.2"
 
 msgid "造成6点伤害，获得4点护甲"
 msgstr "Deal 6 damage,gain 4 armor"
 
 msgid "宝具「阴阳飞鸟井」"
-msgstr "宝具「阴阳飞鸟井」"
+msgstr "Treasure \"Yin-Yang Asuka'i\" "
 
 msgid "造成5点伤害，获得5点护甲，回复5HP，抽5张卡"
 msgstr "Deal 5 damage,gain 5 armor,restore 5HP,draw 5 cards"
 
 msgid "灵符「梦想封印」"
-msgstr "灵符「梦想封印」"
+msgstr "Spirit Sign \"Dream Seal\" "
 
 msgid "消耗所有MP，每消耗1MP，造成2次1点普通伤害"
 msgstr "Use all MP,deal 1 normal damage 2 times for each 1MP used"
 
 msgid "【飞翔于空中程度的能力】"
-msgstr "【飞翔于空中程度的能力】"
+msgstr "Flying Mysterious Shrine Maiden"
+// use 「空を飛ぶ不思議な巫女」 
 
 msgid "本回合所有牌费用-1"
 msgstr "All cards cost -1 this turn"
 
 msgid "召神术"
-msgstr "召神术"
+msgstr "Call gods"
 
 msgid "获得2临时力量。你的临时力量本回合结束不清零"
 msgstr "Gain 2 temp strength. Your temp strength don't zero in this turn end"
 
 msgid "妖怪破坏者"
-msgstr "妖怪破坏者"
+msgstr "Destroyer faes"
 
 msgid "造成3普通伤害，重复2次"
 msgstr "Deal 3 normal damage,repeat 2 times"
 
 msgid "诱导护符"
-msgstr "诱导护符"
+msgstr "Decoy amulet"
 
 msgid "造成1普通伤害，抽1张卡"
 msgstr "Deal 1 normal damage,draw 1 card"
 
 msgid "亚空点穴"
-msgstr "亚空点穴"
+msgstr "Dimensional Rift"
+// use 夢想亜空穴
 
 msgid "将出牌顶3张0费牌拿回手牌"
 msgstr "Return the top 3 0-MPcost cards of the deck to your hand"
 
 msgid "问神"
-msgstr "问神"
+msgstr "Ask gods"
 
 msgid "将场上最后一张牌复制*置入手牌"
 msgstr "Copy site last card temp* into your hand"
 
 msgid "神技「八方龙杀阵」"
-msgstr "神技「八方龙杀阵」"
+msgstr "Divine Arts \"Omnidirectional Dragon-Slaying Circle\" "
 
 msgid "丢弃所有手牌，每丢弃一张就造成10点伤害；抽1"
 msgstr "Discard all cards in your hand,deal 10 damage for each card discarded,draw 1 card"
@@ -113,7 +115,7 @@ msgid "造成6混沌伤害"
 msgstr "Deal 6 chaos damage"
 
 msgid "阴阳玉"
-msgstr "阴阳玉"
+msgstr "Yin-Yang Sign"
 
 msgid "香蕉皮陷阱"
 msgstr "香蕉皮陷阱"
