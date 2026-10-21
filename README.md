@@ -11,3 +11,11 @@ json数据格式不受保护(如果您所在的地区认为这种数据堆砌受
 Discord:https://discord.gg/EtRuxDbys5
 
 QQ:807604626
+
+Ifdian:https://ifdian.net/a/Wisdom-games
+
+游戏发布:
+
+Itch:https://wisdom-gamer.itch.io/th-card (Dev 按版本更新)
+
+https://wisdom-games.github.io/TH-card (Dev 滚动更新)
