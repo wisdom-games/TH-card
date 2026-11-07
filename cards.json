@@ -1134,7 +1134,7 @@
     "伤害":{
       "value":5,
 	    "type":"普通"
-    }
+    },
     "标记":{
 	"气功":{
       "self":{
@@ -1143,10 +1143,10 @@
 	}
     }
   },
-	"mp":1,
+	"MP":1,
     "info":"消耗2气功，造成5普通伤害",
     "tag":"handcard;handcarddamage;handcardremovetagself",
-    "sidetype":"typeNormal"
+    "sidetype":"typeNormal",
 	"userule_js":{
 	"js":"checktag",
 	"input":"1;>;<self.气功>" // 确保气功不低于1
@@ -1159,7 +1159,7 @@
   "效果":{
     "抽卡":{
     "value":2
-    }
+    },
     "标记":{
 	"气功":{
       "self":{
@@ -1168,7 +1168,7 @@
 	}
     }
   },
-	"mp":2
+	"MP":2,
     "info":"获得2气功，抽取2张卡",
     "tag":"handcard;handcardaddcardself;handcardaddtagself",
     "sidetype":"typeNormal"
@@ -1179,7 +1179,7 @@
   "类型":"基本卡",
   "rooteffect":{
     "value":"turnend"
-  }
+  },
   "效果":{
     "标记":{
 	"气功":{
@@ -1189,20 +1189,20 @@
 	}
     }
   },
-	"mp":3
+	"MP":3,
     "info":"获得5气功，回合结束",
     "tag":"handcard;handcardaddcardself;handcardaddtagself",
     "sidetype":"typeNormal"
   },
   
   "华符「破山炮」":{
-  "display":"空气炮",
+  "display":"华符「破山炮」",
   "类型":"基本卡",
   "效果":{
     "伤害":{
       "value":15,
 	    "type":"普通"
-    }
+    },
     "标记":{
 	"气功":{
       "self":{
@@ -1211,10 +1211,10 @@
 	}
     }
   },
-	"mp":3,
+	"MP":3,
     "info":"消耗7气功，造成15普通伤害",
     "tag":"handcard;handcarddamage;handcardremovetagself",
-    "sidetype":"typeNormal"
+    "sidetype":"typeNormal",
 	"userule_js":{
 	"js":"checktag",
 	"input":"6;>;<self.气功>" // 确保气功不低于6

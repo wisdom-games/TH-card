@@ -46,7 +46,7 @@
       "type":"random",
       "maxnumber":1,
       "红美铃":1
-    }
+    },
     "测试总是出现":{
       "type":"always",
       "水井":5,

@@ -8,7 +8,7 @@
   }
   window.isObject = isObject;
   
-  function toInt(value, fallback) {
+  function toInt(value,fallback) {
     const number = Number(value);
 
     return Number.isFinite(number) ? Math.floor(number) : fallback;
@@ -173,7 +173,7 @@ function parseFightCard(cardEntry) {
       String(cardId ?? "");
 
     for (
-      const [name, card]
+      const [name,card]
       of Object.entries(database)
     ) {
       if (
@@ -236,7 +236,7 @@ function parseFightCard(cardEntry) {
     const slots = Array.from(document.querySelectorAll(slotSelector));
 
     slots.forEach(
-      function (button, index) {
+      function (button,index) {
         const cardEntry = cards[index];
         const cardName = parseFightCard(cardEntry).name;
 
@@ -320,8 +320,8 @@ window.fightplayerability = fight.playerability;
 window.fightenemyability = fight.enemyability;
 
     updateFightPileCounts(fight);
-    renderFightEquip(fight, 1);
-    renderFightEquip(fight, 0);
+    renderFightEquip(fight,1);
+    renderFightEquip(fight,0);
     // render tags UI
     renderFightTags(fight);
     updateBattleBars();
@@ -367,15 +367,15 @@ function renderFightSite(fight) {
   ) || 80;
   const normalGap = 8;
   const sitePadding = 8;
-  const availableWidth = Math.max(cardWidth, site.clientWidth - sitePadding * 2);
+  const availableWidth = Math.max(cardWidth,site.clientWidth - sitePadding * 2);
   const maxStep = cardWidth + normalGap;
   const step = cardCount > 1
-    ? Math.max(0, Math.min(maxStep, (availableWidth - cardWidth) / (cardCount - 1)))
+    ? Math.max(0,Math.min(maxStep,(availableWidth - cardWidth) / (cardCount - 1)))
     : 0;
   const rowWidth = cardCount > 0 ? cardWidth + (cardCount - 1) * step : 0;
-  const startLeft = sitePadding + Math.max(0, (availableWidth - rowWidth) / 2);
+  const startLeft = sitePadding + Math.max(0,(availableWidth - rowWidth) / 2);
 
-  fight.fightsitecards.forEach(function (cardEntry, index) {
+  fight.fightsitecards.forEach(function (cardEntry,index) {
     const cardName = parseFightCard(cardEntry).name;
     const button = document.createElement("button");
     const img = document.createElement("img");
@@ -386,8 +386,8 @@ function renderFightSite(fight) {
     button.style.left = `${startLeft + index * step}px`;
     button.style.zIndex = String(index + 1);
 
-    button.setAttribute("aria-label", cardName);
-    bindFightCardInfo(button, 1, cardName);
+    button.setAttribute("aria-label",cardName);
+    bindFightCardInfo(button,1,cardName);
     img.src = window.fightcardImage(cardName);
     img.alt = cardName;
     button.appendChild(img);
@@ -435,7 +435,7 @@ function renderFightEquip(fight,owner) {
   try {
     tagsDatabase = await window.myjsonread("tags.json");
   } catch (e) {
-    console.error("tags.json读取失败:", e);
+    console.error("tags.json读取失败:",e);
     return {};
   }
   return tagsDatabase;
@@ -448,10 +448,10 @@ function renderFightEquip(fight,owner) {
     return {
       mode: String(config.mode || 'get').trim(),
       pick: String(config.pick || 'random').trim(),
-      hasFiller: Object.prototype.hasOwnProperty.call(config, 'filler_js'),
+      hasFiller: Object.prototype.hasOwnProperty.call(config,'filler_js'),
       filler_js: String(config.filler_js ?? '').trim(),
       input: String(config.input ?? ''),
-      value: toInt(config.value, 1),
+      value: toInt(config.value,1),
       side: String(config.side || 'other').trim(),
       sidetypechange: String(config.sidetypechange || '').trim(),
       newcardside: String(config.newcardside || 'self').trim().toLowerCase(),
@@ -459,7 +459,7 @@ function renderFightEquip(fight,owner) {
     };
   }
 
-  function applySidetypeChange(sidetype, changeStr) {
+  function applySidetypeChange(sidetype,changeStr) {
     if (!changeStr || changeStr === '') return sidetype;
     
     const changes = changeStr.split(';').map(s => s.trim()).filter(Boolean);
@@ -479,7 +479,7 @@ function renderFightEquip(fight,owner) {
       } else if (operator === '-') {
         const idx = result.indexOf(typeToChange);
         if (idx !== -1) {
-          result.splice(idx, 1);
+          result.splice(idx,1);
         }
       }
     }
@@ -487,22 +487,22 @@ function renderFightEquip(fight,owner) {
     return result;
   }
 
-  function randomSelectCard(fight, side) {
+  function randomSelectCard(fight,side) {
     const hand = side === 1 ? fight.playerhand : fight.enemyhand;
     if (!hand || hand.length === 0) return null;
     
     const randomIdx = Math.floor(Math.random() * hand.length);
-    return [side, randomIdx];
+    return [side,randomIdx];
   }
 
-  function setupManualCardSelection(fight, side, callback) {
+  function setupManualCardSelection(fight,side,callback) {
     const isPlayer = side === 1;
     const selector = isPlayer  ? ".game-area .player.bottom .slots .card-slot" : ".game-area .player.top .slots .card-slot";
     
     const slots = Array.from(document.querySelectorAll(selector));
     
     const originalBorders = [];
-    slots.forEach((button, idx) => {
+    slots.forEach((button,idx) => {
       originalBorders[idx] = button.style.border;
       const cardEntry = (isPlayer ? fight.playerhand : fight.enemyhand)[idx];
       const cardName = parseFightCard(cardEntry).name;
@@ -514,16 +514,16 @@ function renderFightEquip(fight,owner) {
         const handleClick = function(e) {
           e.stopPropagation();
           cleanupSelection();
-          callback([side, idx]);
+          callback([side,idx]);
         };
         
-        button.addEventListener('click', handleClick, { once: true });
+        button.addEventListener('click',handleClick,{ once: true });
         button.dataset.selectable = 'true';
       }
     });
     
     const cleanupSelection = function() {
-      slots.forEach((button, idx) => {
+      slots.forEach((button,idx) => {
         button.style.border = originalBorders[idx] || '';
         button.style.cursor = '';
         delete button.dataset.selectable;
@@ -699,7 +699,7 @@ function renderFightEquip(fight,owner) {
           continue;
         }
 
-        const amount =Math.max(0,toInt(count, 0));
+        const amount =Math.max(0,toInt(count,0));
 
         for (let index = 0;index < amount;index += 1) {
           pool.push(cardName);
@@ -732,8 +732,8 @@ function renderFightEquip(fight,owner) {
     const enemyCard = enemyRecord ? enemyRecord.card : {};
     const adventureStats =  getAdventureStats();
 
-    const enemyHP = Math.max(0,toInt(enemyCard.HP, 0));
-    const enemyMP = Math.max(0,toInt(enemyCard.MP, 0));
+    const enemyHP = Math.max(0,toInt(enemyCard.HP,0));
+    const enemyMP = Math.max(0,toInt(enemyCard.MP,0));
 
     const pc = typeof window.PCAPI === "function" && window.selectedCharacter ? window.PCAPI(window.selectedCharacter) : (window.playerCharacterData || {});
 
@@ -758,8 +758,8 @@ function renderFightEquip(fight,owner) {
         giveothercardondraw: 0
       },
 
-      playerability: pc && pc.ability ? [[String(pc.ability.name || ""), toInt(pc.ability.turn, 0), 0]] : [],
-      enemyability: enemyCard.ability ? [[String(enemyCard.ability.name || ""), toInt(enemyCard.ability.turn, 0), 0]] : [],
+      playerability: pc && pc.ability ? [[String(pc.ability.name || ""),toInt(pc.ability.turn,0),0]] : [],
+      enemyability: enemyCard.ability ? [[String(enemyCard.ability.name || ""),toInt(enemyCard.ability.turn,0),0]] : [],
 
       player: {
         name: String(window.selectedCharacter || "玩家"),
@@ -792,7 +792,7 @@ function renderFightEquip(fight,owner) {
       fightplayerequip: [],
       /* 敌人装备 */
       fightenemyequip: [],
-      /* 新增：玩家与敌人的标签数组，二维格式 [ [name,count], ... ] */
+      /* 新增：玩家与敌人的标签数组，二维格式 [ [name,count],... ] */
       playerfighttags: [],
       enemyfighttags: [],
       resolve: null,
@@ -886,7 +886,7 @@ async function drawEnemyCards(DCnumber) {
     container.style.bottom = "auto";
   }
 }
-function renderAbilityButton(fight, owner) {
+function renderAbilityButton(fight,owner) {
   const abilities = owner === 1 ? fight.playerability : fight.enemyability;
   const containerId = owner === 1 ? "fightplayerability" : "fightenemyability";
   const container = document.getElementById(containerId);
@@ -896,7 +896,7 @@ function renderAbilityButton(fight, owner) {
     return;
   }
 
-  abilities.forEach(function (entry, idx) {
+  abilities.forEach(function (entry,idx) {
     const cardName = String(entry[0] ?? "").trim();
     const total = Number(entry[1] ?? 0);
     const remaining = Number(entry[2] ?? 0);
@@ -910,7 +910,7 @@ function renderAbilityButton(fight, owner) {
     btn.dataset.ability = "true";
     btn.dataset.owner = String(owner);
     btn.dataset.abilityIndex = String(idx);
-    btn.setAttribute("aria-label", cardName + (remaining > 0 ? `（冷却${remaining}回合）` : ""));
+    btn.setAttribute("aria-label",cardName + (remaining > 0 ? `（冷却${remaining}回合）` : ""));
 
     const img = document.createElement("img");
     img.src = window.fightcardImage(cardName);
@@ -933,9 +933,9 @@ function renderAbilityButton(fight, owner) {
     const effect = card["效果"];
     const mpCost = card ? Number(card["MP"] ?? 0) : 0;
     // 检查玩家是否有 "noability" 标记
-    const hasNoAbilityTag = getTagCount(fight, 1, "noability") > 0;
+    const hasNoAbilityTag = getTagCount(fight,1,"noability") > 0;
     // check can use
-    btn.disabled = fight.carduseLocked || remaining > 0 || !effect || !checkCardCanUse(createFightCardEntry(cardName, [], {}), fight.player) || hasNoAbilityTag;
+    btn.disabled = fight.carduseLocked || remaining > 0 || !effect || !checkCardCanUse(createFightCardEntry(cardName,[],{}),fight.player) || hasNoAbilityTag;
 
     btn.onclick = async function () {
       // re-read entry by index in case abilities array mutated
@@ -957,8 +957,12 @@ function renderAbilityButton(fight, owner) {
         await carduse(1,type,card,tagValue,cardName,fight,["ability"]);
 
         // set remaining cooldown to total
-        const totalVal = toInt(abilityEntry[1], 0);
-        abilityEntry[2] = Math.max(0, totalVal);
+        const totalVal = toInt(abilityEntry[1],0);
+        abilityEntry[2] = Math.max(0,totalVal);
+
+        if (await runRootEffect(fight,1,card)) {
+          return;
+        }
 
         const outcome = getFightOutcome(fight);
         if (outcome === "win" || outcome === "lost") {
@@ -1016,7 +1020,7 @@ function renderAbilityButton(fight, owner) {
     const displayInfo = window.i18n.t(info.description);
 
     if(Number(window.debugmode) === 1){
-      content.innerHTML = `${displayName}\n ${JSON.stringify(info.data, null, 2)} ${displayInfo}`;
+      content.innerHTML = `${displayName}\n ${JSON.stringify(info.data,null,2)} ${displayInfo}`;
       }else{
     content.innerHTML = `${displayName}\n${displayInfo}`;
   }
@@ -1024,26 +1028,26 @@ function renderAbilityButton(fight, owner) {
 
   window.displayfightcardinfo = displayfightcardinfo;
 
-  function bindFightCardInfo(element, type, name) {
+  function bindFightCardInfo(element,type,name) {
   if (!element) {
     return;
   }
 
-  element.addEventListener("mouseenter", function () {
-    displayfightcardinfo(type, name);
+  element.addEventListener("mouseenter",function () {
+    displayfightcardinfo(type,name);
   });
 }
 
 const valuetypes = ["value_js","value_read"]; // 动态取值关键字,无value时按此顺序查找并调用advvalue 
   /* 规则元数据关键字：只用于规则匹配，不属于效果本身 */
   const ruleMetaKeys = ["rule","siderule","rule_js","valuerule"];
-function parseValueRead(expression, fight, side) {
+function parseValueRead(expression,fight,side) {
   if (typeof expression !== "string") return Number(expression);
   let result = String(expression).trim();
   const tagPattern = /<(self|other)\.tags\.([^>]+)>/g;
-  result = result.replace(tagPattern, function (match, owner, tagName) {
+  result = result.replace(tagPattern,function (match,owner,tagName) {
     const targetSide = owner === "self" ? side : (1 - side);
-    const count = getTagCount(fight, targetSide, tagName);
+    const count = getTagCount(fight,targetSide,tagName);
     return String(count);
   });
   const valuePattern = /<(self|other)\.(HP|maxHP|MP|maxMP|handcard)>/g;
@@ -1303,14 +1307,14 @@ async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIn
 }
 
   // 标签数组操作 & 渲染工具
-  function getTagListForSide(fight, side, name) {
+  function getTagListForSide(fight,side,name) {
     if (isTrait(name)) {
       return side === 1 ? fight.playerfighttraits : fight.enemyfighttraits;
     }
     return side === 1 ? fight.playerfighttags : fight.enemyfighttags;
   }
 
-  function findTagIndex(list, name) {
+  function findTagIndex(list,name) {
     for (let i = 0; i < list.length; i += 1) {
       if (String(list[i][0]) === String(name)) return i;
     }
@@ -1337,14 +1341,14 @@ async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIn
     renderFightTags(fight);
   }
 
-  function modifyTagCount(fight, side, name, delta) {
+  function modifyTagCount(fight,side,name,delta) {
     if (!fight) return;
     setTagCount(fight,side,name,getTagCount(fight,side,name) + Number(delta));
   }
 
-  function getTagCount(fight, side, name) {
-    const list = getTagListForSide(fight, side, name);
-    const idx = findTagIndex(list, name);
+  function getTagCount(fight,side,name) {
+    const list = getTagListForSide(fight,side,name);
+    const idx = findTagIndex(list,name);
     return idx === -1 ? 0 : Number(list[idx][1]);
   }
 
@@ -1366,15 +1370,15 @@ async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIn
       const tagDisplay = tagDef ? window.i18n.t(tagDef.display) : name;
       const wrapper = document.createElement("span");
       wrapper.className = "tag-wrapper";
-      wrapper.setAttribute("role", "img");
-      wrapper.setAttribute("aria-label", isTrait(name) ? tagDisplay : `${tagDisplay} ×${count}`);
+      wrapper.setAttribute("role","img");
+      wrapper.setAttribute("aria-label",isTrait(name) ? tagDisplay : `${tagDisplay} ×${count}`);
       const img = document.createElement("img");
       img.src = `images/tags/${name}.png`;
       img.alt = tagDisplay;
       wrapper.appendChild(img);
       const badge = document.createElement("span");
       badge.className = "tag-badge";
-      badge.textContent = isTrait(name) ? "" : String(Math.max(0, count));
+      badge.textContent = isTrait(name) ? "" : String(Math.max(0,count));
       wrapper.appendChild(badge);
       playBox.appendChild(wrapper);
     });
@@ -1390,22 +1394,22 @@ async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIn
       if (hidden) return;
       const wrapper = document.createElement("span");
       wrapper.className = "tag-wrapper";
-      wrapper.setAttribute("role", "img");
-      wrapper.setAttribute("aria-label", isTrait(name) ? name : `${name} ×${count}`);
+      wrapper.setAttribute("role","img");
+      wrapper.setAttribute("aria-label",isTrait(name) ? name : `${name} ×${count}`);
       const img = document.createElement("img");
       img.src = `images/tags/${name}.png`;
       img.alt = name;
       wrapper.appendChild(img);
       const badge = document.createElement("span");
       badge.className = "tag-badge";
-      badge.textContent = isTrait(name) ? "" : String(Math.max(0, count));
+      badge.textContent = isTrait(name) ? "" : String(Math.max(0,count));
       wrapper.appendChild(badge);
       enemyBox.appendChild(wrapper);
     });
   }
 }
-   function findMorereturnTag(fight, side) {
-     const list = getTagListForSide(fight, side);
+   function findMorereturnTag(fight,side) {
+     const list = getTagListForSide(fight,side);
      if (!Array.isArray(list)) return -1;
      for (let i = 0; i < list.length; i += 1) {
        const entry = list[i];
@@ -1427,18 +1431,18 @@ function renderFightBags() {
   const playerBagEl = document.getElementById("fightplayerbag");
   if (playerBagEl) {
     playerBagEl.innerHTML = "";
-    (window.fightplayerbag || []).forEach(function (cardName, bagIndex) {
+    (window.fightplayerbag || []).forEach(function (cardName,bagIndex) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "bag-slot";
       btn.dataset.card = cardName;
-      btn.setAttribute("aria-label", cardName);
-      btn.disabled = !playerCardCanUse(fight, null, true);
+      btn.setAttribute("aria-label",cardName);
+      btn.disabled = !playerCardCanUse(fight,null,true);
       const img = document.createElement("img");
       img.src = window.fightcardImage(cardName);
       img.alt = cardName;
       btn.appendChild(img);
-      btn.addEventListener("mouseenter", function () {
+      btn.addEventListener("mouseenter",function () {
         displayfightcardinfo(1,cardName);
       });
       btn.onclick = async function () {
@@ -1459,7 +1463,7 @@ function renderFightBags() {
         }
         
         // 从背包移除
-        window.fightplayerbag.splice(bagIndex, 1);
+        window.fightplayerbag.splice(bagIndex,1);
         renderFightBags();
         
         if (Number.isFinite(mpCost) && mpCost > 0) {
@@ -1467,14 +1471,17 @@ function renderFightBags() {
         }
         
         await carduse(1,type,card,tag,cardName,fight,[],-1,0,{});
+        if (await runRootEffect(fight,1,card)) {
+          return;
+        }
         const outcome = getFightOutcome(fight);
         if (outcome === "win" || outcome === "lost") {
-          finishFight(fight, outcome);
+          finishFight(fight,outcome);
         }
         
         updatePlayerHandUI(fight);
-        renderAbilityButton(fight, 1);
-        renderAbilityButton(fight, 0);
+        renderAbilityButton(fight,1);
+        renderAbilityButton(fight,0);
         bindPlayerHandActions(fight);
       };
       playerBagEl.appendChild(btn);
@@ -1492,13 +1499,13 @@ function renderFightBags() {
       btn.type = "button";
       btn.className = "bag-slot";
       btn.dataset.card = cardName;
-      btn.setAttribute("aria-label", cardName);
+      btn.setAttribute("aria-label",cardName);
       const img = document.createElement("img");
       img.src = window.fightcardImage(cardName);
       img.alt = cardName;
       btn.appendChild(img);
-      btn.addEventListener("mouseenter", function () {
-        displayfightcardinfo(1, cardName);
+      btn.addEventListener("mouseenter",function () {
+        displayfightcardinfo(1,cardName);
       });
       playerEquipEl.appendChild(btn);
     });
@@ -1513,7 +1520,7 @@ function renderFightBags() {
       btn.type = "button";
       btn.className = "bag-slot";
       btn.dataset.card = cardName;
-      btn.setAttribute("aria-label", cardName);
+      btn.setAttribute("aria-label",cardName);
       const img = document.createElement("img");
       img.src = window.fightcardImage(cardName);
       img.alt = cardName;
@@ -1532,7 +1539,7 @@ function renderFightBags() {
       btn.type = "button";
       btn.className = "bag-slot";
       btn.dataset.card = cardName;
-      btn.setAttribute("aria-label", cardName);
+      btn.setAttribute("aria-label",cardName);
       const img = document.createElement("img");
       img.src = window.fightcardImage(cardName);
       img.alt = cardName;
@@ -1908,11 +1915,48 @@ function checkCardCanUse(cardEntry,player,isHandCard = false) {
       return false;
     }
   }
-  
-  return true;
+  const userule = isObject(card.userule_js) ? card.userule_js : null;
+  if (!userule) {
+    return true;
+  }
+  const useruleName = String(userule.js ?? "").trim();
+  if (useruleName === "") {
+    return true;
+  }
+  const useruleFunc = window[useruleName];
+  if (typeof useruleFunc !== "function") {
+    console.error(`userule_js 缺少可用的 js：${useruleName}`);
+    return false;
+  }
+  const useruleInput = String(userule.input ?? "").trim();
+  const useruleParams = useruleInput === "" ? [] : useruleInput.split(";").map(function (value) { return value.trim(); });
+  const checkFight = isObject(window.fight) ? window.fight : null;
+  const checkSide = isObject(checkFight) && player === checkFight.enemy ? 0 : 1;
+  try {
+    const ruleResult = useruleFunc(
+      ...useruleParams,
+      cardName,
+      parsedCard.valuechange,
+      Array.isArray(parsedCard.sidetype) ? parsedCard.sidetype : [],
+      checkFight,
+      checkSide,
+      type,
+      isObject(card["效果"]) ? card["效果"] : null
+    );
+    if (ruleResult && typeof ruleResult.then === "function") {
+      Promise.resolve(ruleResult).catch(function (error) {
+        console.error(`userule_js 检查失败：${useruleName}`,error);
+      });
+      return true;
+    }
+    return !!ruleResult;
+  } catch (error) {
+    console.error(`Error calling ${useruleName}:`,error);
+    return false;
+  }
 }
 
-function playerCardCanUse(fight, cardEntry, isBackpack) {
+function playerCardCanUse(fight,cardEntry,isBackpack) {
   // 背包卡牌逻辑
   if (isBackpack) {
     // 非玩家回合：禁用
@@ -1941,7 +1985,7 @@ function updatePlayerHandUI(fight) {
   const slots = Array.from(document.querySelectorAll(".game-area .player.bottom .slots .card-slot"));
 
   slots.forEach(
-    function (button, index) {
+    function (button,index) {
       const cardEntry = fight.playerhand[index];
       const cardName = parseFightCard(cardEntry).name;
 
@@ -1951,7 +1995,7 @@ function updatePlayerHandUI(fight) {
       }
 
       // 使用新的卡牌可用性检查
-      button.disabled = !playerCardCanUse(fight, cardEntry, false);
+      button.disabled = !playerCardCanUse(fight,cardEntry,false);
     }
   );
 }
@@ -1967,7 +2011,7 @@ function updatePlayerHandUI(fight) {
   return null;
 }
 
-function finishFight(fight, outcome) {
+function finishFight(fight,outcome) {
   if (!fight || fight.ended) {
     return outcome;
   }
@@ -2499,7 +2543,7 @@ if (isObject(getCards)) {
       /* 手动选择仅支持手牌来源：玩家手动点选，敌方随机 */
       if (side === 1) {
         await new Promise(function(resolve) {
-          setupManualCardSelection(fight, selectSide, function(picked) {
+          setupManualCardSelection(fight,selectSide,function(picked) {
             cardpick = picked;
             resolve();
           });
@@ -2831,7 +2875,7 @@ function bindPlayerHandActions(fight) {
     const cardName = parsedCard.name;
     
     // 卡牌可用性检查
-    button.disabled = !playerCardCanUse(fight, cardEntry, false);
+    button.disabled = !playerCardCanUse(fight,cardEntry,false);
     
     button.onclick = async function () {
       if (!window.fight || window.fight !== fight || fight.ended || fight.carduseLocked || fight.sideturn === "enemy") {
@@ -2858,7 +2902,7 @@ function bindPlayerHandActions(fight) {
         updatePlayerHandUI(fight);
         return;
       }
-      fight.playerhand.splice(index, 1);
+      fight.playerhand.splice(index,1);
       renderPlayerHand(fight);
       bindPlayerHandActions(fight);
       exposeBattleGlobals(fight);
@@ -2866,6 +2910,9 @@ function bindPlayerHandActions(fight) {
         fight.player.MP -= mpCost;
       }
       const res = await carduse(1,type,card,tag,cardName,fight,sidetype,-1,0,valuechange,null,false,mpCost);
+      if (await runRootEffect(fight,1,card)) {
+        return;
+      }
       const outcome = getFightOutcome(fight);
       if (outcome === "win" || outcome === "lost") {
         finishFight(fight,outcome);
@@ -2901,13 +2948,14 @@ async function fightenemyactioncard(fight) {
     const baseCost = Number(valuechange.MP ?? card.MP ?? 0);
     const costChange = Number(fight.enemy.cardmpchange ?? 0);
     const mpCost = Math.max(0,(Number.isFinite(baseCost) ? baseCost : 0) + (Number.isFinite(costChange) ? costChange : 0));
-    fight.enemyhand.splice(index, 1);
+    fight.enemyhand.splice(index,1);
     index -= 1;
     renderEnemyHand(fight);
     exposeBattleGlobals(fight);
     fight.enemy.MP -= mpCost;
-    await carduse(0,type,card,tag,cardName,fight,sidetype, -1, 0, valuechange, null, false, mpCost);
-    await new Promise(function (resolve) { setTimeout(resolve, 1000); });
+    await carduse(0,type,card,tag,cardName,fight,sidetype,-1,0,valuechange,null,false,mpCost);
+    if (await runRootEffect(fight,0,card)) break;
+    await new Promise(function (resolve) { setTimeout(resolve,1000); });
   }
 }
   async function fightenemyaction() {
@@ -2915,12 +2963,13 @@ async function fightenemyactioncard(fight) {
    while (true) {
      if (!fight || fight.ended) return null;
           const turnStartResult = await carduse(0,"event","event","turnstart",null,fight,["turnstart"]);
+     let enemyTurnEnded = false;
      // 敌方能力：查找第一个可用（remaining === 0）的能力并使用
      if (Array.isArray(fight.enemyability) && fight.enemyability.length > 0) {
        for (let i = 0; i < fight.enemyability.length; i += 1) {
          const entry = fight.enemyability[i];
          const name = String(entry[0] ?? "").trim();
-         const total = toInt(entry[1], 0);
+         const total = toInt(entry[1],0);
          const remaining = Number(entry[2] ?? 0);
          if (name && remaining === 0) {
            const abilityCard = getFightCardData(name);
@@ -2935,15 +2984,18 @@ async function fightenemyactioncard(fight) {
                const tagValue = abilityCard ? String(abilityCard["tag"] ?? "").trim() : "";
                await carduse(0,type,abilityCard,tagValue,name,fight,["ability"]);
                // set remaining cooldown to total
-               entry[2] = Math.max(0, total);
-               await new Promise(function (resolve) { setTimeout(resolve, 1000); });
-               break; // 使用一次后退出循环（按原逻辑只用一次）
+               entry[2] = Math.max(0,total);
+               enemyTurnEnded = await runRootEffect(fight,0,abilityCard);
+               await new Promise(function (resolve) { setTimeout(resolve,1000); });
+               break;
              }
            }
          }
        }
      }
-     await fightenemyactioncard(fight);
+     if (!enemyTurnEnded) {
+       await fightenemyactioncard(fight);
+     }
      if (fight.enemy.MP < fight.enemy.MAXMP) {
      fight.enemy.MP = fight.enemy.MAXMP;
      }
@@ -2954,13 +3006,13 @@ async function fightenemyactioncard(fight) {
        for (let i = 0; i < fight.enemyability.length; i += 1) {
          const entry = fight.enemyability[i];
          if (Number.isFinite(entry[2]) && entry[2] > 0) {
-           entry[2] = Math.max(0, entry[2] - 1);
+           entry[2] = Math.max(0,entry[2] - 1);
          }
        }
      }
-     const moreturnIdx = findMorereturnTag(fight, 0);
+     const moreturnIdx = findMorereturnTag(fight,0);
      if (moreturnIdx !== -1 && !fight.ended) {
-       modifyTagCount(fight, 0, "额外回合", -1);
+       modifyTagCount(fight,0,"额外回合",-1);
        fight.turn += 1;
        continue;
      }
@@ -2972,54 +3024,10 @@ async function fightenemyactioncard(fight) {
    }
    return "end";
    }
-  async function fightmain() {
-    const fight = window.fight;
-
-    if (!fight || fight.ended) {
-      return;
-    }
-    const turnStartResult = await carduse(1,"event","event","turnstart",null,fight);
-    fight.sideturn = "player" ;
-
-    // 在玩家回合开始的 turnstart 事件完成后进行胜负判定（按你的要求）
-    const outcomeAfterTurnstart = getFightOutcome(fight);
-    if (outcomeAfterTurnstart === "win" || outcomeAfterTurnstart === "lost") {
-      return finishFight(fight,outcomeAfterTurnstart);
-    }
-    /* 发卡 */
-    if(fight.turn === 1){
-    await drawPlayerCards(3);
-    renderPlayerHand(fight);
-    
-    }
-
-    /* 绑定玩家手牌点击。鼠标点击即视为使用。 */
-    bindPlayerHandActions(fight);
-
-    /* 敌人初始牌 */
-    if(fight.turn === 1){
-    await drawEnemyCards(3);
-    renderEnemyHand(fight);
-    }
-    /*
-      显示场上卡牌 */
-    renderFightSite(fight);
-
-    /* 更新双方 HP / MP 以及牌库 / 坟场数量。*/
-    exposeBattleGlobals(fight);
-
-    /* 玩家结束回合 */
-    const endTurnButton = document.querySelector(".game-area .end-turn");
-
-    if (endTurnButton) {
-      endTurnButton.disabled = false;
-
-      
-          endTurnButton.onclick = async function () {
-  if (!window.fight || window.fight !== fight || fight.ended || fight.carduseLocked) {
-    return;
-  }
-  endTurnButton.disabled = true;
+  /* 玩家回合结束流程：从 turnend 事件开始，到交接给敌方回合为止。
+     结束回合按钮与 rooteffect:turnend 都复用这段代码。 */
+  async function endPlayerTurn(fight) {
+  if (!isObject(fight) || fight.ended) return;
   const turnEndResult = await carduse(1,"event","event","turnend",null,fight);
   fight.sideturn = "enemy";
   await moveSiteCardsToGrave(fight);
@@ -3030,7 +3038,7 @@ async function fightenemyactioncard(fight) {
     for (let i = 0; i < fight.playerability.length; i += 1) {
       const entry = fight.playerability[i];
       if (Number.isFinite(entry[2]) && entry[2] > 0) {
-        entry[2] = Math.max(0, entry[2] - 1);
+        entry[2] = Math.max(0,entry[2] - 1);
       }
     }
   }
@@ -3039,13 +3047,13 @@ async function fightenemyactioncard(fight) {
   }
   await drawPlayerCards(2);
   renderPlayerHand(fight);
-   const moreturnIdx = findMorereturnTag(fight, 1);
+   const moreturnIdx = findMorereturnTag(fight,1);
    if (moreturnIdx !== -1) {
-     modifyTagCount(fight, 1, "额外回合", -1);
+     modifyTagCount(fight,1,"额外回合",-1);
      fight.turn += 1;
      const outcome = await fightmain();
      if (outcome === "win" || outcome === "lost") {
-       finishFight(fight, outcome);
+       finishFight(fight,outcome);
      }
      return;
    }
@@ -3065,6 +3073,80 @@ async function fightenemyactioncard(fight) {
   if (outcome === "win" || outcome === "lost") {
     finishFight(fight,outcome);
   }
+  }
+
+  // rooteffect
+  function getRootEffectValue(card) {
+    const rootEffect = isObject(card) ? card.rooteffect : null;
+    if (!isObject(rootEffect)) return "";
+    const value = String(rootEffect.value ?? "").trim();
+    return value === "turnend" ? value : "";
+  }
+
+  // rooteffect:turnend
+  async function runRootEffect(fight,side,card) {
+    if (getRootEffectValue(card) !== "turnend") return false;
+    if (!isObject(fight) || fight.ended) return false;
+    if (Number(side) !== 1) return true;
+    const endTurnButton = document.querySelector(".game-area .end-turn");
+    if (endTurnButton) {
+      endTurnButton.disabled = true;
+    }
+    await endPlayerTurn(fight);
+    const outcome = getFightOutcome(fight);
+    if (outcome === "win" || outcome === "lost") {
+      finishFight(fight,outcome);
+    }
+    return true;
+  }
+
+  async function fightmain() {
+    const fight = window.fight;
+
+    if (!fight || fight.ended) {
+      return;
+    }
+    const turnStartResult = await carduse(1,"event","event","turnstart",null,fight);
+    fight.sideturn = "player" ;
+
+    const outcomeAfterTurnstart = getFightOutcome(fight);
+    if (outcomeAfterTurnstart === "win" || outcomeAfterTurnstart === "lost") {
+      return finishFight(fight,outcomeAfterTurnstart);
+    }
+    /* 发卡 */
+    if(fight.turn === 1){
+    await drawPlayerCards(3);
+    renderPlayerHand(fight);
+    
+    }
+
+    /* 绑定玩家手牌点击。鼠标点击即视为使用。 */
+    bindPlayerHandActions(fight);
+
+    /* 敌人初始牌 */
+    if(fight.turn === 1){
+    await drawEnemyCards(3);
+    renderEnemyHand(fight);
+    }
+    /* 显示场上卡牌 */
+    renderFightSite(fight);
+
+    /* 更新双方 HP / MP 以及牌库 / 坟场数量。*/
+    exposeBattleGlobals(fight);
+
+    /* 玩家结束回合 */
+    const endTurnButton = document.querySelector(".game-area .end-turn");
+
+    if (endTurnButton) {
+      endTurnButton.disabled = false;
+
+      
+          endTurnButton.onclick = async function () {
+  if (!window.fight || window.fight !== fight || fight.ended || fight.carduseLocked) {
+    return;
+  }
+  endTurnButton.disabled = true;
+  await endPlayerTurn(fight);
 };
     }
 
@@ -3115,8 +3197,8 @@ async function fightenemyactioncard(fight) {
     fight.ended = false;
 
     exposeBattleGlobals(fight);
-    renderAbilityButton(fight, 1);
-    renderAbilityButton(fight, 0);
+    renderAbilityButton(fight,1);
+    renderAbilityButton(fight,0);
     return new Promise(
       function (resolve) {
         fight.resolve = resolve;
@@ -3145,24 +3227,24 @@ function updateEndTurnAsset() {
   const assetPath = `images/UI/${assetName}.png`;
   const fallbackPath = `images/UI/${baseAsset}.png`;
 
-  button.classList.toggle("end-turn-localized-banner", isLocalized);
+  button.classList.toggle("end-turn-localized-banner",isLocalized);
   image.onerror = null;
 
   if (image.getAttribute("src") !== assetPath) {
-    image.setAttribute("src", assetPath);
+    image.setAttribute("src",assetPath);
   }
 
   if (isLocalized) {
     image.onerror = function () {
       image.onerror = null;
       button.classList.remove("end-turn-localized-banner");
-      image.setAttribute("src", fallbackPath);
+      image.setAttribute("src",fallbackPath);
     };
   }
 }
 
-document.addEventListener("DOMContentLoaded", updateEndTurnAsset);
-document.addEventListener("th-card:i18n-ready", updateEndTurnAsset);
+document.addEventListener("DOMContentLoaded",updateEndTurnAsset);
+document.addEventListener("th-card:i18n-ready",updateEndTurnAsset);
 if (document.readyState !== "loading") updateEndTurnAsset();
   /* 对外暴露 */
 window.fightAPI = fightAPI;
@@ -3175,6 +3257,11 @@ window.carduse = carduse;
 window.cardeffect = cardeffect;
 window.modifyTagCount = modifyTagCount;
 window.getTagCount = getTagCount;
+window.renderPlayerHand = renderPlayerHand;
+window.renderEnemyHand = renderEnemyHand;
+window.bindPlayerHandActions = bindPlayerHandActions;
+window.updatePlayerHandUI = updatePlayerHandUI;
+window.checkCardCanUse = checkCardCanUse;
 window.parseFightCard = parseFightCard;
 window.createFightCardEntry = createFightCardEntry;
 window.getFightCardData = getFightCardData;

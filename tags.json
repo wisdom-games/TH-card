@@ -44,7 +44,7 @@
 		},
     "rule":"turnend",
     "siderule":"self"
-	}
+	},
     "info":"减少受到的伤害，回合结束时清空"
   },
   "气功":{
@@ -53,7 +53,7 @@
     "标记":{
         "护盾":{
           "self":{
-        "value_read":"<self.tags.临时力量>*2"
+        "value_read":"<self.tags.气功>*2"
           }
         }
       }
@@ -89,7 +89,7 @@
 	"display":"临时力量",
     "效果":{
     "伤害修改":{
-      "value_read":"c'c",
+      "value_read":"<self.tags.临时力量>",
       "type":"普通"
       }
     },
