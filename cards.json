@@ -1081,6 +1081,145 @@
     "tag":"handcard;handcardaddtagother",
     "sidetype":"typeIce"
   },
+  /* 赤蛮奇 */
+/*
+  "眼里有光":{
+  "display":"眼里有光",
+  "类型":"基本卡",
+  "效果":{
+    "伤害":{
+      "value":4,
+	    "type":"普通"
+    }
+  },
+	"MP":1,
+    "info":"造成4普通伤害",
+    "tag":"handcard;handcarddamage",
+    "sidetype":"typeNormal"
+  },
+  "高能光束":{
+  "display":"高能光束",
+  "类型":"基本卡",
+  "效果":{
+    "伤害":{
+      "value":6,
+	    "type":"普通"
+    }
+  },
+	"MP":2,
+    "info":"造成6普通伤害",
+    "tag":"handcard;handcarddamage",
+    "sidetype":"typeNormal"
+  },*/
+  /* 红美铃 */
+  
+  "太极拳":{
+  "display":"太极拳",
+  "类型":"基本卡",
+  "效果":{
+    "伤害":{
+      "value":2,
+	    "type":"普通"
+    }
+  },
+    "info":"造成2普通伤害，获得1气功",
+    "tag":"handcard;handcarddamage;handcardaddtagself",
+    "sidetype":"typeNormal"
+  }, 
+  
+  "空气炮":{
+  "display":"空气炮",
+  "类型":"基本卡",
+  "效果":{
+    "伤害":{
+      "value":5,
+	    "type":"普通"
+    }
+    "标记":{
+	"气功":{
+      "self":{
+      "value":-2
+      }
+	}
+    }
+  },
+	"mp":1,
+    "info":"消耗2气功，造成5普通伤害",
+    "tag":"handcard;handcarddamage;handcardremovetagself",
+    "sidetype":"typeNormal"
+	"userule_js":{
+	"js":"checktag",
+	"input":"1;>;<self.气功>" // 确保气功不低于1
+	}
+  },
+  
+  "运气":{
+  "display":"运气",
+  "类型":"基本卡",
+  "效果":{
+    "抽卡":{
+    "value":2
+    }
+    "标记":{
+	"气功":{
+      "self":{
+      "value":2
+      }
+	}
+    }
+  },
+	"mp":2
+    "info":"获得2气功，抽取2张卡",
+    "tag":"handcard;handcardaddcardself;handcardaddtagself",
+    "sidetype":"typeNormal"
+  },
+  
+  "背水阵":{
+  "display":"背水阵",
+  "类型":"基本卡",
+  "rooteffect":{
+    "value":"turnend"
+  }
+  "效果":{
+    "标记":{
+	"气功":{
+      "self":{
+      "value":5
+      }
+	}
+    }
+  },
+	"mp":3
+    "info":"获得5气功，回合结束",
+    "tag":"handcard;handcardaddcardself;handcardaddtagself",
+    "sidetype":"typeNormal"
+  },
+  
+  "华符「破山炮」":{
+  "display":"空气炮",
+  "类型":"基本卡",
+  "效果":{
+    "伤害":{
+      "value":15,
+	    "type":"普通"
+    }
+    "标记":{
+	"气功":{
+      "self":{
+      "value":-7
+      }
+	}
+    }
+  },
+	"mp":3,
+    "info":"消耗7气功，造成15普通伤害",
+    "tag":"handcard;handcarddamage;handcardremovetagself",
+    "sidetype":"typeNormal"
+	"userule_js":{
+	"js":"checktag",
+	"input":"6;>;<self.气功>" // 确保气功不低于6
+	}
+  },
   
   /* General */
   "顺走":{

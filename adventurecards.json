@@ -362,6 +362,34 @@
         "Gold":45
         }
     }
+  },
+  "红美铃":{
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
+    "ID":"rLV5enemy1",
+    "HP":20,
+    "MP":5,
+	"tags":{
+	"气功":5
+	},
+    "cards":{
+      "太极拳":4,
+      "空气炮":3,
+      "运气":3,
+      "背水阵":2,
+      "华符「破山炮」":2
+      },
+    "ability":{
+      "name":"智慧",
+      "turn":1
+    },
+    "reaction":{
+      "win":{
+        "delete":"红美铃",
+        "XP":20,
+        "Gold":45
+        }
+    }
   }
 
 }

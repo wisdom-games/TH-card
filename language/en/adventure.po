@@ -42,3 +42,6 @@ msgstr "西行寺幽幽子"
 
 msgid "琪露诺"
 msgstr "琪露诺"
+
+msgid "红美玲"
+msgstr "Hong_Meiling"
