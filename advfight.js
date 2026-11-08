@@ -250,7 +250,34 @@
     }
     return selected;
   }
-
+  function checkfightvalue(input,cardName,valuechange,sidetype,fight,side,type,effect) {
+    const expression = String(input ?? "").trim();
+    if (expression === "") {
+      return false;
+    }
+    const selfSide = Number(side) === 1 ? 1 : 0;
+    const condition = expression.replace(/fight\.(<selfside>|<otherside>|player|enemy)\.([A-Za-z_$][\w$]*)/g,function (match,owner,key) {
+      let targetSide = -1;
+      if (owner === "<selfside>") {
+        targetSide = selfSide;
+      } else if (owner === "<otherside>") {
+        targetSide = 1 - selfSide;
+      } else if (owner === "player") {
+        targetSide = 1;
+      } else {
+        targetSide = 0;
+      }
+      const target = targetSide === 1 ? fight?.player : fight?.enemy;
+      const value = target ? Number(target[key]) : NaN;
+      return Number.isFinite(value) ? String(value) : "NaN";
+    });
+    try {
+      return Function('"use strict"; if (' + condition + ') { return true; } return false;')();
+    } catch (error) {
+      return false;
+    }
+  }
+  window.checkfightvalue = checkfightvalue;
   window.fillerformpneed = fillerformpneed;
   window.advvalueread = advvalueread;
   window.checksidetype = checksidetype;

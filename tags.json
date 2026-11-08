@@ -246,7 +246,7 @@
 	"rule":"drawcard",
 	"siderule":"self",
 	"info":"每次抽牌时，对对方造成2点普通伤害"
-	}
+	},
     "getHPturnstart":{
 	"display":"getHPturnstart",
     "效果":{

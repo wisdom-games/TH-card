@@ -749,13 +749,16 @@ function renderFightEquip(fight,owner) {
 
         ID: String(enemyCard.ID || enemyId || ""),
 
-        HP: enemyHP,
-        MAXHP: enemyHP,
+        HP:enemyHP,
+        MAXHP:enemyHP,
 
-        MP: enemyMP,
-        MAXMP: enemyMP,
-        cardmpchange: 0,
-        giveothercardondraw: 0
+        MP:enemyMP,
+        MAXMP:enemyMP,
+        cardmpchange:0,
+        giveothercardondraw:0,
+        undrawcard:0,
+        drawcardnumchange:0,
+        drawcardnumlog:0
       },
 
       playerability: pc && pc.ability ? [[String(pc.ability.name || ""),toInt(pc.ability.turn,0),0]] : [],
@@ -768,8 +771,11 @@ function renderFightEquip(fight,owner) {
         MAXHP:adventureStats.MAXHP,
         MP:adventureStats.MAXMP,
         MAXMP:adventureStats.MAXMP,
-        cardmpchange: 0,
-        giveothercardondraw: 0
+        cardmpchange:0,
+        giveothercardondraw:0,
+        undrawcard:0,
+        drawcardnumchange:0,
+        drawcardnumlog:0
       },
 
       /* 玩家牌组 */
@@ -834,7 +840,18 @@ async function drawPlayerCards(DCnumber) {
       break;
     }
     const cardName = String(cardEntry).trim();
+    const playerDrawNumChange = Number(fight.player?.drawcardnumchange ?? 0);
+    if (playerDrawNumChange < 0) {
+      fight.player.drawcardnumchange = playerDrawNumChange + 1;
+      fight.playercards.push(cardEntry);
+      continue;
+    }
     addcardtohand(cardName,1);
+    const playerDrawNumBonus = Number(fight.player?.drawcardnumchange ?? 0);
+    if (playerDrawNumBonus > 0) {
+      fight.player.drawcardnumchange = playerDrawNumBonus - 1;
+      index -= 1;
+    }
   }
   window.fightplayerhand = fight.playerhand;
   updateFightPileCounts(fight);
@@ -858,7 +875,18 @@ async function drawEnemyCards(DCnumber) {
       break;
     }
     const cardName = String(cardEntry).trim();
+    const enemyDrawNumChange = Number(fight.enemy?.drawcardnumchange ?? 0);
+    if (enemyDrawNumChange < 0) {
+      fight.enemy.drawcardnumchange = enemyDrawNumChange + 1;
+      fight.enemycards.push(cardEntry);
+      continue;
+    }
     addcardtohand(cardName,0);
+    const enemyDrawNumBonus = Number(fight.enemy?.drawcardnumchange ?? 0);
+    if (enemyDrawNumBonus > 0) {
+      fight.enemy.drawcardnumchange = enemyDrawNumBonus - 1;
+      index -= 1;
+    }
   }
   window.fightenemyhand = fight.enemyhand;
   updateFightPileCounts(fight);
@@ -2524,8 +2552,14 @@ if (isObject(getCards)) {
         }
       }
     } else if (selectPick === "random") {
-      if (poolIndices.length > 0) {
-        pickedIndices.push(poolIndices[Math.floor(Math.random() * poolIndices.length)]);
+      const randomPool = poolIndices.slice();
+      if (randomPool.length > 0) {
+        const randomCount = Math.max(1,Math.min(selectValue,randomPool.length));
+        for (let randomIndex = 0;randomIndex < randomCount;randomIndex += 1) {
+          const pickAt = Math.floor(Math.random() * randomPool.length);
+          pickedIndices.push(randomPool[pickAt]);
+          randomPool.splice(pickAt,1);
+        }
       }
     } else if (selectPick === "top") {
       if (poolIndices.length > 0) {
@@ -3019,7 +3053,12 @@ async function fightenemyactioncard(fight) {
      break;
    }
    if (fight && !fight.ended) {
-     await drawEnemyCards(2);
+     const enemyUndraw = Number(fight.enemy?.undrawcard ?? 0);
+     if (enemyUndraw > 0) {
+       fight.enemy.undrawcard = enemyUndraw - 1;
+     } else {
+       await drawEnemyCards(2);
+     }
      renderEnemyHand(fight);
    }
    return "end";
@@ -3045,7 +3084,12 @@ async function fightenemyactioncard(fight) {
   if (fight.player.MP < fight.player.MAXMP) {
     fight.player.MP = fight.player.MAXMP;
   }
-  await drawPlayerCards(2);
+  const playerUndraw = Number(fight.player?.undrawcard ?? 0);
+  if (playerUndraw > 0) {
+    fight.player.undrawcard = playerUndraw - 1;
+  } else {
+    await drawPlayerCards(2);
+  }
   renderPlayerHand(fight);
    const moreturnIdx = findMorereturnTag(fight,1);
    if (moreturnIdx !== -1) {

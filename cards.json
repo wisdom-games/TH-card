@@ -1297,7 +1297,7 @@
   "效果_2":{
 	"valuechange":{
 	"fight.<selfside>.drawcardnumlog":{
-	"value_new":0
+	"value_new":-1
 	},
 	"抽卡":{
 		"value":1
@@ -1349,11 +1349,11 @@
 	"效果":{
 	"伤害":{
 		"value":20
-	}
+	},
 	"valuechange":{
 	"fight.<otherside>.MP":{
 	"value_js":"advvalueread",
-	"input":"-<other.MP>/2;int"
+	"input":"-<other.MP>/2;int;"
 	},
 	"fight.<otherside>.undrawcard":{
 	"value":1
