@@ -235,6 +235,18 @@
     "siderule":"self",
     "info":"有50%概率无法造成伤害"
   },
+  "鸦天狗":{
+	"效果":{
+	"伤害":{
+		"value":2,
+		"type":"普通",
+		"side":"other"
+	}
+	},
+	"rule":"drawcard",
+	"siderule":"self",
+	"info":"每次抽牌时，对对方造成2点普通伤害"
+	}
     "getHPturnstart":{
 	"display":"getHPturnstart",
     "效果":{

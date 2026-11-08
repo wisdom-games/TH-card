@@ -379,13 +379,36 @@
       "背水阵":2,
       "华符「破山炮」":2
       },
-    "ability":{
-      "name":"智慧",
-      "turn":1
-    },
     "reaction":{
       "win":{
         "delete":"红美铃",
+        "XP":20,
+        "Gold":45
+        }
+    }
+  },
+  "射命丸文":{
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
+    "ID":"rLV6enemy1",
+    "HP":60,
+    "MP":3,
+	"tags":{
+	"鸦天狗":1
+	},
+    "cards":{
+      "号外！号外！":4,
+      "文文。新闻":4,
+      "风速":5,
+      "龙卷风":4,
+      "团扇":2,
+      "「无双风神」":2,
+      "狂风":3,
+      "「幻想风靡」":1
+      },
+    "reaction":{
+      "win":{
+        "delete":"射命丸文",
         "XP":20,
         "Gold":45
         }

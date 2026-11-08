@@ -1220,7 +1220,151 @@
 	"input":"6;>;<self.气功>" // 确保气功不低于6
 	}
   },
+  /* 射命丸文 */
+  "号外！号外！":{
+  "display":"号外！号外！",
+  "类型":"基本卡",
+  "效果":{
+    "获取卡":{
+    "文文。新闻":{
+        "value":2,
+		"newloc":"fightcards",
+		"newcardside":"other",
+        "sidetype":"+|selfdeleteonsite"
+    }
+    }
+  },
+    "info":"将2张文文。新闻置入对方牌组",
+    "tag":"handcard;handcardaddcardother",
+    "sidetype":"typeNormal"
+  },
+  "文文。新闻":{
+  "display":"文文。新闻",
+  "类型":"基本卡",
+    "info":"打出后移除自身",
+    "tag":"handcard;handcarddelselfonsite",
+    "sidetype":"typeNormal;selfdeleteonsite"
+  },
   
+  "风速":{
+  "display":"风速",
+  "类型":"基本卡",
+  "效果":{
+    "抽卡":{
+    "value":3
+    }
+  },
+    "info":"抽3张卡",
+    "tag":"handcard;handcardaddcardself",
+    "sidetype":"typeNormal"
+  },
+  
+  "龙卷风":{
+  "display":"龙卷风",
+  "类型":"基本卡",
+  "效果":{
+    "伤害":{
+    "value":6
+    },
+	"valuechange":{
+	"fight.<otherside>.drawcardnumchange":{
+	"value":-1
+	},
+	"fight.<selfside>.drawcardnumchange":{
+	"value":1
+	}
+	}
+  },
+    "info":"造成6点伤害。自身下次抽卡增加1，对手减少1",
+    "tag":"handcard;handcarddamage",
+    "sidetype":"typeNormal"
+  },
+  
+  "团扇":{
+  "display":"团扇",
+  "类型":"装备卡",
+  "效果":{
+	"valuechange":{
+	"fight.<selfside>.drawcardnumlog":{
+	"value":1
+	}
+	},
+	"rule":"drawcard",
+	"rule_js":"checkfightvalue",
+	"input":"fight.<selfside>.drawcardnumlog != 2",
+	"siderule":"self"
+  },
+  "效果_2":{
+	"valuechange":{
+	"fight.<selfside>.drawcardnumlog":{
+	"value_new":0
+	},
+	"抽卡":{
+		"value":1
+	}
+	},
+	"rule":"drawcard",
+	"rule_js":"checkfightvalue",
+	"input":"fight.<selfside>.drawcardnumlog == 2",
+	"siderule":"self"
+  },
+    "info":"每抽2张牌，再抽1张(本装备的抽卡不计入)",
+    "tag":"equipcard;equipcardaddcard",
+    "sidetype":"typeNormal"
+  },
+  
+  "「无双风神」":{
+  "display":"「无双风神」",
+  "类型":"基本卡",
+  "效果":{
+    "抽卡":{
+    "value":5
+    }
+  },
+    "info":"抽5张卡",
+    "tag":"handcard;handcardaddcardself",
+    "sidetype":"typeNormal"
+  },
+  
+  "狂风":{
+	"display":"狂风",
+	"类型":"基本卡",
+	"效果":{
+    "卡牌选择":{
+	"mode":"remove",
+	"pick":"random",
+	"source":"hand",
+	"value":2,
+	"side":"other"
+	}
+  },
+    "info":"对方随机弃置2张手牌",
+    "tag":"handcard;handcardremoveotherhandcard",
+    "sidetype":"typeNormal"
+  },
+
+  "「幻想风靡」":{
+	"display":"「幻想风靡」",
+	"类型":"基本卡",
+	"效果":{
+	"伤害":{
+		"value":20
+	}
+	"valuechange":{
+	"fight.<otherside>.MP":{
+	"value_js":"advvalueread",
+	"input":"-<other.MP>/2;int"
+	},
+	"fight.<otherside>.undrawcard":{
+	"value":1
+	}
+	}
+  },
+    "info":"造成20点伤害，对方MP减半且下回合无法抽牌",
+    "tag":"handcard;handcarddamage;handcardchangeothermp",
+    "sidetype":"typeNormal"
+  },
+
   /* General */
   "顺走":{
   "display":"顺走",

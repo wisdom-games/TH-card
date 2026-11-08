@@ -47,6 +47,11 @@
       "maxnumber":1,
       "红美铃":1
     },
+    "正式出怪LV6":{
+      "type":"random",
+      "maxnumber":1,
+      "射命丸文":1
+    },
     "测试总是出现":{
       "type":"always",
       "水井":5,
