@@ -1327,10 +1327,10 @@
 	"valuechange":{
 	"fight.<selfside>.drawcardnumlog":{
 	"value_new":-1
+	}
 	},
 	"抽卡":{
 		"value":1
-	}
 	},
 	"rule":"drawcard",
 	"rule_js":"checkfightvalue",

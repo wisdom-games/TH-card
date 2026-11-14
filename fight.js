@@ -820,9 +820,40 @@ function renderFightEquip(fight,owner) {
     const cards = fight.enemyhand;
     renderSlots(".game-area .player.top .slots .card-slot",cards,"敌人");
   }
-
-async function drawPlayerCards(DCnumber) {
+// 抽卡filler
+async function pickDrawCardWithFiller(fight,owner,fillerName,fillerParams) {
+  const deck = owner === 1 ? fight.playercards : fight.enemycards;
+  if (!Array.isArray(deck) || deck.length === 0) {
+    return null;
+  }
+  const filler = window[fillerName];
+  if (typeof filler !== "function") {
+    return null;
+  }
+  let selected = null;
+  try {
+    selected = await filler(deck.slice(),...(Array.isArray(fillerParams) ? fillerParams : []));
+  } catch (error) {
+    console.error(`Error calling ${fillerName}:`,error);
+    return null;
+  }
+  if (!Array.isArray(selected) || selected.length === 0) {
+    return null;
+  }
+  if (selected.length === 1) {
+    return selected[0];
+  }
+  return selected[Math.floor(Math.random() * selected.length)];
+}
+async function drawPlayerCards(DCnumber,drawConfig) {
   const drawCount = DCnumber;
+  const fillerName = isObject(drawConfig) ? String(drawConfig.filler_js ?? "").trim() : "";
+  const fillerInput = isObject(drawConfig) ? String(drawConfig.input ?? "").trim() : "";
+  const fillerParams = fillerInput === "" ? [] : fillerInput.split(";").map(function (value) { return value.trim(); });
+  const useFiller = fillerName !== "";
+  if (useFiller && typeof window[fillerName] !== "function") {
+    console.error(`抽卡 filler 不可用：${fillerName}`);
+  }
   let drewAll = true;
   for (let index = 0;index < drawCount;index += 1) {
     /* 手牌已满则跳过本轮剩余抽牌，并且不消耗牌堆 */
@@ -831,10 +862,31 @@ async function drawPlayerCards(DCnumber) {
       drewAll = false;
       break;
     }
+    let playerFillerEntry = null;
+    let playerFillerChecked = false;
+    if (useFiller) {
+      playerFillerChecked = true;
+      playerFillerEntry = await pickDrawCardWithFiller(fight,1,fillerName,fillerParams);
+      if (playerFillerEntry === null || playerFillerEntry === undefined) {
+        drewAll = false;
+        continue;
+      }
+    }
     await carduse(1,"event",{"event":{"drawcard":{"value":1}}},"drawcard",null,fight,["drawcard"]);
     if (fight.ended) break;
     if (!Array.isArray(fight.playerhand) || fight.playerhand.length >= 8) break;
-    const cardEntry = fight.playercards.pop();
+    let cardEntry = null;
+    if (playerFillerChecked) {
+      // filler
+      const playerFillerIndex = fight.playercards.indexOf(playerFillerEntry);
+      if (playerFillerIndex === -1) {
+        drewAll = false;
+        continue;
+      }
+      cardEntry = fight.playercards.splice(playerFillerIndex,1)[0];
+    } else {
+      cardEntry = fight.playercards.pop();
+    }
     if (!cardEntry) {
       drewAll = false;
       break;
@@ -857,8 +909,15 @@ async function drawPlayerCards(DCnumber) {
   updateFightPileCounts(fight);
   return drewAll;
 }
-async function drawEnemyCards(DCnumber) {
+async function drawEnemyCards(DCnumber,drawConfig) {
   const drawCount = DCnumber;
+  const fillerName = isObject(drawConfig) ? String(drawConfig.filler_js ?? "").trim() : "";
+  const fillerInput = isObject(drawConfig) ? String(drawConfig.input ?? "").trim() : "";
+  const fillerParams = fillerInput === "" ? [] : fillerInput.split(";").map(function (value) { return value.trim(); });
+  const useFiller = fillerName !== "";
+  if (useFiller && typeof window[fillerName] !== "function") {
+    console.error(`抽卡 filler 不可用：${fillerName}`);
+  }
   let drewAll = true;
   for (let index = 0;index < drawCount;index += 1) {
     if (!Array.isArray(fight.enemyhand) || fight.enemyhand.length >= 8) break;
@@ -866,10 +925,30 @@ async function drawEnemyCards(DCnumber) {
       drewAll = false;
       break;
     }
+    let enemyFillerEntry = null;
+    let enemyFillerChecked = false;
+    if (useFiller) {
+      enemyFillerChecked = true;
+      enemyFillerEntry = await pickDrawCardWithFiller(fight,0,fillerName,fillerParams);
+      if (enemyFillerEntry === null || enemyFillerEntry === undefined) {
+        drewAll = false;
+        continue;
+      }
+    }
     await carduse(0,"event",{"event":{"drawcard":{"value":1}}},"drawcard",null,fight,["drawcard"]);
     if (fight.ended) break;
     if (!Array.isArray(fight.enemyhand) || fight.enemyhand.length >= 8) break;
-    const cardEntry = fight.enemycards.pop();
+    let cardEntry = null;
+    if (enemyFillerChecked) {
+      const enemyFillerIndex = fight.enemycards.indexOf(enemyFillerEntry);
+      if (enemyFillerIndex === -1) {
+        drewAll = false;
+        continue;
+      }
+      cardEntry = fight.enemycards.splice(enemyFillerIndex,1)[0];
+    } else {
+      cardEntry = fight.enemycards.pop();
+    }
     if (!cardEntry) {
       drewAll = false;
       break;
@@ -2392,10 +2471,10 @@ async function cardeffect(side,type,effect,fight,cardName = "",sidetype = []) {
   const drawValue = isObject(drawCard) ? Number(drawCard.value) : 0;
   if (Number.isFinite(drawValue) && drawValue > 0) {
     if (side === 1) {
-      await drawPlayerCards(drawValue);
+      await drawPlayerCards(drawValue,drawCard);
       renderPlayerHand(fight);
     } else {
-      await drawEnemyCards(drawValue);
+      await drawEnemyCards(drawValue,drawCard);
       renderEnemyHand(fight);
     }
   }
