@@ -1111,6 +1111,35 @@
     "tag":"handcard;handcarddamage",
     "sidetype":"typeNormal"
   },*/
+  /* 小恶魔 */
+  "链弹":{
+  "display":"链弹",
+  "类型":"基本卡",
+  "效果":{
+    "伤害":{
+      "value":4,
+	    "type":"普通"
+    }
+  },
+	"MP":1,
+    "info":"造成4普通伤害",
+    "tag":"handcard;handcarddamage",
+    "sidetype":"typeNormal"
+  },
+  "大玉":{
+  "display":"大玉",
+  "类型":"基本卡",
+  "效果":{
+    "伤害":{
+      "value":6,
+	    "type":"普通"
+    }
+  },
+	"MP":2,
+    "info":"造成6普通伤害",
+    "tag":"handcard;handcarddamage",
+    "sidetype":"typeNormal"
+  },
   /* 红美铃 */
   
   "太极拳":{

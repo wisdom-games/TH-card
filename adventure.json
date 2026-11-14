@@ -42,6 +42,11 @@
       "type":"alwyas",
       "2商人1":1
       },
+    "正式出怪LV4":{
+      "type":"random",
+      "maxnumber":1,
+      "小恶魔":1
+    },
     "正式出怪LV5":{
       "type":"random",
       "maxnumber":1,

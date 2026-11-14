@@ -358,6 +358,19 @@
     "siderule":"all"
     },
     "info":"所有卡将要被送入坟场时都改为被移除;每有一张牌被移除，获得1HP上限和1HP"
-  }
+  },
+  "瞬间找出所需书籍程度的能力":{
+  "display":"瞬间找出所需书籍程度的能力",
+  "效果":{
+    "抽卡":{
+      "value":1,
+	  "filler_js":"fillerformpneed",
+	  "input":"20;random;autol;1" /* MP;pick;mode;value*/
+    }
+  },
+    "rule":"turnstart",
+	"siderule":"self",
+    "info":"自身回合开始时，抽取MP消耗最高的卡牌"
+  },
   
 }

@@ -340,7 +340,7 @@
   "琪露诺":{
     "logoimage":"images/adventure/logo_fight.png",
     "action":"fight",
-    "ID":"rLV4enemy1",
+    "ID":"rLV4enemyboss1",
     "HP":30,
     "MP":4,
     "cards":{
@@ -358,6 +358,28 @@
       "win":{
         "addgroup":"L58",
         "delete":"琪露诺",
+        "XP":20,
+        "Gold":45
+        }
+    }
+  },
+  "小恶魔":{
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
+    "ID":"rLV4enemy1",
+    "HP":30,
+    "MP":4,
+	"tags":{
+	"瞬间找出所需书籍程度的能力":1
+	},
+    "cards":{
+      "打击":4,
+      "链弹":3,
+      "大玉":3
+      },
+    "reaction":{
+      "win":{
+        "delete":"小恶魔",
         "XP":20,
         "Gold":45
         }
