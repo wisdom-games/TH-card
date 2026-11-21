@@ -290,6 +290,7 @@
 	"效果_2":{
 	"抽卡":{
 		"value":2
+		"rule":"void",
 	},
 	"autonext":"false"
 	},

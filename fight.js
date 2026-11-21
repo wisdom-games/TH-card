@@ -709,6 +709,29 @@ function renderFightEquip(fight,owner) {
 
     return shuffle(pool);
   }
+    // adventurecards.equip
+  function buildEquipPool(source) {
+    const pool = [];
+    if (Array.isArray(source)) {
+      source.forEach(function (cardName) {
+        const name = String(cardName).trim();
+        if (name) {
+          pool.push(name);
+        }
+      });
+    } else if (isObject(source)) {
+      for (const [cardName,count] of Object.entries(source)) {
+        if (cardName === "type" || cardName === "maxnumber") {
+          continue;
+        }
+        const amount = Math.max(0,toInt(count,0));
+        for (let index = 0;index < amount;index += 1) {
+          pool.push(cardName);
+        }
+      }
+    }
+    return pool;
+  }
   function createInitialFightMarks(config) {
     const result = {tags:[],traits:[]};
     if (!isObject(config)) return result;
@@ -739,6 +762,7 @@ function renderFightEquip(fight,owner) {
 
     const playerMarks = createInitialFightMarks(pc.tags);
     const enemyMarks = createInitialFightMarks(enemyCard.tags);
+	const enemyEquip = buildEquipPool(enemyCard.equip); 
     const playerDeck = window.playerDeck && typeof window.playerDeck.getCards === "function" ? window.playerDeck.getCards().slice() : [];
 
     return {
@@ -800,7 +824,7 @@ function renderFightEquip(fight,owner) {
       fightenemyequip: [],
       /* 新增：玩家与敌人的标签数组，二维格式 [ [name,count],... ] */
       playerfighttags: [],
-      enemyfighttags: [],
+      enemyfighttags:enemyEquip,
       resolve: null,
       ended: false,
       carduseLocked: false,
@@ -1215,13 +1239,35 @@ function parseValueRead(expression,fight,side) {
       }
       return stepResult;
     }
-
+// random_js
+async function resolveRandomJsThreshold(randomJsConfig,siblingInput,cardName,valuechange,sidetype,fight,side,type,effect){
+  let funcName = "";
+  let inputText = "";
+  if(isObject(randomJsConfig)){
+    funcName = String(randomJsConfig.js ?? "").trim();
+    inputText = String(randomJsConfig.input ?? "").trim();
+  } else {
+    funcName = String(randomJsConfig ?? "").trim();
+    inputText = String(siblingInput ?? "").trim();
+  }
+  const params = inputText === "" ? [] : inputText.split(";").map(function (value) { return value.trim(); });
+  try{
+    const result = await window[funcName](...params,cardName ?? "",isObject(valuechange) ? valuechange : {},sidetype,fight,side,type,effect);
+    const threshold = Number(result);
+    return Number.isFinite(threshold) ? threshold : NaN;
+  } catch (error) {
+    console.error(`Error calling ${funcName}:`,error);
+    return NaN;
+  }
+}
 async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIndex,sourceData,ownerSide,sourceCount,cardName,valuechange,sourceCardName) {
   const newEffectTypes = ["获取卡","抽卡","伤害","标记","卡牌选择","valuechange"];
   const source = isObject(sourceData) ? sourceData : {};
   let nextEffect = effect === "event.movetograve:card" ? {event:{movetograve:{card:true}}} : effect;
   let effectIndex = 1;
   let anyRulePassed = false;
+  let forceNextEffect = false;
+  let skipNextEffect = false; 
   let chainCardUsed = false;
   const sourceName = String(cardName ?? "");
   const sourceValuechange = isObject(valuechange) ? valuechange : {};
@@ -1230,31 +1276,40 @@ async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIn
   if (nextEffect === null) {
     return {side:side,type:type,effect:nextEffect,tag:tag,sidetype:sidetype,register:-1,newEffectChain:false,rulePassed:false};
   }
-  while (true) {
+  while(true){
     const effectKey = effectIndex === 1 ? "效果" : `效果_${effectIndex}`;
-    if (!Object.prototype.hasOwnProperty.call(source,effectKey)) {
+    if (!Object.prototype.hasOwnProperty.call(source,effectKey)){
       break;
     }
-
+    const forceThisEffect = forceNextEffect;
+    const skipThisEffect = skipNextEffect;
+    forceNextEffect = false;
+    skipNextEffect = false;
+    if (skipThisEffect){
+      effectIndex += 1;
+      if (fight.ended){
+        break;
+      }
+      continue;
+    }
     const sourceEffect = source[effectKey];
-    if (isObject(sourceEffect)) {
+    if(isObject(sourceEffect)){
       // 效果内规则，如无则使用外层，否则跳过
       const ruleSource = {...source,...sourceEffect};
       let rulePassed = true;
-
-      if (Object.prototype.hasOwnProperty.call(ruleSource,"rule")) {
-        const rules = String(ruleSource.rule ?? "").split(";").map(function (value) {
+      if (!forceThisEffect && Object.prototype.hasOwnProperty.call(ruleSource,"rule")){
+        const rules = String(ruleSource.rule ?? "").split(";").map(function (value){
           return value.trim();
         }).filter(Boolean);
-        const tags = String(tag ?? "").split(";").map(function (value) {
+        const tags = String(tag ?? "").split(";").map(function (value){
           return value.trim();
         }).filter(Boolean);
-        rulePassed = rules.some(function (value) {
+        rulePassed = rules.some(function (value){
           return tags.includes(value);
         });
       }
 
-      if (rulePassed && Object.prototype.hasOwnProperty.call(ruleSource,"siderule")) {
+      if (!forceThisEffect && rulePassed && Object.prototype.hasOwnProperty.call(ruleSource,"siderule")) {
         const sideRule = String(ruleSource.siderule ?? "").trim();
         if (sideRule === "self") {
           rulePassed = Number(side) === Number(ownerSide);
@@ -1318,7 +1373,7 @@ async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIn
         }
       }
 
-      if (rulePassed && Object.prototype.hasOwnProperty.call(ruleSource,"rule_js")) {
+      if (!forceThisEffect && rulePassed && Object.prototype.hasOwnProperty.call(ruleSource,"rule_js")) {
         rulePassed = false;
         const funcName = String(ruleSource.rule_js ?? "").trim();
         const inputText = String(ruleSource.input ?? "").trim();
@@ -1337,7 +1392,22 @@ async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIn
           }
         }
       }
-
+	  let blockRandomPassed = true;
+      if (rulePassed && Object.prototype.hasOwnProperty.call(ruleSource,"random")) {
+        const blockRandom = Number(ruleSource.random);
+        if (Number.isFinite(blockRandom) && Math.random() >= blockRandom) {
+          blockRandomPassed = false;
+        }
+      }
+      if (rulePassed && blockRandomPassed && Object.prototype.hasOwnProperty.call(ruleSource,"random_js")) {
+        const blockJsThreshold = await resolveRandomJsThreshold(ruleSource.random_js,ruleSource.input,sourceName,sourceValuechange,sidetype,fight,side,type,effect);
+        if (!Number.isFinite(blockJsThreshold) || !(blockJsThreshold >= Math.random())) {
+          blockRandomPassed = false;
+        }
+      }
+      if (!blockRandomPassed) {
+        rulePassed = false;
+      }
       if (rulePassed) {
         anyRulePassed = true;
         let filteredSource = sourceEffect;
@@ -1347,7 +1417,7 @@ async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIn
           if (newEffectTypes.includes(effectName)) {
             continue;
           }
-          if (!isObject(effectConfig) || !Object.prototype.hasOwnProperty.call(effectConfig,"random")) {
+          if (!isObject(effectConfig) || (!Object.prototype.hasOwnProperty.call(effectConfig,"random") && !Object.prototype.hasOwnProperty.call(effectConfig,"random_js"))){
             continue;
           }
 
@@ -1356,11 +1426,19 @@ async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIn
             filteredSource = {...sourceEffect};
           }
 
-          if (Number.isFinite(random) && Math.random() >= random) {
+          let dropRandomKey = Number.isFinite(random) && Math.random() >= random;
+          if (!dropRandomKey && Object.prototype.hasOwnProperty.call(effectConfig,"random_js")) {
+            const jsThreshold = await resolveRandomJsThreshold(effectConfig.random_js,effectConfig.input,sourceName,sourceValuechange,sidetype,fight,side,type,effect);
+            if (!Number.isFinite(jsThreshold) || !(jsThreshold >= Math.random())) {
+              dropRandomKey = true;
+            }
+          }
+          if (dropRandomKey) {
             delete filteredSource[effectName];
           } else {
             const keptConfig = {...effectConfig};
             delete keptConfig.random;
+            delete keptConfig.random_js;
             filteredSource[effectName] = keptConfig;
           }
         }
@@ -1394,6 +1472,19 @@ async function effectruleAPI(side,type,effect,tag,sidetype,fight,register,stepIn
             const resumeStep = stepIndex + 1;
             await carduse(ownerSide,type,triggerEffect,chainTag,chainCardName,fight,[],-1,Number.isFinite(resumeStep) ? resumeStep : 0,sourceValuechange,null,true,null,sourceIgnore);
           }
+		}
+      // autonext
+      const autonextMode = isObject(sourceEffect) ? sourceEffect.autonext : undefined;
+      const autonextText = typeof autonextMode === "string" ? autonextMode.trim().toLowerCase() : autonextMode;
+      if (autonextText === "ifrandom") {
+        if (rulePassed && blockRandomPassed) {
+          forceNextEffect = true;
+        } else {
+          skipNextEffect = true;
+        }
+      } else if (autonextText === "false" || autonextText === false) {
+        if (rulePassed) {
+          skipNextEffect = true;
         }
       }
     }
@@ -2739,7 +2830,35 @@ if (isObject(getCards)) {
   }
   return {side: side,type: type,effect: effect};
 }
-
+  // equip remove_效果
+  async function runRemoveEffects(ownerSide,cardName,entryValuechange,fight) {
+    const name = String(cardName ?? "").trim();
+    if (name === "" || !fight) {
+      return null;
+    }
+    const cardData = getFightCardData(name);
+    if (!isObject(cardData)) {
+      return null;
+    }
+    const removeEffect = {};
+    if (isObject(cardData["remove_效果"])) {
+      removeEffect["效果"] = cardData["remove_效果"];
+    }
+    let removeIndex = 2;
+    while (Object.prototype.hasOwnProperty.call(cardData,`remove_效果_${removeIndex}`)) {
+      if (isObject(cardData[`remove_效果_${removeIndex}`])) {
+        removeEffect[`效果_${removeIndex}`] = cardData[`remove_效果_${removeIndex}`];
+      }
+      removeIndex += 1;
+    }
+    if (Object.keys(removeEffect).length === 0) {
+      return null;
+    }
+    const cardType = String(cardData["类型"] ?? "").trim();
+    const cardTag = String(cardData["tag"] ?? "").trim();
+    const cardIgnore = String(cardData["ignore"] ?? "").trim();
+    return carduse(Number(ownerSide) === 1 ? 1 : 0,cardType,removeEffect,cardTag,null,fight,[],-1,0,isObject(entryValuechange) ? entryValuechange : {},null,false,null,cardIgnore === "" ? null : cardIgnore);
+  }
   async function carduse(side,type,effect,tag,cardName,fight,sidetype = [],register = -1,startStep = 0,valuechange = {},nextto = null,rulesChecked = false,usedMP = null,ignoreOverride = null){
   await loadTagsDatabase();
   let ignore = ignoreOverride === null || ignoreOverride === undefined ? "" : String(ignoreOverride);
@@ -2904,16 +3023,24 @@ if (isObject(getCards)) {
       if (isObject(cardEffect)) {
         const keptEffect = {};
         for (const [effectName,effectConfig] of Object.entries(cardEffect)) {
-          if (!isObject(effectConfig) || !Object.prototype.hasOwnProperty.call(effectConfig,"random")) {
+          if (!isObject(effectConfig) || (!Object.prototype.hasOwnProperty.call(effectConfig,"random") && !Object.prototype.hasOwnProperty.call(effectConfig,"random_js"))) {
             keptEffect[effectName] = effectConfig;
             continue;
           }
           const random = Number(effectConfig.random);
-          if (Number.isFinite(random) && Math.random() >= random) {
+          let dropRandomKey = Number.isFinite(random) && Math.random() >= random;
+          if (!dropRandomKey && Object.prototype.hasOwnProperty.call(effectConfig,"random_js")) {
+            const jsThreshold = await resolveRandomJsThreshold(effectConfig.random_js,effectConfig.input,cardName,valuechange,sidetype,fight,side,type,cardEffect);
+            if (!Number.isFinite(jsThreshold) || !(jsThreshold >= Math.random())) {
+              dropRandomKey = true;
+            }
+          }
+          if (dropRandomKey) {
             continue;
           }
           const keptConfig = {...effectConfig};
           delete keptConfig.random;
+          delete keptConfig.random_js;
           keptEffect[effectName] = keptConfig;
         }
         currentEffect = keptEffect;

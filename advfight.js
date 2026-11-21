@@ -276,6 +276,77 @@
     } catch (error) {
       return false;
     }
+  }  // ifcode/valuecode
+  function replaceCodeTokens(expression,fight,side) {
+    let result = String(expression ?? "");
+    const selfSide = Number(side) === 1 ? 1 : 0;
+    result = result.replace(/<(self|other)\.tags\.([^>]+)>/g,function (match,owner,tagName) {
+      const targetSide = owner === "self" ? selfSide : 1 - selfSide;
+      const count = fight && typeof window.getTagCount === "function" ? Number(window.getTagCount(fight,targetSide,String(tagName).trim())) : NaN;
+      return Number.isFinite(count) ? String(count) : "NaN";
+    });
+    result = result.replace(/<(self|other)\.(HP|maxHP|MP|maxMP|handcard)>/g,function (match,owner,key) {
+      const targetSide = owner === "self" ? selfSide : 1 - selfSide;
+      const player = targetSide === 1 ? fight?.player : fight?.enemy;
+      if (!player) return "0";
+      if (key === "HP") return String(Number(player.HP ?? 0));
+      if (key === "maxHP") return String(Number(player.MAXHP ?? player.maxHP ?? 0));
+      if (key === "MP") return String(Number(player.MP ?? 0));
+      if (key === "maxMP") return String(Number(player.MAXMP ?? player.maxMP ?? 0));
+      if (key === "handcard") {
+        const hand = targetSide === 1 ? fight?.playerhand : fight?.enemyhand;
+        return String(Array.isArray(hand) ? hand.length : 0);
+      }
+      return "0";
+    });
+    result = result.replace(/<(self|other)\.equip\.([^>]+)>/g,function (match,owner,equipName) {
+      const targetSide = owner === "self" ? selfSide : 1 - selfSide;
+      const equips = targetSide === 1 ? fight?.fightplayerequip : fight?.fightenemyequip;
+      const name = String(equipName ?? "").trim();
+      let has = false;
+      if (name !== "" && Array.isArray(equips) && typeof window.parseFightCard === "function") {
+        for (const entry of equips) {
+          let parsed = null;
+          try {
+            parsed = window.parseFightCard(entry);
+          } catch (error) {
+            parsed = null;
+          }
+          if (parsed && parsed.name === name) {
+            has = true;
+            break;
+          }
+        }
+      }
+      return has ? "true" : "false";
+    });
+    return result;
+  }
+  function ifcode(input,cardName,valuechange,sidetype,fight,side,type,effect) {
+    const expression = String(input ?? "").trim();
+    if (expression === "") {
+      return false;
+    }
+    const condition = replaceCodeTokens(expression,fight,side);
+    try {
+      return Function('"use strict"; if (' + condition + ') { return true; } return false;')();
+    } catch (error) {
+      return false;
+    }
+  }
+  function valuecode(expression,cardName,valuechange,sidetype,fight,side,type,effect) {
+    const text = String(expression ?? "").trim();
+    if (text === "") {
+      return NaN;
+    }
+    const code = replaceCodeTokens(text,fight,side);
+    try {
+      const calculated = Function('"use strict"; return (' + code + ')')();
+      const value = Number(calculated);
+      return Number.isFinite(value) ? value : NaN;
+    } catch (error) {
+      return NaN;
+    }
   }
   window.checkfightvalue = checkfightvalue;
   window.fillerformpneed = fillerformpneed;
@@ -284,4 +355,6 @@
   window.checkmp = checkmp;
   window.checktag = checktag;
   window.readmapsideType = readmapsideType;
+  window.ifcode = ifcode;
+  window.valuecode = valuecode;
 })();
