@@ -1393,6 +1393,96 @@
     "tag":"handcard;handcarddamage;handcardchangeothermp",
     "sidetype":"typeNormal"
   },
+  /* 村纱水蜜 */
+  
+  "船锚":{
+  "display":"船锚",
+  "类型":"装备卡",
+  "效果":{
+    "抽卡":{
+      "value":2
+    }
+  },
+  "remove_效果":{
+	"伤害":{
+	"value":20,
+	"type":"普通"
+	},
+    "标记":{
+      "额外回合":{
+      "self":{
+      "value":1
+      }
+    }
+    }
+  },
+    "info":"触发逆流概率上限为25%，触发逆流时抽2张卡，被丢弃时获得1额外回合并对对方造成20普通伤害",
+    "tag":"equipcard;equipcardaddcardself",
+    "sidetype":"typeWater"
+  },
+  "巨浪":{
+  "display":"巨浪",
+  "类型":"基本卡",
+  "效果":{
+    "伤害":{
+      "value":3,
+	  "type":"水"
+    }
+  },
+  "效果_2":{
+    "伤害":{
+      "value":3,
+	  "type":"水"
+    },
+    "ignore":"startsidecounter;startsideequip;startsidetrait;startsidetag;nsidetag;nsidetrait;nsideequip;nsidecounter"
+  },
+    "info":"造成3水属性伤害，然后造成3忽略任何效果的水属性伤害",
+    "tag":"handcard;handcarddamage",
+    "sidetype":"typeWater"
+  },
+  "水难":{
+  "display":"水难",
+  "类型":"基本卡",
+  "效果":{
+    "标记":{
+		"逆流":{
+		"other":{
+		"value":2
+		}
+		}
+    }
+  },
+  "效果_2":{
+        "标记":{
+		"逆流":{
+		"other":{
+		"value":2
+		}
+		}
+    },
+    "ignore":"startsidecounter;startsideequip;startsidetrait;startsidetag;nsidetag;nsidetrait;nsideequip;nsidecounter"
+  },
+    "info":"对方获得2逆流标记，然后对方获得2逆流标记(不触发效果)",
+    "tag":"handcard;handcardaddcardother",
+    "sidetype":"typeWater"
+  },
+  
+  "倾覆「击沉之锚」":{
+    "display":"倾覆「击沉之锚」",
+    "类型":"基本卡",
+    "效果":{
+      "卡牌选择":{
+        "mode":"remove",
+        "pick":"topnext",
+        "source":"equip",
+        "value":65535,
+        "side":"self"
+      }
+    },
+    "info":"丢弃自身所有装备卡，移除自身",
+    "tag":"handcard,handcardremovecardself",
+    "sidetype":"typeWater;selfdeleteonsite"
+  },
 
   /* General */
   "顺走":{

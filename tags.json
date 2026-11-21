@@ -267,6 +267,48 @@
     "siderule":"self",
     "info":"下回合开始时恢复标记层数HP"
   },
+  "逆流":{
+	"效果":{
+	"effectchange":{
+		"delete":["伤害","抽卡","获取卡","标记","卡牌选择","valuechange"]
+	},
+	"卡牌选择":{
+		"mode":"get",
+		"source":"site",
+		"pick":"end",
+		"value":1,
+		"newcardside":"self"
+	},
+	"random_js":{
+	"js":"valuecode",
+	"input":"Math.min(<self.equip.船锚>?0.25:0.9,<self.tags.逆流>*0.05)"
+	},
+	"rule":"handcard",
+	"siderule":"self",
+	"autonext":"ifrandom"
+	},
+	"效果_2":{
+	"抽卡":{
+		"value":2
+	},
+	"autonext":"false"
+	},
+	"效果_3":{
+	"标记":{
+		"逆流":{
+		"self":{
+		"value_js":"advvalueread",
+		"input":"-<self.tags.逆流>/2;int;"
+		}
+		}
+	},
+	"rule_js":"ifcode",
+	"input":"<self.equip.船锚>",
+	"rule":"turnend",
+	"siderule":"self"
+	},
+	"info":"打出的卡牌有概率无效，那之后，回到手牌;回合结束时减半"
+	},
   "getcardturnstart":{
 	"display":"getcardturnstart",
     "效果":{
@@ -361,6 +403,7 @@
   },
   "瞬间找出所需书籍程度的能力":{
   "display":"瞬间找出所需书籍程度的能力",
+  "type":"trait",
   "效果":{
     "抽卡":{
       "value":1,

@@ -435,6 +435,33 @@
         "Gold":45
         }
     }
+  },
+  "村纱水蜜":{
+    "logoimage":"images/adventure/logo_fight.png",
+    "action":"fight",
+    "ID":"rLV6enemy2",
+    "HP":40,
+    "MP":6,
+	"tags":{
+	"逆流":20
+	},
+	"equip":{
+	"船锚":1
+	},
+    "cards":{
+      "打击":5,
+      "沉思":5,
+      "巨浪":3,
+      "水难":3,
+      "倾覆「击沉之锚」":1
+      },
+    "reaction":{
+      "win":{
+        "delete":"村纱水蜜",
+        "XP":20,
+        "Gold":45
+        }
+    }
   }
 
 }
